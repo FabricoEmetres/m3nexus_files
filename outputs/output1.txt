@@ -1,0 +1,194 @@
+hot-reloader-client.tsx:364 [Fast Refresh] rebuilding
+script.debug.js:1 [Vercel Web Analytics] Debug mode is enabled by default in development. No requests will be sent to the server.
+script.debug.js:1 [Vercel Web Analytics] Running queued event pageview {route: '/component/[basecomponentId]/[version]/budget', path: '/component/6d41d420-8562-4186-a49a-43c3fd8020ba/v2/budget'}
+script.debug.js:1 [Vercel Web Analytics] [pageview] http://localhost:3001/component/6d41d420-8562-4186-a49a-43c3fd8020ba/v2/budget?orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde {o: 'http://localhost:3001/component/6d41d420-8562-4186…dget?orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde', sv: '0.1.3', sdkn: '@vercel/analytics/next', sdkv: '1.5.0', ts: 1754522425827, …}
+page.js:76 🔍 Loading versions for component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
+page.js:97 🔍 Loading component data for ID: cc8b240d-f251-49f0-9ad4-ee94becb0fc4
+page.js:113 ✅ Component data loaded successfully
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: null, …}
+ComponentProfileImage.js:84 🖼️ [ComponentProfileImage] 2025-08-06T23:20:28.471Z ℹ️ Inicializando ComponentProfileImage com configurações: {imageUrl: null, size: 'large', componentTitle: 'Componente 1 (Cópia 2)', showBorder: true}
+ComponentProfileImage.js:84 🖼️ [ComponentProfileImage] 2025-08-06T23:20:28.472Z ℹ️ Nenhuma URL de imagem fornecida, usando estado vazio 
+ComponentProfileImage.js:84 🖼️ [ComponentProfileImage] 2025-08-06T23:20:28.473Z ℹ️ Estado da imagem alterado para: loading {displayUrl: null, retryCount: 0, componentTitle: 'Componente 1 (Cópia 2)'}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: false, fileName: undefined, oneDriveItemId: undefined, status: undefined, generatedUrl: null}
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 0
+ForgeBudgetForm.js:123 🖼️ [ForgeBudgetForm] No uploaded sliceImage files found for profile image
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: false, profileImage: null}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: false, fileName: undefined, oneDriveItemId: undefined}
+ForgeBudgetForm.js:250 ⚠️ No curing machines available for this material
+ForgeBudgetForm.js:406 🔧 Initializing upload manager...
+ForgeBudgetForm.js:414 📦 Upload manager created, setting up persistence...
+uploadManager.js:595 📦 Storage context set: uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: null, …}
+ComponentProfileImage.js:84 🖼️ [ComponentProfileImage] 2025-08-06T23:20:28.706Z ℹ️ Estado da imagem alterado para: empty {displayUrl: null, retryCount: 0, componentTitle: 'Componente 1 (Cópia 2)'}
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 6
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentProfileImage.js:84 🖼️ [ComponentProfileImage] 2025-08-06T23:20:28.841Z ℹ️ Inicializando ComponentProfileImage com configurações: {imageUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', size: 'large', componentTitle: 'Componente 1 (Cópia 2)', showBorder: true}
+ComponentProfileImage.js:84 🖼️ [ComponentProfileImage] 2025-08-06T23:20:28.843Z ℹ️ URL de imagem válida detectada: /api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7 
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentProfileImage.js:84 🖼️ [ComponentProfileImage] 2025-08-06T23:20:28.943Z ℹ️ Estado da imagem alterado para: loading {displayUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', retryCount: 0, componentTitle: 'Componente 1 (Cópia 2)'}
+uploadManager.js:686 📂 Loaded 6 files from storage (0 invalid)
+uploadManager.js:642 💾 Saved 6 completed files to storage (0 in-progress files excluded): uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+uploadManager.js:898 🔄 Initialized with persistence: 0 current + 6 restored = 6 total
+ForgeBudgetForm.js:426 📂 Restored 6 files from localStorage
+ForgeBudgetForm.js:476 ✅ Upload manager fully initialized with callbacks
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 6
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ForgeBudgetForm.js:513 📁 Starting file upload process for component budget: {componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', files: Array(1)}
+ForgeBudgetForm.js:537 📁 Adding files to state: [{…}]
+ForgeBudgetForm.js:549 🚀 Starting uploads with IDs: ['upload_1754522441006_0_3almq9xm7']
+ForgeBudgetForm.js:551 🔄 Uploading file Boton VEH_20250423_153243_0000.png with ID: upload_1754522441006_0_3almq9xm7
+uploadManager.js:213 🔄 Starting budget upload for file: Boton VEH_20250423_153243_0000.png
+ForgeBudgetForm.js:450 📊 Upload status change - upload_1754522441006_0_3almq9xm7: iniciando
+ForgeBudgetForm.js:447 🔄 Upload progress - upload_1754522441006_0_3almq9xm7: 0%
+uploadManager.js:230 🔄 Creating budget upload session: {fileName: 'Boton VEH_20250423_153243_0000.png', componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', budgetCategory: 'sliceImage', orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde'}
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 7
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Boton VEH_20250423_153243_0000.png', budgetCategory: 'sliceImage', status: 'iniciando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+uploadManager.js:926 💾 Executing debounced save...
+uploadManager.js:642 💾 Saved 6 completed files to storage (1 in-progress files excluded): uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+uploadManager.js:245 ✅ Upload session created successfully
+ForgeBudgetForm.js:450 📊 Upload status change - upload_1754522441006_0_3almq9xm7: carregando
+ForgeBudgetForm.js:447 🔄 Upload progress - upload_1754522441006_0_3almq9xm7: 0%
+uploadManager.js:251 🔄 Uploading file to OneDrive...
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 7
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Boton VEH_20250423_153243_0000.png', budgetCategory: 'sliceImage', status: 'carregando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+uploadManager.js:926 💾 Executing debounced save...
+uploadManager.js:642 💾 Saved 6 completed files to storage (1 in-progress files excluded): uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:447 🔄 Upload progress - upload_1754522441006_0_3almq9xm7: 7%
+ForgeBudgetForm.js:450 📊 Upload status change - upload_1754522441006_0_3almq9xm7: carregando
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 7
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Boton VEH_20250423_153243_0000.png', budgetCategory: 'sliceImage', status: 'carregando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:447 🔄 Upload progress - upload_1754522441006_0_3almq9xm7: 56%
+ForgeBudgetForm.js:450 📊 Upload status change - upload_1754522441006_0_3almq9xm7: carregando
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 7
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Boton VEH_20250423_153243_0000.png', budgetCategory: 'sliceImage', status: 'carregando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:447 🔄 Upload progress - upload_1754522441006_0_3almq9xm7: 100%
+ForgeBudgetForm.js:450 📊 Upload status change - upload_1754522441006_0_3almq9xm7: carregando
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 7
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Boton VEH_20250423_153243_0000.png', budgetCategory: 'sliceImage', status: 'carregando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+uploadManager.js:926 💾 Executing debounced save...
+uploadManager.js:642 💾 Saved 6 completed files to storage (1 in-progress files excluded): uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+uploadManager.js:262 ✅ File uploaded to OneDrive: 01IK7GO4XPXE5S4QWJZBDYRWSCO6SDOWMG
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:450 📊 Upload status change - upload_1754522441006_0_3almq9xm7: finalizando
+ForgeBudgetForm.js:447 🔄 Upload progress - upload_1754522441006_0_3almq9xm7: 100%
+uploadManager.js:270 🔄 Finalizing budget upload...
+uploadManager.js:918 💾 AutoSave triggered for 7 files (6 completed, will persist only completed)
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 7
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Boton VEH_20250423_153243_0000.png', budgetCategory: 'sliceImage', status: 'finalizando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+uploadManager.js:289 ✅ Upload finalized successfully
+uploadManager.js:918 💾 AutoSave triggered for 7 files (7 completed, will persist only completed)
+ForgeBudgetForm.js:450 📊 Upload status change - upload_1754522441006_0_3almq9xm7: success
+ForgeBudgetForm.js:447 🔄 Upload progress - upload_1754522441006_0_3almq9xm7: 100%
+ForgeBudgetForm.js:453 ✅ File upload completed - upload_1754522441006_0_3almq9xm7: {success: true, fileId: 'upload_1754522441006_0_3almq9xm7', fileName: 'Boton VEH_20250423_153243_0000.png', onedrive_item_id: '01IK7GO4XPXE5S4QWJZBDYRWSCO6SDOWMG', onedrive_download_url: 'https://o3652425788-my.sharepoint.com/personal/fab…S_TEMP_FILES/BOTON%20VEH_20250423_153243_0000.PNG', …}
+uploadManager.js:918 💾 AutoSave triggered for 7 files (7 completed, will persist only completed)
+uploadManager.js:918 💾 AutoSave triggered for 7 files (7 completed, will persist only completed)
+ForgeBudgetForm.js:185 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 7
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Paralelipipedo 100 50mm.stl_ori.stl', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: '1744108596705.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'add_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'WhatsApp Image 2025-05-29 at 3.28.03 PM copy.jpeg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL', budgetCategory: 'slice', status: 'success', hasOnedriveId: true, isSliceImage: false, …}
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'Boton VEH_20250423_153243_0000.png', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:129 🖼️ [ForgeBudgetForm] Profile image selected: {name: '1744108596705.jpg', onedrive_item_id: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', tempId: 'upload_1754497623603_0_1jqs6e5o5'}
+ForgeBudgetForm.js:195 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+ComponentBudgetTitle.js:205 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentBudgetTitle.js:221 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: '1744108596705.jpg', oneDriveItemId: '01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7', status: 'success', generatedUrl: '/api/get-download-link/01IK7GO4X2ETOQOUFHXNDKK4ITJMUWTMY7'}
+uploadManager.js:926 💾 Executing debounced save...
+uploadManager.js:642 💾 Saved 7 completed files to storage (0 in-progress files excluded): uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2

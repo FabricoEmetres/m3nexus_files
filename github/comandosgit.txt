@@ -1,0 +1,37 @@
+git tag -a v1.5.0 -m "Release 1.5.0"
+
+git push origin v1.5.0
+
+-----
+
+git fetch origin main
+git merge origin/main
+
+-----
+CRIAR NOVO REPOSITÓRIO A PARTIR DE PASTA LOCAL:
+-----
+
+# 1. Navegue para a pasta
+cd /caminho/para/sua/pasta
+
+# 2. Inicialize o Git
+git init
+
+# 3. Configure usuário (se necessário)
+git config user.name "Thúlio Silva"
+git config user.email "seu.email@exemplo.com"
+
+# 4. Adicione arquivos
+git add .
+
+# 5. Primeiro commit
+git commit -m "Initial commit"
+
+# 6. Conecte com repositório remoto
+git remote add origin https://github.com/usuario/nome-repo.git
+
+# 7. Defina branch principal
+git branch -M main
+
+# 8. Envie para o remoto
+git push -u origin main

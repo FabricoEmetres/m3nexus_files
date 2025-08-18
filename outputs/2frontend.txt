@@ -1,0 +1,471 @@
+hot-reloader-client.tsx:364 [Fast Refresh] rebuilding
+page.js:76 🔍 Loading versions for component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
+script.debug.js:1 [Vercel Web Analytics] Debug mode is enabled by default in development. No requests will be sent to the server.
+script.debug.js:1 [Vercel Web Analytics] Running queued event pageview {route: '/component/[basecomponentId]/[version]/budget', path: '/component/6d41d420-8562-4186-a49a-43c3fd8020ba/v2/budget'}
+script.debug.js:1 [Vercel Web Analytics] [pageview] http://localhost:3001/component/6d41d420-8562-4186-a49a-43c3fd8020ba/v2/budget?orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde {o: 'http://localhost:3001/component/6d41d420-8562-4186…dget?orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde', sv: '0.1.3', sdkn: '@vercel/analytics/next', sdkv: '1.5.0', ts: 1754643697264, …}
+page.js:97 🔍 Loading component data for ID: cc8b240d-f251-49f0-9ad4-ee94becb0fc4
+page.js:113 ✅ Component data loaded successfully
+ComponentBudgetTitle.js:151 🔍 [ComponentBudgetTitle] PROFILE IMAGE URL GENERATION: {profileImageData: null, hasProfileImageData: false, oneDriveItemId: undefined, timestamp: 1754643698377}
+ComponentBudgetTitle.js:159 🔍 [ComponentBudgetTitle] No profile image data or OneDrive ID - returning null
+ComponentBudgetTitle.js:316 🔍 [ComponentBudgetTitle] STORAGE CONTEXT CREATION: {componentDataId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', basecomponentId: '6d41d420-8562-4186-a49a-43c3fd8020ba', version: 2, orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', storageContext: {…}, …}
+ComponentBudgetTitle.js:327 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: null, …}
+ComponentProfileImage.js:59 🔍 [ComponentProfileImage] HOOK CONTEXT DECISION: {imageUrl: null, storageContext: {…}, hookContext: {…}, willUseHook: true, timestamp: 1754643698379}
+ComponentProfileImage.js:74 🔍 [ComponentProfileImage] HOOK RESULTS: {storageImageUrl: null, storageImageData: null, isStorageLoading: false, storageError: null, timestamp: 1754643698379}
+ComponentProfileImage.js:136 🔍 [ComponentProfileImage] EFFECTIVE URL CALCULATION: {imageUrl: null, storageImageUrl: null, effectiveImageUrl: null, imageSource: 'none', priority: 'No URL available', …}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.405Z ℹ️ 🚀 HOOK INITIALIZATION EFFECT TRIGGERED {hasStorageContext: true, storageContext: {…}, timestamp: 1754643698405}
+useProfileImageFromStorage.js:71 🔑 [useProfileImageFromStorage] GENERATING STORAGE KEY: {context: {…}, hasContext: true, hasComponentId: true, hasVersion: true, timestamp: 1754643698407}
+useProfileImageFromStorage.js:99 🔑 [useProfileImageFromStorage] STORAGE KEY GENERATED: {storagePrefix: 'uploadManager_', mode: 'budget', componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', version: 2, …}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.409Z ℹ️ ✅ Generated storage key: uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2 {componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', version: 2}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.409Z ℹ️ 🔑 Generated storage key in effect: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', storageContext: {…}}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.410Z ℹ️ 📂 About to load profile image from storage 
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.411Z ℹ️ 📂 Loading profile image from storage: uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2 
+useProfileImageFromStorage.js:270 📂 [useProfileImageFromStorage] READING LOCALSTORAGE: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', allLocalStorageKeys: Array(1), timestamp: 1754643698412}
+useProfileImageFromStorage.js:278 📂 [useProfileImageFromStorage] LOCALSTORAGE READ RESULT: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', hasStoredData: true, storedDataLength: 96, storedDataPreview: '{"files":[],"timestamp":1754643679248,"expiresAt":1754730079248,"mode":"budget","version":"1.0"}...', timestamp: 1754643698413}
+useProfileImageFromStorage.js:314 🖼️ [useProfileImageFromStorage] EXTRACTING PROFILE IMAGE: {totalFiles: 0, files: Array(0), timestamp: 1754643698413}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.414Z ℹ️ No uploaded sliceImage files found for profile image 
+useProfileImageFromStorage.js:322 🖼️ [useProfileImageFromStorage] PROFILE IMAGE EXTRACTION RESULT: {profileImage: null, hasProfileImage: false, timestamp: 1754643698415}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.416Z ℹ️ ❌ No valid profile image found in stored files 
+useProfileImageFromStorage.js:330 ❌ [useProfileImageFromStorage] NO PROFILE IMAGE - setting null values
+ComponentProfileImage.js:147 🚀 [ComponentProfileImage] MAIN EFFECT TRIGGERED: {imageUrl: null, storageContext: {…}, effectiveImageUrl: null, imageSource: 'none', size: 'large', …}
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:38.420Z ℹ️ 🔄 MAIN EFFECT: Inicializando ComponentProfileImage com configurações: {imageUrl: null, storageContext: {…}, effectiveImageUrl: null, imageSource: 'none', size: 'large', …}
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:38.421Z ℹ️ Nenhuma URL de imagem disponível (fonte: none), usando estado vazio 
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:38.422Z ℹ️ Estado da imagem alterado para: loading {displayUrl: null, retryCount: 0, componentTitle: 'Componente 1 (Cópia 2)', imageSource: 'none', effectiveImageUrl: null, …}
+ComponentBudgetTitle.js:262 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: false, fileName: undefined, oneDriveItemId: undefined, status: undefined, generatedUrl: null}
+ForgeBudgetForm.js:202 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 0
+ForgeBudgetForm.js:124 🖼️ [ForgeBudgetForm] No uploaded sliceImage files found for profile image
+ForgeBudgetForm.js:212 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: false, profileImage: null}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: false, fileName: undefined, oneDriveItemId: undefined}
+ForgeBudgetForm.js:267 ⚠️ No curing machines available for this material
+ForgeBudgetForm.js:423 🔧 Initializing upload manager...
+ForgeBudgetForm.js:431 📦 Upload manager created, setting up persistence...
+uploadManager.js:595 📦 Storage context set: uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+uploadManager.js:686 📂 Loaded 0 files from storage (0 invalid)
+uploadManager.js:898 🔄 Initialized with persistence: 0 current + 0 restored = 0 total
+ForgeBudgetForm.js:493 ✅ Upload manager fully initialized with callbacks
+ComponentBudgetTitle.js:316 🔍 [ComponentBudgetTitle] STORAGE CONTEXT CREATION: {componentDataId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', basecomponentId: '6d41d420-8562-4186-a49a-43c3fd8020ba', version: 2, orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', storageContext: {…}, …}
+ComponentBudgetTitle.js:327 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: null, …}
+ComponentProfileImage.js:59 🔍 [ComponentProfileImage] HOOK CONTEXT DECISION: {imageUrl: null, storageContext: {…}, hookContext: {…}, willUseHook: true, timestamp: 1754643698518}
+ComponentProfileImage.js:74 🔍 [ComponentProfileImage] HOOK RESULTS: {storageImageUrl: null, storageImageData: null, isStorageLoading: false, storageError: null, timestamp: 1754643698518}
+ComponentProfileImage.js:136 🔍 [ComponentProfileImage] EFFECTIVE URL CALCULATION: {imageUrl: null, storageImageUrl: null, effectiveImageUrl: null, imageSource: 'none', priority: 'No URL available', …}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.563Z ℹ️ 🚀 HOOK INITIALIZATION EFFECT TRIGGERED {hasStorageContext: true, storageContext: {…}, timestamp: 1754643698563}
+useProfileImageFromStorage.js:71 🔑 [useProfileImageFromStorage] GENERATING STORAGE KEY: {context: {…}, hasContext: true, hasComponentId: true, hasVersion: true, timestamp: 1754643698565}
+useProfileImageFromStorage.js:99 🔑 [useProfileImageFromStorage] STORAGE KEY GENERATED: {storagePrefix: 'uploadManager_', mode: 'budget', componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', version: 2, …}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.567Z ℹ️ ✅ Generated storage key: uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2 {componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', version: 2}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.568Z ℹ️ 🔑 Generated storage key in effect: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', storageContext: {…}}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.569Z ℹ️ 📂 About to load profile image from storage 
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.571Z ℹ️ 📂 Loading profile image from storage: uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2 
+useProfileImageFromStorage.js:270 📂 [useProfileImageFromStorage] READING LOCALSTORAGE: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', allLocalStorageKeys: Array(1), timestamp: 1754643698571}
+useProfileImageFromStorage.js:278 📂 [useProfileImageFromStorage] LOCALSTORAGE READ RESULT: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', hasStoredData: true, storedDataLength: 96, storedDataPreview: '{"files":[],"timestamp":1754643679248,"expiresAt":1754730079248,"mode":"budget","version":"1.0"}...', timestamp: 1754643698572}
+useProfileImageFromStorage.js:314 🖼️ [useProfileImageFromStorage] EXTRACTING PROFILE IMAGE: {totalFiles: 0, files: Array(0), timestamp: 1754643698573}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.575Z ℹ️ No uploaded sliceImage files found for profile image 
+useProfileImageFromStorage.js:322 🖼️ [useProfileImageFromStorage] PROFILE IMAGE EXTRACTION RESULT: {profileImage: null, hasProfileImage: false, timestamp: 1754643698576}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.577Z ℹ️ ❌ No valid profile image found in stored files 
+useProfileImageFromStorage.js:330 ❌ [useProfileImageFromStorage] NO PROFILE IMAGE - setting null values
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:38.581Z ℹ️ Estado da imagem alterado para: empty {displayUrl: null, retryCount: 0, componentTitle: 'Componente 1 (Cópia 2)', imageSource: 'none', effectiveImageUrl: null, …}
+ForgeBudgetForm.js:202 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 0
+ForgeBudgetForm.js:124 🖼️ [ForgeBudgetForm] No uploaded sliceImage files found for profile image
+ForgeBudgetForm.js:212 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: false, profileImage: null}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: false, fileName: undefined, oneDriveItemId: undefined}
+ComponentBudgetTitle.js:316 🔍 [ComponentBudgetTitle] STORAGE CONTEXT CREATION: {componentDataId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', basecomponentId: '6d41d420-8562-4186-a49a-43c3fd8020ba', version: 2, orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', storageContext: {…}, …}
+ComponentBudgetTitle.js:327 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: null, …}
+ComponentProfileImage.js:59 🔍 [ComponentProfileImage] HOOK CONTEXT DECISION: {imageUrl: null, storageContext: {…}, hookContext: {…}, willUseHook: true, timestamp: 1754643698592}
+ComponentProfileImage.js:74 🔍 [ComponentProfileImage] HOOK RESULTS: {storageImageUrl: null, storageImageData: null, isStorageLoading: false, storageError: null, timestamp: 1754643698592}
+ComponentProfileImage.js:136 🔍 [ComponentProfileImage] EFFECTIVE URL CALCULATION: {imageUrl: null, storageImageUrl: null, effectiveImageUrl: null, imageSource: 'none', priority: 'No URL available', …}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.614Z ℹ️ 🚀 HOOK INITIALIZATION EFFECT TRIGGERED {hasStorageContext: true, storageContext: {…}, timestamp: 1754643698614}
+useProfileImageFromStorage.js:71 🔑 [useProfileImageFromStorage] GENERATING STORAGE KEY: {context: {…}, hasContext: true, hasComponentId: true, hasVersion: true, timestamp: 1754643698616}
+useProfileImageFromStorage.js:99 🔑 [useProfileImageFromStorage] STORAGE KEY GENERATED: {storagePrefix: 'uploadManager_', mode: 'budget', componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', version: 2, …}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.619Z ℹ️ ✅ Generated storage key: uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2 {componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', version: 2}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.620Z ℹ️ 🔑 Generated storage key in effect: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', storageContext: {…}}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.621Z ℹ️ 📂 About to load profile image from storage 
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.623Z ℹ️ 📂 Loading profile image from storage: uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2 
+useProfileImageFromStorage.js:270 📂 [useProfileImageFromStorage] READING LOCALSTORAGE: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', allLocalStorageKeys: Array(1), timestamp: 1754643698625}
+useProfileImageFromStorage.js:278 📂 [useProfileImageFromStorage] LOCALSTORAGE READ RESULT: {storageKey: 'uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94b…fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2', hasStoredData: true, storedDataLength: 96, storedDataPreview: '{"files":[],"timestamp":1754643679248,"expiresAt":1754730079248,"mode":"budget","version":"1.0"}...', timestamp: 1754643698626}
+useProfileImageFromStorage.js:314 🖼️ [useProfileImageFromStorage] EXTRACTING PROFILE IMAGE: {totalFiles: 0, files: Array(0), timestamp: 1754643698627}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.629Z ℹ️ No uploaded sliceImage files found for profile image 
+useProfileImageFromStorage.js:322 🖼️ [useProfileImageFromStorage] PROFILE IMAGE EXTRACTION RESULT: {profileImage: null, hasProfileImage: false, timestamp: 1754643698630}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:38.630Z ℹ️ ❌ No valid profile image found in stored files 
+useProfileImageFromStorage.js:330 ❌ [useProfileImageFromStorage] NO PROFILE IMAGE - setting null values
+ComponentProfileImage.js:59 🔍 [ComponentProfileImage] HOOK CONTEXT DECISION: {imageUrl: null, storageContext: {…}, hookContext: {…}, willUseHook: true, timestamp: 1754643698636}
+ComponentProfileImage.js:74 🔍 [ComponentProfileImage] HOOK RESULTS: {storageImageUrl: null, storageImageData: null, isStorageLoading: false, storageError: null, timestamp: 1754643698636}
+ComponentProfileImage.js:136 🔍 [ComponentProfileImage] EFFECTIVE URL CALCULATION: {imageUrl: null, storageImageUrl: null, effectiveImageUrl: null, imageSource: 'none', priority: 'No URL available', …}
+ForgeBudgetForm.js:530 📁 Starting file upload process for component budget: {componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', files: Array(1)}
+ForgeBudgetForm.js:554 📁 Adding files to state: [{…}]
+ForgeBudgetForm.js:566 🚀 Starting uploads with IDs: ['upload_1754643714018_0_cwdw7dcyq']
+ForgeBudgetForm.js:568 🔄 Uploading file johannes-hofmann-_0fTSNoGtHE-unsplash.jpg with ID: upload_1754643714018_0_cwdw7dcyq
+uploadManager.js:213 🔄 Starting budget upload for file: johannes-hofmann-_0fTSNoGtHE-unsplash.jpg
+ForgeBudgetForm.js:467 📊 Upload status change - upload_1754643714018_0_cwdw7dcyq: iniciando
+ForgeBudgetForm.js:464 🔄 Upload progress - upload_1754643714018_0_cwdw7dcyq: 0%
+uploadManager.js:230 🔄 Creating budget upload session: {fileName: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', budgetCategory: 'sliceImage', orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde'}
+uploadManager.js:918 💾 AutoSave triggered for 1 files (0 completed, will persist only completed)
+uploadManager.js:918 💾 AutoSave triggered for 1 files (0 completed, will persist only completed)
+ForgeBudgetForm.js:202 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 1
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'iniciando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:124 🖼️ [ForgeBudgetForm] No uploaded sliceImage files found for profile image
+ForgeBudgetForm.js:212 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: false, profileImage: null}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: false, fileName: undefined, oneDriveItemId: undefined}
+uploadManager.js:926 💾 Executing debounced save...
+uploadManager.js:642 💾 Saved 0 completed files to storage (1 in-progress files excluded): uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+uploadManager.js:245 ✅ Upload session created successfully
+uploadManager.js:918 💾 AutoSave triggered for 1 files (0 completed, will persist only completed)
+ForgeBudgetForm.js:467 📊 Upload status change - upload_1754643714018_0_cwdw7dcyq: carregando
+ForgeBudgetForm.js:464 🔄 Upload progress - upload_1754643714018_0_cwdw7dcyq: 0%
+uploadManager.js:251 🔄 Uploading file to OneDrive...
+uploadManager.js:918 💾 AutoSave triggered for 1 files (0 completed, will persist only completed)
+ForgeBudgetForm.js:202 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 1
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'carregando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:124 🖼️ [ForgeBudgetForm] No uploaded sliceImage files found for profile image
+ForgeBudgetForm.js:212 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: false, profileImage: null}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: false, fileName: undefined, oneDriveItemId: undefined}
+ForgeBudgetForm.js:464 🔄 Upload progress - upload_1754643714018_0_cwdw7dcyq: 100%
+ForgeBudgetForm.js:467 📊 Upload status change - upload_1754643714018_0_cwdw7dcyq: carregando
+uploadManager.js:918 💾 AutoSave triggered for 1 files (0 completed, will persist only completed)
+uploadManager.js:918 💾 AutoSave triggered for 1 files (0 completed, will persist only completed)
+ForgeBudgetForm.js:202 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 1
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'carregando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:124 🖼️ [ForgeBudgetForm] No uploaded sliceImage files found for profile image
+ForgeBudgetForm.js:212 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: false, profileImage: null}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: false, fileName: undefined, oneDriveItemId: undefined}
+uploadManager.js:926 💾 Executing debounced save...
+uploadManager.js:642 💾 Saved 0 completed files to storage (1 in-progress files excluded): uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+uploadManager.js:262 ✅ File uploaded to OneDrive: 01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO
+ForgeBudgetForm.js:467 📊 Upload status change - upload_1754643714018_0_cwdw7dcyq: finalizando
+ForgeBudgetForm.js:464 🔄 Upload progress - upload_1754643714018_0_cwdw7dcyq: 100%
+uploadManager.js:270 🔄 Finalizing budget upload...
+uploadManager.js:918 💾 AutoSave triggered for 1 files (0 completed, will persist only completed)
+uploadManager.js:918 💾 AutoSave triggered for 1 files (0 completed, will persist only completed)
+ForgeBudgetForm.js:202 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 1
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'finalizando', hasOnedriveId: false, isSliceImage: true, …}
+ForgeBudgetForm.js:124 🖼️ [ForgeBudgetForm] No uploaded sliceImage files found for profile image
+ForgeBudgetForm.js:212 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: false, profileImage: null}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: false, fileName: undefined, oneDriveItemId: undefined}
+uploadManager.js:289 ✅ Upload finalized successfully
+ForgeBudgetForm.js:467 📊 Upload status change - upload_1754643714018_0_cwdw7dcyq: success
+ForgeBudgetForm.js:464 🔄 Upload progress - upload_1754643714018_0_cwdw7dcyq: 100%
+ForgeBudgetForm.js:470 ✅ File upload completed - upload_1754643714018_0_cwdw7dcyq: {success: true, fileId: 'upload_1754643714018_0_cwdw7dcyq', fileName: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', onedrive_item_id: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO', onedrive_download_url: 'https://o3652425788-my.sharepoint.com/personal/fab…P_FILES/JOHANNES-HOFMANN-_0FTSNOGTHE-UNSPLASH.JPG', …}
+uploadManager.js:918 💾 AutoSave triggered for 1 files (1 completed, will persist only completed)
+uploadManager.js:918 💾 AutoSave triggered for 1 files (1 completed, will persist only completed)
+uploadManager.js:918 💾 AutoSave triggered for 1 files (1 completed, will persist only completed)
+ForgeBudgetForm.js:202 🖼️ [ForgeBudgetForm] Monitoring files for profile image changes: 1
+ForgeBudgetForm.js:110 🖼️ [ForgeBudgetForm] Checking file for profile image: {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', budgetCategory: 'sliceImage', status: 'success', hasOnedriveId: true, isSliceImage: true, …}
+ForgeBudgetForm.js:145 🖼️ [ForgeBudgetForm] Profile image selected (most recent): {name: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', onedrive_item_id: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO', tempId: 'upload_1754643714018_0_cwdw7dcyq', totalSliceImages: 1}
+ForgeBudgetForm.js:212 🖼️ [ForgeBudgetForm] Notifying parent about profile image change: {hasProfileImage: true, profileImage: {…}}
+page.js:170 🖼️ [ComponentBudgetPage] Received profile image update: {hasImage: true, fileName: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', oneDriveItemId: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO'}
+ComponentBudgetTitle.js:151 🔍 [ComponentBudgetTitle] PROFILE IMAGE URL GENERATION: {profileImageData: {…}, hasProfileImageData: true, oneDriveItemId: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO', timestamp: 1754643716827}
+ComponentBudgetTitle.js:171 🍪 [ComponentBudgetTitle] GETTING TOKEN FROM COOKIES: {documentCookie: '', documentCookieLength: 0, allCookies: Array(1), cookieCount: 1, hasCookies: false, …}
+ComponentBudgetTitle.js:181 🔐 [ComponentBudgetTitle] AUTHENTICATION DEBUG: {hasDocument: true, hasWindow: true, userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36…KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', location: 'http://localhost:3001/component/6d41d420-8562-4186…dget?orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde', timestamp: 1754643716828}
+ComponentBudgetTitle.js:196 🔐 [ComponentBudgetTitle] TOKEN FROM TOKEN MANAGER: {hasToken: true, tokenLength: 439, timestamp: 1754643716829}
+ComponentBudgetTitle.js:206 🍪 [ComponentBudgetTitle] TOKEN EXTRACTION RESULT: {hasToken: true, tokenLength: 439, tokenPreview: 'eyJhbGciOiJIUzI1NiIs...', timestamp: 1754643716829}
+ComponentBudgetTitle.js:215 🌐 [ComponentBudgetTitle] API BASE RESOLUTION: {envApiBase: 'http://localhost:3000', resolvedApiBase: 'http://localhost:3000', windowLocation: 'http://localhost:3001/component/6d41d420-8562-4186…dget?orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde', timestamp: 1754643716829}
+ComponentBudgetTitle.js:225 🔗 [ComponentBudgetTitle] BEFORE TOKEN ADDITION: {baseUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO', hasToken: true, willAddToken: true, timestamp: 1754643716830}
+ComponentBudgetTitle.js:235 🔗 [ComponentBudgetTitle] AFTER TOKEN ADDITION: {finalUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO?token=***', tokenAdded: true, timestamp: 1754643716830}
+ComponentBudgetTitle.js:248 🔍 [ComponentBudgetTitle] FINAL GENERATED URL: {oneDriveItemId: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO', generatedUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO?token=***', hasToken: true, urlLength: 512, timestamp: 1754643716830}
+ComponentBudgetTitle.js:316 🔍 [ComponentBudgetTitle] STORAGE CONTEXT CREATION: {componentDataId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', basecomponentId: '6d41d420-8562-4186-a49a-43c3fd8020ba', version: 2, orderId: '32eaa430-6e70-46b4-a3bb-18b05e84efde', storageContext: {…}, …}
+ComponentBudgetTitle.js:327 🔍 ComponentBudgetTitle Debug: {componentData: {…}, finishings_count: '3', orderData: {…}, quantity: 123, profileImageData: {…}, …}
+ComponentProfileImage.js:59 🔍 [ComponentProfileImage] HOOK CONTEXT DECISION: {imageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', storageContext: {…}, hookContext: null, willUseHook: false, timestamp: 1754643716831}
+ComponentProfileImage.js:74 🔍 [ComponentProfileImage] HOOK RESULTS: {storageImageUrl: null, storageImageData: null, isStorageLoading: false, storageError: null, timestamp: 1754643716832}
+ComponentProfileImage.js:136 🔍 [ComponentProfileImage] EFFECTIVE URL CALCULATION: {imageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', storageImageUrl: null, effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', imageSource: 'prop', priority: 'Using imageUrl prop', …}
+useProfileImageFromStorage.js:48 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:56.845Z ℹ️ 🚀 HOOK INITIALIZATION EFFECT TRIGGERED {hasStorageContext: false, storageContext: null, timestamp: 1754643716845}
+useProfileImageFromStorage.js:54 🖼️ [useProfileImageFromStorage] 2025-08-08T09:01:56.846Z ⚠️ ❌ No storage context provided - hook will not load from localStorage  Error Component Stack
+    at ComponentProfileImage (ComponentProfileImage.js:38:3)
+    at div (<anonymous>)
+    at ComponentBudgetTitle (ComponentBudgetTitle.js:26:3)
+    at div (<anonymous>)
+    at div (<anonymous>)
+    at ComponentBudgetPage (page.js:35:26)
+    at ClientPageRoot (client-page.tsx:17:3)
+    at InnerLayoutRouter (layout-router.tsx:319:3)
+    at RedirectErrorBoundary (redirect-boundary.tsx:43:5)
+    at RedirectBoundary (redirect-boundary.tsx:74:36)
+    at HTTPAccessFallbackBoundary (error-boundary.tsx:154:3)
+    at LoadingBoundary (layout-router.tsx:454:3)
+    at ErrorBoundary (error-boundary.tsx:183:3)
+    at InnerScrollAndFocusHandler (layout-router.tsx:177:1)
+    at ScrollAndFocusHandler (layout-router.tsx:294:3)
+    at RenderFromTemplateContext (render-from-template-context.tsx:7:30)
+    at OuterLayoutRouter (layout-router.tsx:507:3)
+    at main (<anonymous>)
+    at InnerComponentBudgetLayout (layout.js:21:39)
+    at NewOrderUnsavedChangesProvider (NewOrderUnsavedChangesContext.js:21:50)
+    at SessionProvider (SessionContext.js:24:35)
+    at ComponentBudgetLayout (layout.js:69:49)
+    at ClientSegmentRoot (client-segment.tsx:16:3)
+    at InnerLayoutRouter (layout-router.tsx:319:3)
+    at RedirectErrorBoundary (redirect-boundary.tsx:43:5)
+    at RedirectBoundary (redirect-boundary.tsx:74:36)
+    at HTTPAccessFallbackBoundary (error-boundary.tsx:154:3)
+    at LoadingBoundary (layout-router.tsx:454:3)
+    at ErrorBoundary (error-boundary.tsx:183:3)
+    at InnerScrollAndFocusHandler (layout-router.tsx:177:1)
+    at ScrollAndFocusHandler (layout-router.tsx:294:3)
+    at RenderFromTemplateContext (render-from-template-context.tsx:7:30)
+    at OuterLayoutRouter (layout-router.tsx:507:3)
+    at InnerLayoutRouter (layout-router.tsx:319:3)
+    at RedirectErrorBoundary (redirect-boundary.tsx:43:5)
+    at RedirectBoundary (redirect-boundary.tsx:74:36)
+    at HTTPAccessFallbackBoundary (error-boundary.tsx:154:3)
+    at LoadingBoundary (layout-router.tsx:454:3)
+    at ErrorBoundary (error-boundary.tsx:183:3)
+    at InnerScrollAndFocusHandler (layout-router.tsx:177:1)
+    at ScrollAndFocusHandler (layout-router.tsx:294:3)
+    at RenderFromTemplateContext (render-from-template-context.tsx:7:30)
+    at OuterLayoutRouter (layout-router.tsx:507:3)
+    at InnerLayoutRouter (layout-router.tsx:319:3)
+    at RedirectErrorBoundary (redirect-boundary.tsx:43:5)
+    at RedirectBoundary (redirect-boundary.tsx:74:36)
+    at HTTPAccessFallbackBoundary (error-boundary.tsx:154:3)
+    at LoadingBoundary (layout-router.tsx:454:3)
+    at ErrorBoundary (error-boundary.tsx:183:3)
+    at InnerScrollAndFocusHandler (layout-router.tsx:177:1)
+    at ScrollAndFocusHandler (layout-router.tsx:294:3)
+    at RenderFromTemplateContext (render-from-template-context.tsx:7:30)
+    at OuterLayoutRouter (layout-router.tsx:507:3)
+    at InnerLayoutRouter (layout-router.tsx:319:3)
+    at RedirectErrorBoundary (redirect-boundary.tsx:43:5)
+    at RedirectBoundary (redirect-boundary.tsx:74:36)
+    at HTTPAccessFallbackErrorBoundary (error-boundary.tsx:49:5)
+    at HTTPAccessFallbackBoundary (error-boundary.tsx:154:3)
+    at LoadingBoundary (layout-router.tsx:454:3)
+    at ErrorBoundary (error-boundary.tsx:183:3)
+    at InnerScrollAndFocusHandler (layout-router.tsx:177:1)
+    at ScrollAndFocusHandler (layout-router.tsx:294:3)
+    at RenderFromTemplateContext (render-from-template-context.tsx:7:30)
+    at OuterLayoutRouter (layout-router.tsx:507:3)
+    at main (<anonymous>)
+    at NewOrderUnsavedChangesProvider (NewOrderUnsavedChangesContext.js:21:50)
+    at SessionProvider (SessionContext.js:24:35)
+    at LanguageProvider (LanguageContext.js:16:36)
+    at body (<anonymous>)
+    at html (<anonymous>)
+    at RootLayout [Server] (<anonymous>)
+    at RedirectErrorBoundary (redirect-boundary.tsx:43:5)
+    at RedirectBoundary (redirect-boundary.tsx:74:36)
+    at HTTPAccessFallbackErrorBoundary (error-boundary.tsx:49:5)
+    at HTTPAccessFallbackBoundary (error-boundary.tsx:154:3)
+    at DevRootHTTPAccessFallbackBoundary (dev-root-http-access-fallback-boundary.tsx:17:3)
+    at ReactDevOverlay (ReactDevOverlay.tsx:17:16)
+    at HotReload (hot-reloader-client.tsx:523:3)
+    at Router (app-router.tsx:243:3)
+    at ErrorBoundaryHandler (error-boundary.tsx:69:5)
+    at ErrorBoundary (error-boundary.tsx:183:3)
+    at AppRouter (app-router.tsx:647:3)
+    at ServerRoot (app-index.tsx:184:32)
+    at Root (app-index.tsx:212:17)
+overrideMethod @ hook.js:608
+useProfileImageFromStorage.useCallback[log] @ useProfileImageFromStorage.js:54
+useProfileImageFromStorage.useEffect @ useProfileImageFromStorage.js:430
+react-stack-bottom-frame @ react-dom-client.development.js:23695
+runWithFiberInDEV @ react-dom-client.development.js:543
+commitHookEffectListMount @ react-dom-client.development.js:10763
+commitHookPassiveMountEffects @ react-dom-client.development.js:10883
+commitPassiveMountOnFiber @ react-dom-client.development.js:12668
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12661
+recursivelyTraversePassiveMountEffects @ react-dom-client.development.js:12642
+commitPassiveMountOnFiber @ react-dom-client.development.js:12770
+ComponentProfileImage.js:147 🚀 [ComponentProfileImage] MAIN EFFECT TRIGGERED: {imageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', storageContext: {…}, effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', imageSource: 'prop', size: 'large', …}
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:56.929Z ℹ️ 🔄 MAIN EFFECT: Inicializando ComponentProfileImage com configurações: {imageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', storageContext: {…}, effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', imageSource: 'prop', size: 'large', …}
+ComponentProfileImage.js:204 🔗 [ComponentProfileImage] SETTING DISPLAY URL: {effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', imageSource: 'prop', previousDisplayUrl: null, imageState: 'empty', timestamp: 1754643716930}
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:56.932Z ℹ️ ✅ URL de imagem válida detectada (fonte: prop): http://localhost:3000/api/image/01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4NDY1YjUyLWQ4Y2EtNGY2Ni05MWE4LTQyOGIzZjA2NWRmNiIsImVtYWlsIjoiYWRtaW4yQG1haWwuY29tIiwicm9sZSI6IkFkbWluIiwiZmluZ2VycHJpbnQiOiIyZTFkOGVmNjk4ZjQ0NGU2NDMyM2Q5NTUzNDExYzdjZGM3ZWIxMDJmODY0NmJlMmQ3NjFkN2VmZWMzZGU0ZmEzIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc1NDY0MzE4MSwiZXhwIjoxNzU0NjQ0MzgxLCJhdWQiOiJtMy1uZXh1cy1mcm9udGVuZCIsImlzcyI6Im0zLW5leHVzLWJhY2tlbmQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU 
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:56.933Z ℹ️ Estado da imagem alterado para: empty {displayUrl: null, retryCount: 0, componentTitle: 'Componente 1 (Cópia 2)', imageSource: 'prop', effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', …}
+ComponentBudgetTitle.js:262 🖼️ [ComponentBudgetTitle] Profile image data changed: {hasProfileImage: true, fileName: 'johannes-hofmann-_0fTSNoGtHE-unsplash.jpg', oneDriveItemId: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO', status: 'success', generatedUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU'}
+ComponentProfileImage.js:59 🔍 [ComponentProfileImage] HOOK CONTEXT DECISION: {imageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', storageContext: {…}, hookContext: null, willUseHook: false, timestamp: 1754643716938}
+ComponentProfileImage.js:74 🔍 [ComponentProfileImage] HOOK RESULTS: {storageImageUrl: null, storageImageData: null, isStorageLoading: false, storageError: null, timestamp: 1754643716938}
+ComponentProfileImage.js:136 🔍 [ComponentProfileImage] EFFECTIVE URL CALCULATION: {imageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', storageImageUrl: null, effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', imageSource: 'prop', priority: 'Using imageUrl prop', …}
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:56.941Z ℹ️ Estado da imagem alterado para: loading {displayUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', retryCount: 0, componentTitle: 'Componente 1 (Cópia 2)', imageSource: 'prop', effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', …}
+uploadManager.js:926 💾 Executing debounced save...
+uploadManager.js:642 💾 Saved 1 completed files to storage (0 in-progress files excluded): uploadManager_budget_cc8b240d-f251-49f0-9ad4-ee94becb0fc4_order_32eaa430-6e70-46b4-a3bb-18b05e84efde_v2
+ComponentProfileImage.js:244 🎉 [ComponentProfileImage] IMAGE LOAD SUCCESS: {src: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', naturalWidth: 4240, naturalHeight: 2832, displayUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', retryCount: 0, …}
+ComponentProfileImage.js:119 🖼️ [ComponentProfileImage] 2025-08-08T09:01:58.205Z ✅ ✅ Imagem carregada com sucesso: http://localhost:3000/api/image/01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4NDY1YjUyLWQ4Y2EtNGY2Ni05MWE4LTQyOGIzZjA2NWRmNiIsImVtYWlsIjoiYWRtaW4yQG1haWwuY29tIiwicm9sZSI6IkFkbWluIiwiZmluZ2VycHJpbnQiOiIyZTFkOGVmNjk4ZjQ0NGU2NDMyM2Q5NTUzNDExYzdjZGM3ZWIxMDJmODY0NmJlMmQ3NjFkN2VmZWMzZGU0ZmEzIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc1NDY0MzE4MSwiZXhwIjoxNzU0NjQ0MzgxLCJhdWQiOiJtMy1uZXh1cy1mcm9udGVuZCIsImlzcyI6Im0zLW5leHVzLWJhY2tlbmQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU {imageWidth: 4240, imageHeight: 2832, imageSrc: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU'}
+ComponentBudgetTitle.js:351 🖼️ [ComponentBudgetTitle] Profile image loaded successfully
+ComponentProfileImage.js:59 🔍 [ComponentProfileImage] HOOK CONTEXT DECISION: {imageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', storageContext: {…}, hookContext: null, willUseHook: false, timestamp: 1754643718206}
+ComponentProfileImage.js:74 🔍 [ComponentProfileImage] HOOK RESULTS: {storageImageUrl: null, storageImageData: null, isStorageLoading: false, storageError: null, timestamp: 1754643718206}
+ComponentProfileImage.js:136 🔍 [ComponentProfileImage] EFFECTIVE URL CALCULATION: {imageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', storageImageUrl: null, effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', imageSource: 'prop', priority: 'Using imageUrl prop', …}
+ComponentProfileImage.js:116 🖼️ [ComponentProfileImage] 2025-08-08T09:01:58.206Z ℹ️ Estado da imagem alterado para: loaded {displayUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', retryCount: 0, componentTitle: 'Componente 1 (Cópia 2)', imageSource: 'prop', effectiveImageUrl: 'http://localhost:3000/api/image/01IK7GO4RUZMK4KUNU…mQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU', …}

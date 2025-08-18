@@ -1,0 +1,97 @@
+API handler should not return a value, received object.
+ OPTIONS /api/session 204 in 53ms
+API handler should not return a value, received object.
+ OPTIONS /api/session 204 in 56ms
+API handler should not return a value, received object.
+ OPTIONS /api/session 204 in 39ms
+API handler should not return a value, received object.
+ OPTIONS /api/session 204 in 32ms
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 32ms
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 46ms
+API handler should not return a value, received object.
+ OPTIONS /api/db-status 204 in 36ms
+API handler should not return a value, received object.
+ OPTIONS /api/get-component-versions?baseComponentId=6d41d420-8562-4186-a49a-43c3fd8020ba 204 in 50ms
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 47ms
+ GET /api/db-status 200 in 95ms
+🚀 Starting component-versions API request
+🔌 Database connection established
+🔐 Starting authentication
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+✅ Authentication successful for user: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🔍 Fetching versions for component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
+🔍 Executing versions query...
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 39ms
+📊 Found 2 versions for component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
+🔄 Processing version data...
+✅ Successfully fetched 2 versions
+📊 Response summary: 2 versions for component base 6d41d420-8562-4186-a49a-43c3fd8020ba
+🔌 Releasing database connection
+🏁 component-versions API request completed
+ GET /api/get-component-versions?baseComponentId=6d41d420-8562-4186-a49a-43c3fd8020ba 304 in 99ms
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 23ms
+ GET /api/db-status 200 in 65ms
+API handler should not return a value, received object.
+ OPTIONS /api/get-username 204 in 44ms
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 52ms
+API handler should not return a value, received object.
+ OPTIONS /api/get-component-budget-data?componentId=cc8b240d-f251-49f0-9ad4-ee94becb0fc4&orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde 204 in 48ms
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🔍 Searching for user with ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🔍 User ID type: string
+🔍 User ID length: 36
+🔍 Executing query: SELECT id, name, surname FROM "User" WHERE id = $1 with parameter: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🌐 Detected language: pt from header: pt
+🚀 Starting component-budget-data API request
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🔌 Database connection established
+📋 Processing request for componentId: cc8b240d-f251-49f0-9ad4-ee94becb0fc4, orderId: 32eaa430-6e70-46b4-a3bb-18b05e84efde
+🔍 Fetching budget data for component: cc8b240d-f251-49f0-9ad4-ee94becb0fc4 with order context: 32eaa430-6e70-46b4-a3bb-18b05e84efde
+🔍 Fetching component details for: cc8b240d-f251-49f0-9ad4-ee94becb0fc4
+ GET /api/db-status 200 in 79ms
+🔍 Query result rows count: 1
+🔍 Found user data: {
+  id: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
+  name: 'admin2',
+  surname: 'admin2'
+}
+ GET /api/get-username 304 in 72ms
+✅ Component found: Componente 1 (Cópia 2) (v2)
+🔍 Finishings count: 3
+🔍 Fetching available versions for component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
+ GET /api/db-status 200 in 50ms
+📊 Found 2 available versions
+🔍 Fetching support materials for machine: f1b2d59d-c02c-4fe3-b5ee-047f4bf7c822
+📋 Support Material Type ID: 9313c048-5957-4416-aa4e-9e4a7e9f4089
+ GET /api/db-status 200 in 53ms
+📊 Found 2 support materials for machine: f1b2d59d-c02c-4fe3-b5ee-047f4bf7c822
+ GET /api/db-status 200 in 52ms
+🔍 Fetching curing machines for material: 8be739d4-15ad-429e-baf2-2fa158429eac
+📊 Found 0 curing machines for material: 8be739d4-15ad-429e-baf2-2fa158429eac
+🔍 Fetching order context for: 32eaa430-6e70-46b4-a3bb-18b05e84efde with component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
+✅ Order context found: nova orçamentação
+🔄 Processing response data...
+🔄 Machine status: "Available" -> "Disponível"
+🔄 Technology name: "Filament" -> "Filamento"
+🔄 Material color: "Several colours" -> "Várias cores"
+🔄 Material type: "Polyethylene Terephthalate Glycol" -> "Polietileno Tereftalato Glicol"
+✅ Successfully fetched budget data
+📊 Response summary: 2 versions, 2 support materials, 0 curing machines
+ GET /api/get-component-budget-data?componentId=cc8b240d-f251-49f0-9ad4-ee94becb0fc4&orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde 304 in 577ms
+API handler should not return a value, received object.
+ OPTIONS /api/get-staged-file-link 204 in 11ms
+API handler should not return a value, received object.
+ OPTIONS /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 204 in 10ms
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+ POST /api/get-staged-file-link 200 in 918ms
+ GET /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 304 in 1716ms
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+ GET /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 304 in 1705ms

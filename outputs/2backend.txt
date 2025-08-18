@@ -1,0 +1,63 @@
+API handler should not return a value, received object.
+ OPTIONS /api/create-budget-upload-session 204 in 52ms
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+ POST /api/create-budget-upload-session 200 in 1501ms
+API handler should not return a value, received object.
+ OPTIONS /api/finalize-budget-upload 204 in 8ms
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+ POST /api/finalize-budget-upload 200 in 8ms
+🚀 [image] API HANDLER STARTED: {
+  method: 'GET',
+  url: '/api/image/01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4NDY1YjUyLWQ4Y2EtNGY2Ni05MWE4LTQyOGIzZjA2NWRmNiIsImVtYWlsIjoiYWRtaW4yQG1haWwuY29tIiwicm9sZSI6IkFkbWluIiwiZmluZ2VycHJpbnQiOiIyZTFkOGVmNjk4ZjQ0NGU2NDMyM2Q5NTUzNDExYzdjZGM3ZWIxMDJmODY0NmJlMmQ3NjFkN2VmZWMzZGU0ZmEzIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc1NDY0MzE4MSwiZXhwIjoxNzU0NjQ0MzgxLCJhdWQiOiJtMy1uZXh1cy1mcm9udGVuZCIsImlzcyI6Im0zLW5leHVzLWJhY2tlbmQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU',
+  query: {
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4NDY1YjUyLWQ4Y2EtNGY2Ni05MWE4LTQyOGIzZjA2NWRmNiIsImVtYWlsIjoiYWRtaW4yQG1haWwuY29tIiwicm9sZSI6IkFkbWluIiwiZmluZ2VycHJpbnQiOiIyZTFkOGVmNjk4ZjQ0NGU2NDMyM2Q5NTUzNDExYzdjZGM3ZWIxMDJmODY0NmJlMmQ3NjFkN2VmZWMzZGU0ZmEzIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc1NDY0MzE4MSwiZXhwIjoxNzU0NjQ0MzgxLCJhdWQiOiJtMy1uZXh1cy1mcm9udGVuZCIsImlzcyI6Im0zLW5leHVzLWJhY2tlbmQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU',
+    oneDriveItemId: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO'
+  },
+  headers: {
+    authorization: 'Missing',
+    cookie: 'Present',
+    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36'
+  },
+  timestamp: '2025-08-08T09:01:56.964Z'
+}
+🔐 [image] STARTING AUTHENTICATION: {
+  hasToken: true,
+  tokenPreview: 'eyJhbGciOiJIUzI1NiIs...',
+  hasCookies: true,
+  timestamp: '2025-08-08T09:01:56.964Z'
+}
+🔐 [image] Trying cookie authentication...
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+✅ [image] Cookie authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🔐 [image] AUTHENTICATION RESULT: {
+  userId: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
+  authMethod: 'token',
+  timestamp: '2025-08-08T09:01:56.964Z'
+}
+🎯 [image] PROCEEDING WITH AUTHENTICATED REQUEST: {
+  userId: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
+  oneDriveItemId: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO',
+  timestamp: '2025-08-08T09:01:56.965Z'
+}
+🖼️ [image] Processing image request for item: 01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO by user: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🖼️ [image] File metadata retrieved: JOHANNES-HOFMANN-_0FTSNOGTHE-UNSPLASH.JPG (2070599 bytes, image/jpeg)
+✅ [image] SERVING IMAGE SUCCESSFULLY: {
+  fileName: 'JOHANNES-HOFMANN-_0FTSNOGTHE-UNSPLASH.JPG',
+  contentType: 'image/jpeg',
+  fileSize: 2070599,
+  oneDriveItemId: '01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO',
+  userId: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
+  timestamp: '2025-08-08T09:01:57.681Z'
+}
+📤 [image] SENDING IMAGE DATA: {
+  bufferSize: 2070599,
+  contentType: 'image/jpeg',
+  fileName: 'JOHANNES-HOFMANN-_0FTSNOGTHE-UNSPLASH.JPG',
+  timestamp: '2025-08-08T09:01:58.099Z'
+}
+🎉 [image] IMAGE SENT SUCCESSFULLY: {
+  fileName: 'JOHANNES-HOFMANN-_0FTSNOGTHE-UNSPLASH.JPG',
+  finalSize: 2070599,
+  timestamp: '2025-08-08T09:01:58.194Z'
+}
+ GET /api/image/01IK7GO4RUZMK4KUNUMBHZ744KWLBOQBMO?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4NDY1YjUyLWQ4Y2EtNGY2Ni05MWE4LTQyOGIzZjA2NWRmNiIsImVtYWlsIjoiYWRtaW4yQG1haWwuY29tIiwicm9sZSI6IkFkbWluIiwiZmluZ2VycHJpbnQiOiIyZTFkOGVmNjk4ZjQ0NGU2NDMyM2Q5NTUzNDExYzdjZGM3ZWIxMDJmODY0NmJlMmQ3NjFkN2VmZWMzZGU0ZmEzIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc1NDY0MzE4MSwiZXhwIjoxNzU0NjQ0MzgxLCJhdWQiOiJtMy1uZXh1cy1mcm9udGVuZCIsImlzcyI6Im0zLW5leHVzLWJhY2tlbmQifQ.yOCCi_StMJUIwBDSWAP1-bMrC8CxmJQ5L3VrfjBKfgU 200 in 1239ms

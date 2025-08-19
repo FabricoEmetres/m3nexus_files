@@ -1,0 +1,2986 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.5
+-- Dumped by pg_dump version 17.5
+
+-- Started on 2025-08-19 09:48:35 UTC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 220 (class 1259 OID 253965)
+-- Name: AdminData; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."AdminData" (
+    user_id uuid NOT NULL,
+    role_id uuid NOT NULL,
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."AdminData" OWNER TO neondb_owner;
+
+--
+-- TOC entry 221 (class 1259 OID 253970)
+-- Name: AgentData; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."AgentData" (
+    user_id uuid NOT NULL,
+    role_id uuid NOT NULL,
+    job_title character varying(100),
+    internal_notes text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."AgentData" OWNER TO neondb_owner;
+
+--
+-- TOC entry 222 (class 1259 OID 253977)
+-- Name: AnalystData; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."AnalystData" (
+    user_id uuid NOT NULL,
+    role_id uuid NOT NULL,
+    work_location character varying(100),
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."AnalystData" OWNER TO neondb_owner;
+
+--
+-- TOC entry 253 (class 1259 OID 573930)
+-- Name: BudgetStatus; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."BudgetStatus" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    parent_status_id uuid,
+    title character varying(100) NOT NULL,
+    description text,
+    "order" integer DEFAULT 0 NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public."BudgetStatus" OWNER TO neondb_owner;
+
+--
+-- TOC entry 255 (class 1259 OID 581632)
+-- Name: BudgetStatusHistory; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."BudgetStatusHistory" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    component_budget_id uuid NOT NULL,
+    status_id uuid NOT NULL,
+    user_id uuid,
+    notes text,
+    change_timestamp timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."BudgetStatusHistory" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3949 (class 0 OID 0)
+-- Dependencies: 255
+-- Name: TABLE "BudgetStatusHistory"; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON TABLE public."BudgetStatusHistory" IS 'Tracks status changes for ComponentBudget records, maintaining a complete audit trail of budget status transitions';
+
+
+--
+-- TOC entry 3950 (class 0 OID 0)
+-- Dependencies: 255
+-- Name: COLUMN "BudgetStatusHistory".component_budget_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."BudgetStatusHistory".component_budget_id IS 'Reference to the ComponentBudget whose status changed';
+
+
+--
+-- TOC entry 3951 (class 0 OID 0)
+-- Dependencies: 255
+-- Name: COLUMN "BudgetStatusHistory".status_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."BudgetStatusHistory".status_id IS 'Reference to the BudgetStatus that was applied';
+
+
+--
+-- TOC entry 3952 (class 0 OID 0)
+-- Dependencies: 255
+-- Name: COLUMN "BudgetStatusHistory".user_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."BudgetStatusHistory".user_id IS 'User who triggered the status change (nullable for system changes)';
+
+
+--
+-- TOC entry 3953 (class 0 OID 0)
+-- Dependencies: 255
+-- Name: COLUMN "BudgetStatusHistory".notes; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."BudgetStatusHistory".notes IS 'Optional notes about the status change';
+
+
+--
+-- TOC entry 3954 (class 0 OID 0)
+-- Dependencies: 255
+-- Name: COLUMN "BudgetStatusHistory".change_timestamp; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."BudgetStatusHistory".change_timestamp IS 'Exact timestamp when the status change occurred';
+
+
+--
+-- TOC entry 223 (class 1259 OID 253982)
+-- Name: ClientData; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ClientData" (
+    user_id uuid NOT NULL,
+    role_id uuid NOT NULL,
+    vat_number character varying(20),
+    billing_address text,
+    default_shipping_address text,
+    is_partner boolean DEFAULT false NOT NULL,
+    internal_notes text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."ClientData" OWNER TO neondb_owner;
+
+--
+-- TOC entry 224 (class 1259 OID 253990)
+-- Name: Component; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Component" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    parent_component_id uuid,
+    fabric_id uuid,
+    postfabric_id uuid,
+    material_id uuid,
+    machine_id uuid,
+    title character varying(100) NOT NULL,
+    dimen_x numeric(10,2),
+    dimen_y numeric(10,2),
+    dimen_z numeric(10,2),
+    description text,
+    notes text,
+    version integer DEFAULT 1 NOT NULL,
+    estimated_print_time_minutes integer,
+    estimated_material_usage numeric(10,3),
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    max_weight numeric(10,2),
+    min_weight numeric(10,2),
+    created_by_id uuid,
+    onedrive_folder_id text,
+    onedrive_clientfiles_folder_id text,
+    onedrive_budgets_folder_id text,
+    onedrive_forge_folder_id text,
+    component_base_id uuid,
+    version_backup character varying(20),
+    status_id uuid,
+    support_material_id uuid
+);
+
+
+ALTER TABLE public."Component" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3955 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: COLUMN "Component".component_base_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."Component".component_base_id IS 'References the base component ID - all versions of the same component share this ID';
+
+
+--
+-- TOC entry 225 (class 1259 OID 253999)
+-- Name: ComponentBudget; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ComponentBudget" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    forge_id uuid NOT NULL,
+    component_id uuid NOT NULL,
+    status_id uuid NOT NULL,
+    client_id uuid,
+    analyst_id uuid,
+    description text,
+    internal_notes text,
+    client_notes text,
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    submission_mode character varying(20),
+    submitted_by_user_id uuid,
+    support_material_id uuid,
+    support_volume_per_table numeric(10,3),
+    items_per_table integer,
+    print_hours_per_table integer,
+    volume_per_table numeric(10,3),
+    modeling_hours integer,
+    slicing_hours integer,
+    maintenance_hours_per_table integer,
+    curing_machine_id uuid,
+    curing_hours integer,
+    curing_items_per_table integer,
+    curing_auto_filled boolean DEFAULT false,
+    is_active boolean,
+    total_value numeric(12,2),
+    final_price_per_piece numeric(12,2),
+    CONSTRAINT "ComponentBudget_submission_mode_check" CHECK (((submission_mode)::text = ANY ((ARRAY['forge'::character varying, 'post-forge'::character varying, 'admin'::character varying])::text[])))
+);
+
+
+ALTER TABLE public."ComponentBudget" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3956 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".support_material_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".support_material_id IS 'Material de suporte (impressão 3D) usado neste trabalho (FK Material)';
+
+
+--
+-- TOC entry 3957 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".support_volume_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".support_volume_per_table IS 'Volume de suporte por mesa (g)';
+
+
+--
+-- TOC entry 3958 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".items_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".items_per_table IS 'Itens por mesa (impressão)';
+
+
+--
+-- TOC entry 3959 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".print_hours_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".print_hours_per_table IS 'Tempo de impressão por mesa (minutos)';
+
+
+--
+-- TOC entry 3960 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".volume_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".volume_per_table IS 'Volume por mesa (g)';
+
+
+--
+-- TOC entry 3961 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".modeling_hours; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".modeling_hours IS 'Tempo de modelação (minutos)';
+
+
+--
+-- TOC entry 3962 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".slicing_hours; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".slicing_hours IS 'Tempo de slicing (minutos)';
+
+
+--
+-- TOC entry 3963 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".maintenance_hours_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".maintenance_hours_per_table IS 'Tempo de manutenção por mesa (minutos)';
+
+
+--
+-- TOC entry 3964 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".curing_machine_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".curing_machine_id IS 'Máquina de cura (FK MachineCure)';
+
+
+--
+-- TOC entry 3965 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".curing_hours; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".curing_hours IS 'Tempo de cura por mesa (minutos)';
+
+
+--
+-- TOC entry 3966 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".curing_items_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".curing_items_per_table IS 'Itens por mesa de cura';
+
+
+--
+-- TOC entry 226 (class 1259 OID 254009)
+-- Name: ComponentBudgetFiles; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ComponentBudgetFiles" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    component_budget_id uuid NOT NULL,
+    onedrive_item_id text NOT NULL,
+    onedrive_web_url text NOT NULL,
+    file_name text NOT NULL,
+    file_type text NOT NULL,
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    budget_category character varying(20),
+    is_profile_image boolean DEFAULT false,
+    CONSTRAINT "ComponentBudgetFiles_budget_category_check" CHECK (((budget_category)::text = ANY ((ARRAY['slice'::character varying, 'sliceImage'::character varying, 'excel'::character varying])::text[])))
+);
+
+
+ALTER TABLE public."ComponentBudgetFiles" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3967 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: COLUMN "ComponentBudgetFiles".budget_category; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudgetFiles".budget_category IS 'Categoria do ficheiro: slice | sliceImage | excel';
+
+
+--
+-- TOC entry 263 (class 1259 OID 770115)
+-- Name: ComponentBudgetFinishing; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ComponentBudgetFinishing" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    component_budget_id uuid NOT NULL,
+    finishing_id uuid NOT NULL,
+    total_drying_hours numeric(8,2) NOT NULL,
+    sequence_override integer,
+    notes text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public."ComponentBudgetFinishing" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3968 (class 0 OID 0)
+-- Dependencies: 263
+-- Name: TABLE "ComponentBudgetFinishing"; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON TABLE public."ComponentBudgetFinishing" IS 'Relação dinâmica por orçamento: acabamentos aplicados e horas totais de secagem';
+
+
+--
+-- TOC entry 264 (class 1259 OID 770138)
+-- Name: ComponentBudgetFinishingMaterial; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ComponentBudgetFinishingMaterial" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    component_budget_finishing_id uuid NOT NULL,
+    finishing_material_id uuid NOT NULL,
+    quantity numeric(12,3) NOT NULL,
+    quantity_uom character varying(20),
+    application_hours numeric(8,2) NOT NULL,
+    unit_cost_snapshot numeric(10,2),
+    currency_snapshot character(3),
+    brand_name_snapshot character varying(100),
+    purchase_link_snapshot text,
+    notes text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "ComponentBudgetFinishingMaterial_application_hours_check" CHECK ((application_hours > (0)::numeric)),
+    CONSTRAINT "ComponentBudgetFinishingMaterial_quantity_check" CHECK ((quantity > (0)::numeric))
+);
+
+
+ALTER TABLE public."ComponentBudgetFinishingMaterial" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3969 (class 0 OID 0)
+-- Dependencies: 264
+-- Name: TABLE "ComponentBudgetFinishingMaterial"; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON TABLE public."ComponentBudgetFinishingMaterial" IS 'Relação dinâmica por orçamento: materiais usados em cada acabamento, com quantidades e tempo de aplicação';
+
+
+--
+-- TOC entry 227 (class 1259 OID 254017)
+-- Name: ComponentFile; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ComponentFile" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    component_id uuid NOT NULL,
+    onedrive_item_id text NOT NULL,
+    onedrive_web_url text,
+    file_name character varying(255) NOT NULL,
+    file_type character varying(100),
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."ComponentFile" OWNER TO neondb_owner;
+
+--
+-- TOC entry 254 (class 1259 OID 573951)
+-- Name: ComponentStatus; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ComponentStatus" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    parent_status_id uuid,
+    title character varying(100) NOT NULL,
+    description text,
+    "order" integer DEFAULT 0 NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public."ComponentStatus" OWNER TO neondb_owner;
+
+--
+-- TOC entry 256 (class 1259 OID 581662)
+-- Name: ComponentStatusHistory; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ComponentStatusHistory" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    component_id uuid NOT NULL,
+    status_id uuid NOT NULL,
+    user_id uuid,
+    notes text,
+    change_timestamp timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."ComponentStatusHistory" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3970 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: TABLE "ComponentStatusHistory"; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON TABLE public."ComponentStatusHistory" IS 'Tracks status changes for Component records, maintaining a complete audit trail of component status transitions';
+
+
+--
+-- TOC entry 3971 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: COLUMN "ComponentStatusHistory".component_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentStatusHistory".component_id IS 'Reference to the Component whose status changed';
+
+
+--
+-- TOC entry 3972 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: COLUMN "ComponentStatusHistory".status_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentStatusHistory".status_id IS 'Reference to the ComponentStatus that was applied';
+
+
+--
+-- TOC entry 3973 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: COLUMN "ComponentStatusHistory".user_id; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentStatusHistory".user_id IS 'User who triggered the status change (nullable for system changes)';
+
+
+--
+-- TOC entry 3974 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: COLUMN "ComponentStatusHistory".notes; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentStatusHistory".notes IS 'Optional notes about the status change';
+
+
+--
+-- TOC entry 3975 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: COLUMN "ComponentStatusHistory".change_timestamp; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentStatusHistory".change_timestamp IS 'Exact timestamp when the status change occurred';
+
+
+--
+-- TOC entry 228 (class 1259 OID 254025)
+-- Name: Component_Finishing; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Component_Finishing" (
+    component_id uuid NOT NULL,
+    finishing_id uuid NOT NULL,
+    sequence integer,
+    notes text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."Component_Finishing" OWNER TO neondb_owner;
+
+--
+-- TOC entry 229 (class 1259 OID 254032)
+-- Name: Finishing; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Finishing" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    parent_finishing_id uuid,
+    finishingtype_id uuid NOT NULL,
+    name character varying(100) NOT NULL,
+    description text,
+    cost_per_unit numeric(10,2),
+    is_active boolean DEFAULT true NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."Finishing" OWNER TO neondb_owner;
+
+--
+-- TOC entry 261 (class 1259 OID 770082)
+-- Name: FinishingMaterial; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."FinishingMaterial" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(100) NOT NULL,
+    brand_name character varying(100),
+    description text,
+    default_unit_cost numeric(10,2),
+    currency character(3) DEFAULT 'EUR'::bpchar,
+    unit_of_measurement character varying(20),
+    purchase_link text,
+    is_active boolean DEFAULT true,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public."FinishingMaterial" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3976 (class 0 OID 0)
+-- Dependencies: 261
+-- Name: TABLE "FinishingMaterial"; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON TABLE public."FinishingMaterial" IS 'Catálogo de materiais de acabamento (tintas, colas, etc.)';
+
+
+--
+-- TOC entry 230 (class 1259 OID 254041)
+-- Name: FinishingType; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."FinishingType" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(50) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."FinishingType" OWNER TO neondb_owner;
+
+--
+-- TOC entry 262 (class 1259 OID 770094)
+-- Name: Finishing_FinishingMaterial; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Finishing_FinishingMaterial" (
+    finishing_id uuid NOT NULL,
+    finishing_material_id uuid NOT NULL,
+    is_required boolean DEFAULT true,
+    notes text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public."Finishing_FinishingMaterial" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3977 (class 0 OID 0)
+-- Dependencies: 262
+-- Name: TABLE "Finishing_FinishingMaterial"; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON TABLE public."Finishing_FinishingMaterial" IS 'Relação estática: quais materiais são elegíveis para cada acabamento';
+
+
+--
+-- TOC entry 231 (class 1259 OID 254049)
+-- Name: ForgeData; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ForgeData" (
+    user_id uuid NOT NULL,
+    role_id uuid NOT NULL,
+    specialization character varying(100),
+    skills_summary text,
+    work_location character varying(100),
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."ForgeData" OWNER TO neondb_owner;
+
+--
+-- TOC entry 248 (class 1259 OID 254206)
+-- Name: User; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."User" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(50) NOT NULL,
+    surname character varying(50) NOT NULL,
+    email character varying(255) NOT NULL,
+    phone_number character varying(20),
+    password_hash character varying(255) NOT NULL,
+    is_active boolean DEFAULT true NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."User" OWNER TO neondb_owner;
+
+--
+-- TOC entry 232 (class 1259 OID 254056)
+-- Name: Machine; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Machine" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    technology_id uuid NOT NULL,
+    machinemanufacturer_id uuid NOT NULL,
+    model character varying(100) NOT NULL,
+    location character varying(100) DEFAULT 'Forge'::character varying,
+    status character varying(30) DEFAULT 'Available'::character varying NOT NULL,
+    build_volume_x_mm numeric(10,2),
+    build_volume_y_mm numeric(10,2),
+    build_volume_z_mm numeric(10,2),
+    serial_number character varying(50),
+    ip_address character varying(45),
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    print_resolution character varying(20)
+);
+
+
+ALTER TABLE public."Machine" OWNER TO neondb_owner;
+
+--
+-- TOC entry 259 (class 1259 OID 729091)
+-- Name: MachineCure; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."MachineCure" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    machinemanufacturer_id uuid NOT NULL,
+    model character varying(100) NOT NULL,
+    location character varying(100) DEFAULT 'Forge'::character varying NOT NULL,
+    status character varying(30) DEFAULT 'Available'::character varying NOT NULL,
+    volume_x_mm numeric(10,2),
+    volume_y_mm numeric(10,2),
+    volume_z_mm numeric(10,2),
+    serial_number character varying(50),
+    ip_address character varying(45),
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."MachineCure" OWNER TO neondb_owner;
+
+--
+-- TOC entry 233 (class 1259 OID 254064)
+-- Name: MachineManufacturer; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."MachineManufacturer" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(50) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."MachineManufacturer" OWNER TO neondb_owner;
+
+--
+-- TOC entry 234 (class 1259 OID 254072)
+-- Name: MachineTechnology; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."MachineTechnology" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(50) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    technical_name character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public."MachineTechnology" OWNER TO neondb_owner;
+
+--
+-- TOC entry 235 (class 1259 OID 254080)
+-- Name: Material; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Material" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    materialtype_id uuid NOT NULL,
+    materialmanufacturer_id uuid NOT NULL,
+    name character varying(100) NOT NULL,
+    description text,
+    color_name character varying(50),
+    diameter_mm numeric(4,2),
+    cost_per_1000g numeric(10,2),
+    unit_of_measurement character varying(10),
+    is_available boolean DEFAULT true NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    cure_time interval,
+    cleaning_time interval,
+    cure_cost numeric(10,2),
+    cleaning_cost numeric(10,2),
+    cost_per_1g numeric(10,2),
+    density numeric(10,2),
+    post_production_cost numeric(10,2)
+);
+
+
+ALTER TABLE public."Material" OWNER TO neondb_owner;
+
+--
+-- TOC entry 236 (class 1259 OID 254089)
+-- Name: MaterialManufacturer; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."MaterialManufacturer" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(50) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."MaterialManufacturer" OWNER TO neondb_owner;
+
+--
+-- TOC entry 237 (class 1259 OID 254097)
+-- Name: MaterialType; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."MaterialType" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    name character varying(50) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    technical_name character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public."MaterialType" OWNER TO neondb_owner;
+
+--
+-- TOC entry 238 (class 1259 OID 254105)
+-- Name: Material_Machine; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Material_Machine" (
+    material_id uuid NOT NULL,
+    machine_id uuid NOT NULL,
+    print_profile_name character varying(100),
+    cost_per_min numeric(10,2),
+    is_recommended boolean DEFAULT true NOT NULL,
+    notes text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."Material_Machine" OWNER TO neondb_owner;
+
+--
+-- TOC entry 260 (class 1259 OID 737280)
+-- Name: Material_MachineCure; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Material_MachineCure" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    material_id uuid NOT NULL,
+    machinecure_id uuid NOT NULL,
+    print_profile_name character varying(100),
+    cost_per_min numeric(10,2),
+    is_recommended boolean DEFAULT true NOT NULL,
+    notes text,
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    cure_minutes integer NOT NULL
+);
+
+
+ALTER TABLE public."Material_MachineCure" OWNER TO neondb_owner;
+
+--
+-- TOC entry 239 (class 1259 OID 254113)
+-- Name: Order; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Order" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    client_id uuid,
+    seller_id uuid NOT NULL,
+    status_id uuid,
+    title character varying(50) NOT NULL,
+    description text,
+    notes text,
+    completed_at timestamp with time zone,
+    in_hand boolean DEFAULT false NOT NULL,
+    with_shipping boolean DEFAULT true NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    "Client" character varying(50),
+    is_partner boolean DEFAULT false NOT NULL,
+    is_sample boolean DEFAULT false NOT NULL,
+    is_urgent boolean DEFAULT false NOT NULL,
+    is_scan boolean DEFAULT false NOT NULL,
+    updated_by_id uuid,
+    client_onedrive_folder_id text,
+    order_onedrive_folder_id text,
+    priority_id uuid,
+    payment_terms_id uuid,
+    production_type_id uuid
+);
+
+
+ALTER TABLE public."Order" OWNER TO neondb_owner;
+
+--
+-- TOC entry 252 (class 1259 OID 573909)
+-- Name: OrderStatus; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."OrderStatus" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    parent_status_id uuid,
+    title character varying(100) NOT NULL,
+    description text,
+    "order" integer DEFAULT 0 NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public."OrderStatus" OWNER TO neondb_owner;
+
+--
+-- TOC entry 240 (class 1259 OID 254137)
+-- Name: OrderStatusHistory; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."OrderStatusHistory" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    order_id uuid NOT NULL,
+    status_id uuid NOT NULL,
+    user_id uuid,
+    notes text,
+    change_timestamp timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."OrderStatusHistory" OWNER TO neondb_owner;
+
+--
+-- TOC entry 241 (class 1259 OID 254144)
+-- Name: Order_Component; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Order_Component" (
+    order_id uuid NOT NULL,
+    component_id uuid NOT NULL,
+    quantity integer DEFAULT 1 NOT NULL,
+    status character varying(30) DEFAULT 'Pending'::character varying NOT NULL,
+    unit_cost numeric(10,2),
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT "Order_Component_quantity_check" CHECK ((quantity > 0))
+);
+
+
+ALTER TABLE public."Order_Component" OWNER TO neondb_owner;
+
+--
+-- TOC entry 242 (class 1259 OID 254152)
+-- Name: PaymentTerms; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."PaymentTerms" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    title character varying(100) NOT NULL,
+    description text,
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."PaymentTerms" OWNER TO neondb_owner;
+
+--
+-- TOC entry 243 (class 1259 OID 254160)
+-- Name: PostForgeData; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."PostForgeData" (
+    user_id uuid NOT NULL,
+    role_id uuid NOT NULL,
+    specialization character varying(100),
+    skills_summary text,
+    work_location character varying(100),
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."PostForgeData" OWNER TO neondb_owner;
+
+--
+-- TOC entry 244 (class 1259 OID 254167)
+-- Name: Priority; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Priority" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    title character varying(100) NOT NULL,
+    level integer NOT NULL,
+    description text,
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."Priority" OWNER TO neondb_owner;
+
+--
+-- TOC entry 245 (class 1259 OID 254175)
+-- Name: ProductionType; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."ProductionType" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    title character varying(100) NOT NULL,
+    description text,
+    updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."ProductionType" OWNER TO neondb_owner;
+
+--
+-- TOC entry 251 (class 1259 OID 294912)
+-- Name: RefreshTokens; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."RefreshTokens" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    user_id uuid NOT NULL,
+    token_hash character varying(128) NOT NULL,
+    fingerprint_hash character varying(128) NOT NULL,
+    expires_at timestamp with time zone NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    last_used_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    is_active boolean DEFAULT true,
+    device_info jsonb DEFAULT '{}'::jsonb,
+    ip_address inet
+);
+
+
+ALTER TABLE public."RefreshTokens" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3978 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: TABLE "RefreshTokens"; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON TABLE public."RefreshTokens" IS 'Stores refresh tokens for JWT authentication system with security fingerprinting';
+
+
+--
+-- TOC entry 3979 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: COLUMN "RefreshTokens".token_hash; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."RefreshTokens".token_hash IS 'SHA256 hash of the actual refresh token for security';
+
+
+--
+-- TOC entry 3980 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: COLUMN "RefreshTokens".fingerprint_hash; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."RefreshTokens".fingerprint_hash IS 'SHA256 hash of user fingerprint to prevent token sidejacking';
+
+
+--
+-- TOC entry 3981 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: COLUMN "RefreshTokens".device_info; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."RefreshTokens".device_info IS 'Optional JSON object to store device/browser information';
+
+
+--
+-- TOC entry 3982 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: COLUMN "RefreshTokens".ip_address; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."RefreshTokens".ip_address IS 'IP address when token was created for security tracking';
+
+
+--
+-- TOC entry 246 (class 1259 OID 254183)
+-- Name: Role; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Role" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    title character varying(50) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."Role" OWNER TO neondb_owner;
+
+--
+-- TOC entry 247 (class 1259 OID 254199)
+-- Name: Translation; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."Translation" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    source_text text NOT NULL,
+    target_language character varying(10) NOT NULL,
+    translated_text text NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."Translation" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3983 (class 0 OID 0)
+-- Dependencies: 247
+-- Name: TABLE "Translation"; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON TABLE public."Translation" IS 'Tabela para armazenar o cache de traduções da API Google Cloud Translation';
+
+
+--
+-- TOC entry 249 (class 1259 OID 254215)
+-- Name: UserData; Type: TABLE; Schema: public; Owner: neondb_owner
+--
+
+CREATE TABLE public."UserData" (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    user_id uuid NOT NULL,
+    role_id uuid NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public."UserData" OWNER TO neondb_owner;
+
+--
+-- TOC entry 3482 (class 2606 OID 254226)
+-- Name: AdminData AdminData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AdminData"
+    ADD CONSTRAINT "AdminData_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 3486 (class 2606 OID 254228)
+-- Name: AnalystData AnalystData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AnalystData"
+    ADD CONSTRAINT "AnalystData_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 3616 (class 2606 OID 581640)
+-- Name: BudgetStatusHistory BudgetStatusHistory_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."BudgetStatusHistory"
+    ADD CONSTRAINT "BudgetStatusHistory_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3602 (class 2606 OID 573940)
+-- Name: BudgetStatus BudgetStatus_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."BudgetStatus"
+    ADD CONSTRAINT "BudgetStatus_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3604 (class 2606 OID 573950)
+-- Name: BudgetStatus BudgetStatus_title_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."BudgetStatus"
+    ADD CONSTRAINT "BudgetStatus_title_key" UNIQUE (title);
+
+
+--
+-- TOC entry 3488 (class 2606 OID 254232)
+-- Name: ClientData ClientData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ClientData"
+    ADD CONSTRAINT "ClientData_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 3490 (class 2606 OID 254234)
+-- Name: ClientData ClientData_vat_number_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ClientData"
+    ADD CONSTRAINT "ClientData_vat_number_key" UNIQUE (vat_number);
+
+
+--
+-- TOC entry 3500 (class 2606 OID 254236)
+-- Name: ComponentBudget ComponentBudge_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT "ComponentBudge_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3507 (class 2606 OID 254238)
+-- Name: ComponentBudgetFiles ComponentBudgetFiles_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFiles"
+    ADD CONSTRAINT "ComponentBudgetFiles_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3654 (class 2606 OID 770150)
+-- Name: ComponentBudgetFinishingMaterial ComponentBudgetFinishingMater_component_budget_finishing_id_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFinishingMaterial"
+    ADD CONSTRAINT "ComponentBudgetFinishingMater_component_budget_finishing_id_key" UNIQUE (component_budget_finishing_id, finishing_material_id);
+
+
+--
+-- TOC entry 3656 (class 2606 OID 770148)
+-- Name: ComponentBudgetFinishingMaterial ComponentBudgetFinishingMaterial_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFinishingMaterial"
+    ADD CONSTRAINT "ComponentBudgetFinishingMaterial_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3648 (class 2606 OID 770125)
+-- Name: ComponentBudgetFinishing ComponentBudgetFinishing_component_budget_id_finishing_id_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFinishing"
+    ADD CONSTRAINT "ComponentBudgetFinishing_component_budget_id_finishing_id_key" UNIQUE (component_budget_id, finishing_id);
+
+
+--
+-- TOC entry 3650 (class 2606 OID 770123)
+-- Name: ComponentBudgetFinishing ComponentBudgetFinishing_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFinishing"
+    ADD CONSTRAINT "ComponentBudgetFinishing_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3512 (class 2606 OID 254240)
+-- Name: ComponentFile ComponentFile_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentFile"
+    ADD CONSTRAINT "ComponentFile_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3624 (class 2606 OID 581670)
+-- Name: ComponentStatusHistory ComponentStatusHistory_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentStatusHistory"
+    ADD CONSTRAINT "ComponentStatusHistory_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3609 (class 2606 OID 573961)
+-- Name: ComponentStatus ComponentStatus_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentStatus"
+    ADD CONSTRAINT "ComponentStatus_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3611 (class 2606 OID 573971)
+-- Name: ComponentStatus ComponentStatus_title_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentStatus"
+    ADD CONSTRAINT "ComponentStatus_title_key" UNIQUE (title);
+
+
+--
+-- TOC entry 3515 (class 2606 OID 254242)
+-- Name: Component_Finishing Component_Finishing_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component_Finishing"
+    ADD CONSTRAINT "Component_Finishing_pkey" PRIMARY KEY (component_id, finishing_id);
+
+
+--
+-- TOC entry 3492 (class 2606 OID 254244)
+-- Name: Component Component_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT "Component_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3525 (class 2606 OID 254246)
+-- Name: ForgeData FabricData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ForgeData"
+    ADD CONSTRAINT "FabricData_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 3642 (class 2606 OID 770093)
+-- Name: FinishingMaterial FinishingMaterial_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."FinishingMaterial"
+    ADD CONSTRAINT "FinishingMaterial_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3521 (class 2606 OID 254248)
+-- Name: FinishingType FinishingType_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."FinishingType"
+    ADD CONSTRAINT "FinishingType_name_key" UNIQUE (name);
+
+
+--
+-- TOC entry 3523 (class 2606 OID 254250)
+-- Name: FinishingType FinishingType_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."FinishingType"
+    ADD CONSTRAINT "FinishingType_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3644 (class 2606 OID 770102)
+-- Name: Finishing_FinishingMaterial Finishing_FinishingMaterial_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Finishing_FinishingMaterial"
+    ADD CONSTRAINT "Finishing_FinishingMaterial_pkey" PRIMARY KEY (finishing_id, finishing_material_id);
+
+
+--
+-- TOC entry 3517 (class 2606 OID 254252)
+-- Name: Finishing Finishing_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Finishing"
+    ADD CONSTRAINT "Finishing_name_key" UNIQUE (name);
+
+
+--
+-- TOC entry 3519 (class 2606 OID 254254)
+-- Name: Finishing Finishing_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Finishing"
+    ADD CONSTRAINT "Finishing_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3633 (class 2606 OID 745473)
+-- Name: MachineCure MachineCure_model_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MachineCure"
+    ADD CONSTRAINT "MachineCure_model_key" UNIQUE (model);
+
+
+--
+-- TOC entry 3635 (class 2606 OID 729100)
+-- Name: MachineCure MachineCure_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MachineCure"
+    ADD CONSTRAINT "MachineCure_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3533 (class 2606 OID 254256)
+-- Name: MachineManufacturer MachineManufacturer_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MachineManufacturer"
+    ADD CONSTRAINT "MachineManufacturer_name_key" UNIQUE (name);
+
+
+--
+-- TOC entry 3535 (class 2606 OID 254258)
+-- Name: MachineManufacturer MachineManufacturer_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MachineManufacturer"
+    ADD CONSTRAINT "MachineManufacturer_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3527 (class 2606 OID 254260)
+-- Name: Machine Machine_ip_address_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Machine"
+    ADD CONSTRAINT "Machine_ip_address_key" UNIQUE (ip_address);
+
+
+--
+-- TOC entry 3529 (class 2606 OID 254262)
+-- Name: Machine Machine_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Machine"
+    ADD CONSTRAINT "Machine_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3531 (class 2606 OID 254264)
+-- Name: Machine Machine_serial_number_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Machine"
+    ADD CONSTRAINT "Machine_serial_number_key" UNIQUE (serial_number);
+
+
+--
+-- TOC entry 3545 (class 2606 OID 254266)
+-- Name: MaterialManufacturer MaterialManufacturer_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MaterialManufacturer"
+    ADD CONSTRAINT "MaterialManufacturer_name_key" UNIQUE (name);
+
+
+--
+-- TOC entry 3547 (class 2606 OID 254268)
+-- Name: MaterialManufacturer MaterialManufacturer_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MaterialManufacturer"
+    ADD CONSTRAINT "MaterialManufacturer_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3549 (class 2606 OID 254270)
+-- Name: MaterialType MaterialType_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MaterialType"
+    ADD CONSTRAINT "MaterialType_name_key" UNIQUE (name);
+
+
+--
+-- TOC entry 3551 (class 2606 OID 254272)
+-- Name: MaterialType MaterialType_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MaterialType"
+    ADD CONSTRAINT "MaterialType_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3638 (class 2606 OID 737290)
+-- Name: Material_MachineCure Material_MachineCure_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material_MachineCure"
+    ADD CONSTRAINT "Material_MachineCure_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3553 (class 2606 OID 254274)
+-- Name: Material_Machine Material_Machine_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material_Machine"
+    ADD CONSTRAINT "Material_Machine_pkey" PRIMARY KEY (material_id, machine_id);
+
+
+--
+-- TOC entry 3541 (class 2606 OID 254276)
+-- Name: Material Material_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material"
+    ADD CONSTRAINT "Material_name_key" UNIQUE (name);
+
+
+--
+-- TOC entry 3543 (class 2606 OID 254278)
+-- Name: Material Material_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material"
+    ADD CONSTRAINT "Material_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3557 (class 2606 OID 254280)
+-- Name: OrderStatusHistory OrderStatusHistory_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."OrderStatusHistory"
+    ADD CONSTRAINT "OrderStatusHistory_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3595 (class 2606 OID 573919)
+-- Name: OrderStatus OrderStatus_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."OrderStatus"
+    ADD CONSTRAINT "OrderStatus_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3597 (class 2606 OID 573929)
+-- Name: OrderStatus OrderStatus_title_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."OrderStatus"
+    ADD CONSTRAINT "OrderStatus_title_key" UNIQUE (title);
+
+
+--
+-- TOC entry 3559 (class 2606 OID 254282)
+-- Name: Order_Component Order_Component_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order_Component"
+    ADD CONSTRAINT "Order_Component_pkey" PRIMARY KEY (order_id, component_id);
+
+
+--
+-- TOC entry 3555 (class 2606 OID 254284)
+-- Name: Order Order_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order"
+    ADD CONSTRAINT "Order_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3561 (class 2606 OID 254286)
+-- Name: PaymentTerms PaymentTerms_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."PaymentTerms"
+    ADD CONSTRAINT "PaymentTerms_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3563 (class 2606 OID 254288)
+-- Name: PostForgeData PostFabricData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."PostForgeData"
+    ADD CONSTRAINT "PostFabricData_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 3565 (class 2606 OID 254290)
+-- Name: Priority Priority_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Priority"
+    ADD CONSTRAINT "Priority_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3567 (class 2606 OID 254292)
+-- Name: ProductionType ProductionType_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ProductionType"
+    ADD CONSTRAINT "ProductionType_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3586 (class 2606 OID 294923)
+-- Name: RefreshTokens RefreshTokens_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."RefreshTokens"
+    ADD CONSTRAINT "RefreshTokens_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3588 (class 2606 OID 294925)
+-- Name: RefreshTokens RefreshTokens_token_hash_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."RefreshTokens"
+    ADD CONSTRAINT "RefreshTokens_token_hash_key" UNIQUE (token_hash);
+
+
+--
+-- TOC entry 3569 (class 2606 OID 254294)
+-- Name: Role Role_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Role"
+    ADD CONSTRAINT "Role_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3571 (class 2606 OID 254296)
+-- Name: Role Role_title_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Role"
+    ADD CONSTRAINT "Role_title_key" UNIQUE (title);
+
+
+--
+-- TOC entry 3484 (class 2606 OID 254298)
+-- Name: AgentData SellerData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AgentData"
+    ADD CONSTRAINT "SellerData_pkey" PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 3537 (class 2606 OID 254304)
+-- Name: MachineTechnology Technology_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MachineTechnology"
+    ADD CONSTRAINT "Technology_name_key" UNIQUE (name);
+
+
+--
+-- TOC entry 3539 (class 2606 OID 254306)
+-- Name: MachineTechnology Technology_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MachineTechnology"
+    ADD CONSTRAINT "Technology_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3573 (class 2606 OID 254308)
+-- Name: Translation Translation_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Translation"
+    ADD CONSTRAINT "Translation_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3575 (class 2606 OID 254310)
+-- Name: Translation Translation_source_text_target_language_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Translation"
+    ADD CONSTRAINT "Translation_source_text_target_language_key" UNIQUE (source_text, target_language);
+
+
+--
+-- TOC entry 3582 (class 2606 OID 254312)
+-- Name: UserData UserData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."UserData"
+    ADD CONSTRAINT "UserData_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3584 (class 2606 OID 254314)
+-- Name: UserData UserData_user_id_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."UserData"
+    ADD CONSTRAINT "UserData_user_id_key" UNIQUE (user_id);
+
+
+--
+-- TOC entry 3578 (class 2606 OID 254316)
+-- Name: User User_email_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."User"
+    ADD CONSTRAINT "User_email_key" UNIQUE (email);
+
+
+--
+-- TOC entry 3580 (class 2606 OID 254318)
+-- Name: User User_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."User"
+    ADD CONSTRAINT "User_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3640 (class 2606 OID 745475)
+-- Name: Material_MachineCure material_machinecure_unique; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material_MachineCure"
+    ADD CONSTRAINT material_machinecure_unique UNIQUE (material_id, machinecure_id);
+
+
+--
+-- TOC entry 3498 (class 2606 OID 507935)
+-- Name: Component uk_component_base_version; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT uk_component_base_version UNIQUE (component_base_id, version);
+
+
+--
+-- TOC entry 3631 (class 1259 OID 729102)
+-- Name: MachineCure_ip_address_key; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE UNIQUE INDEX "MachineCure_ip_address_key" ON public."MachineCure" USING btree (ip_address);
+
+
+--
+-- TOC entry 3636 (class 1259 OID 729103)
+-- Name: MachineCure_serial_number_key; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE UNIQUE INDEX "MachineCure_serial_number_key" ON public."MachineCure" USING btree (serial_number);
+
+
+--
+-- TOC entry 3493 (class 1259 OID 770053)
+-- Name: fk_component_support_material; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX fk_component_support_material ON public."Component" USING btree (support_material_id);
+
+
+--
+-- TOC entry 3494 (class 1259 OID 770059)
+-- Name: fki_fk_component_support_material; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX fki_fk_component_support_material ON public."Component" USING btree (support_material_id);
+
+
+--
+-- TOC entry 3605 (class 1259 OID 573946)
+-- Name: idx_budgetstatus_order; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatus_order ON public."BudgetStatus" USING btree ("order");
+
+
+--
+-- TOC entry 3606 (class 1259 OID 573948)
+-- Name: idx_budgetstatus_parent; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatus_parent ON public."BudgetStatus" USING btree (parent_status_id);
+
+
+--
+-- TOC entry 3607 (class 1259 OID 573947)
+-- Name: idx_budgetstatus_title; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatus_title ON public."BudgetStatus" USING btree (title);
+
+
+--
+-- TOC entry 3617 (class 1259 OID 581661)
+-- Name: idx_budgetstatushistory_budget_status_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatushistory_budget_status_timestamp ON public."BudgetStatusHistory" USING btree (component_budget_id, status_id, change_timestamp DESC);
+
+
+--
+-- TOC entry 3618 (class 1259 OID 581660)
+-- Name: idx_budgetstatushistory_budget_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatushistory_budget_timestamp ON public."BudgetStatusHistory" USING btree (component_budget_id, change_timestamp DESC);
+
+
+--
+-- TOC entry 3619 (class 1259 OID 581656)
+-- Name: idx_budgetstatushistory_component_budget; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatushistory_component_budget ON public."BudgetStatusHistory" USING btree (component_budget_id);
+
+
+--
+-- TOC entry 3620 (class 1259 OID 581657)
+-- Name: idx_budgetstatushistory_status; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatushistory_status ON public."BudgetStatusHistory" USING btree (status_id);
+
+
+--
+-- TOC entry 3621 (class 1259 OID 581659)
+-- Name: idx_budgetstatushistory_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatushistory_timestamp ON public."BudgetStatusHistory" USING btree (change_timestamp);
+
+
+--
+-- TOC entry 3622 (class 1259 OID 581658)
+-- Name: idx_budgetstatushistory_user; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_budgetstatushistory_user ON public."BudgetStatusHistory" USING btree (user_id);
+
+
+--
+-- TOC entry 3651 (class 1259 OID 770136)
+-- Name: idx_cbf_budget; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_cbf_budget ON public."ComponentBudgetFinishing" USING btree (component_budget_id);
+
+
+--
+-- TOC entry 3652 (class 1259 OID 770137)
+-- Name: idx_cbf_finishing; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_cbf_finishing ON public."ComponentBudgetFinishing" USING btree (finishing_id);
+
+
+--
+-- TOC entry 3657 (class 1259 OID 770161)
+-- Name: idx_cbfm_budgetfin; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_cbfm_budgetfin ON public."ComponentBudgetFinishingMaterial" USING btree (component_budget_finishing_id);
+
+
+--
+-- TOC entry 3658 (class 1259 OID 770162)
+-- Name: idx_cbfm_finishing_material; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_cbfm_finishing_material ON public."ComponentBudgetFinishingMaterial" USING btree (finishing_material_id);
+
+
+--
+-- TOC entry 3495 (class 1259 OID 507932)
+-- Name: idx_component_base_id; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_component_base_id ON public."Component" USING btree (component_base_id);
+
+
+--
+-- TOC entry 3496 (class 1259 OID 507933)
+-- Name: idx_component_base_version; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_component_base_version ON public."Component" USING btree (component_base_id, version DESC);
+
+
+--
+-- TOC entry 3501 (class 1259 OID 770080)
+-- Name: idx_componentbudget_component; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentbudget_component ON public."ComponentBudget" USING btree (component_id);
+
+
+--
+-- TOC entry 3502 (class 1259 OID 770078)
+-- Name: idx_componentbudget_curing_machine; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentbudget_curing_machine ON public."ComponentBudget" USING btree (curing_machine_id);
+
+
+--
+-- TOC entry 3503 (class 1259 OID 770081)
+-- Name: idx_componentbudget_status; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentbudget_status ON public."ComponentBudget" USING btree (status_id);
+
+
+--
+-- TOC entry 3504 (class 1259 OID 770079)
+-- Name: idx_componentbudget_submitted_by; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentbudget_submitted_by ON public."ComponentBudget" USING btree (submitted_by_user_id);
+
+
+--
+-- TOC entry 3505 (class 1259 OID 770077)
+-- Name: idx_componentbudget_support_material; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentbudget_support_material ON public."ComponentBudget" USING btree (support_material_id);
+
+
+--
+-- TOC entry 3508 (class 1259 OID 770165)
+-- Name: idx_componentbudgetfiles_budget; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentbudgetfiles_budget ON public."ComponentBudgetFiles" USING btree (component_budget_id);
+
+
+--
+-- TOC entry 3509 (class 1259 OID 770166)
+-- Name: idx_componentbudgetfiles_budget_category; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentbudgetfiles_budget_category ON public."ComponentBudgetFiles" USING btree (component_budget_id, budget_category);
+
+
+--
+-- TOC entry 3510 (class 1259 OID 254319)
+-- Name: idx_componentbudgetfiles_componentbudget_id; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentbudgetfiles_componentbudget_id ON public."ComponentBudgetFiles" USING btree (component_budget_id);
+
+
+--
+-- TOC entry 3513 (class 1259 OID 254320)
+-- Name: idx_componentfile_component_id; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentfile_component_id ON public."ComponentFile" USING btree (component_id);
+
+
+--
+-- TOC entry 3612 (class 1259 OID 573967)
+-- Name: idx_componentstatus_order; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatus_order ON public."ComponentStatus" USING btree ("order");
+
+
+--
+-- TOC entry 3613 (class 1259 OID 573969)
+-- Name: idx_componentstatus_parent; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatus_parent ON public."ComponentStatus" USING btree (parent_status_id);
+
+
+--
+-- TOC entry 3614 (class 1259 OID 573968)
+-- Name: idx_componentstatus_title; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatus_title ON public."ComponentStatus" USING btree (title);
+
+
+--
+-- TOC entry 3625 (class 1259 OID 581686)
+-- Name: idx_componentstatushistory_component; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatushistory_component ON public."ComponentStatusHistory" USING btree (component_id);
+
+
+--
+-- TOC entry 3626 (class 1259 OID 581691)
+-- Name: idx_componentstatushistory_component_status_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatushistory_component_status_timestamp ON public."ComponentStatusHistory" USING btree (component_id, status_id, change_timestamp DESC);
+
+
+--
+-- TOC entry 3627 (class 1259 OID 581690)
+-- Name: idx_componentstatushistory_component_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatushistory_component_timestamp ON public."ComponentStatusHistory" USING btree (component_id, change_timestamp DESC);
+
+
+--
+-- TOC entry 3628 (class 1259 OID 581687)
+-- Name: idx_componentstatushistory_status; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatushistory_status ON public."ComponentStatusHistory" USING btree (status_id);
+
+
+--
+-- TOC entry 3629 (class 1259 OID 581689)
+-- Name: idx_componentstatushistory_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatushistory_timestamp ON public."ComponentStatusHistory" USING btree (change_timestamp);
+
+
+--
+-- TOC entry 3630 (class 1259 OID 581688)
+-- Name: idx_componentstatushistory_user; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_componentstatushistory_user ON public."ComponentStatusHistory" USING btree (user_id);
+
+
+--
+-- TOC entry 3645 (class 1259 OID 770113)
+-- Name: idx_finishing_finmat_finishing; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_finishing_finmat_finishing ON public."Finishing_FinishingMaterial" USING btree (finishing_id);
+
+
+--
+-- TOC entry 3646 (class 1259 OID 770114)
+-- Name: idx_finishing_finmat_material; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_finishing_finmat_material ON public."Finishing_FinishingMaterial" USING btree (finishing_material_id);
+
+
+--
+-- TOC entry 3598 (class 1259 OID 573925)
+-- Name: idx_orderstatus_order; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_orderstatus_order ON public."OrderStatus" USING btree ("order");
+
+
+--
+-- TOC entry 3599 (class 1259 OID 573927)
+-- Name: idx_orderstatus_parent; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_orderstatus_parent ON public."OrderStatus" USING btree (parent_status_id);
+
+
+--
+-- TOC entry 3600 (class 1259 OID 573926)
+-- Name: idx_orderstatus_title; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_orderstatus_title ON public."OrderStatus" USING btree (title);
+
+
+--
+-- TOC entry 3589 (class 1259 OID 294937)
+-- Name: idx_refresh_tokens_active; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_refresh_tokens_active ON public."RefreshTokens" USING btree (is_active) WHERE (is_active = true);
+
+
+--
+-- TOC entry 3590 (class 1259 OID 294936)
+-- Name: idx_refresh_tokens_expires_at; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_refresh_tokens_expires_at ON public."RefreshTokens" USING btree (expires_at);
+
+
+--
+-- TOC entry 3591 (class 1259 OID 294935)
+-- Name: idx_refresh_tokens_token_hash; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_refresh_tokens_token_hash ON public."RefreshTokens" USING btree (token_hash);
+
+
+--
+-- TOC entry 3592 (class 1259 OID 294934)
+-- Name: idx_refresh_tokens_user_id; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_refresh_tokens_user_id ON public."RefreshTokens" USING btree (user_id);
+
+
+--
+-- TOC entry 3576 (class 1259 OID 254321)
+-- Name: idx_translation_lookup; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE INDEX idx_translation_lookup ON public."Translation" USING btree (source_text, target_language);
+
+
+--
+-- TOC entry 3593 (class 1259 OID 303104)
+-- Name: idx_unique_active_user_token; Type: INDEX; Schema: public; Owner: neondb_owner
+--
+
+CREATE UNIQUE INDEX idx_unique_active_user_token ON public."RefreshTokens" USING btree (user_id) WHERE (is_active = true);
+
+
+--
+-- TOC entry 3732 (class 2620 OID 254322)
+-- Name: ClientData set_timestamp_clientdata; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_clientdata BEFORE UPDATE ON public."ClientData" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3736 (class 2620 OID 254324)
+-- Name: Component_Finishing set_timestamp_component_finishing; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_component_finishing BEFORE UPDATE ON public."Component_Finishing" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3735 (class 2620 OID 254325)
+-- Name: ComponentFile set_timestamp_componentfile; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_componentfile BEFORE UPDATE ON public."ComponentFile" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3739 (class 2620 OID 254326)
+-- Name: ForgeData set_timestamp_fabricdata; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_fabricdata BEFORE UPDATE ON public."ForgeData" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3737 (class 2620 OID 254327)
+-- Name: Finishing set_timestamp_finishing; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_finishing BEFORE UPDATE ON public."Finishing" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3738 (class 2620 OID 254328)
+-- Name: FinishingType set_timestamp_finishingtype; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_finishingtype BEFORE UPDATE ON public."FinishingType" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3740 (class 2620 OID 254329)
+-- Name: Machine set_timestamp_machine; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_machine BEFORE UPDATE ON public."Machine" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3741 (class 2620 OID 254330)
+-- Name: MachineManufacturer set_timestamp_machinemanufacturer; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_machinemanufacturer BEFORE UPDATE ON public."MachineManufacturer" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3743 (class 2620 OID 254331)
+-- Name: Material set_timestamp_material; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_material BEFORE UPDATE ON public."Material" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3746 (class 2620 OID 254332)
+-- Name: Material_Machine set_timestamp_material_machine; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_material_machine BEFORE UPDATE ON public."Material_Machine" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3744 (class 2620 OID 254333)
+-- Name: MaterialManufacturer set_timestamp_materialmanufacturer; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_materialmanufacturer BEFORE UPDATE ON public."MaterialManufacturer" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3745 (class 2620 OID 254334)
+-- Name: MaterialType set_timestamp_materialtype; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_materialtype BEFORE UPDATE ON public."MaterialType" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3747 (class 2620 OID 254335)
+-- Name: Order set_timestamp_order; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_order BEFORE UPDATE ON public."Order" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3749 (class 2620 OID 254336)
+-- Name: Order_Component set_timestamp_order_component; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_order_component BEFORE UPDATE ON public."Order_Component" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3750 (class 2620 OID 254337)
+-- Name: PostForgeData set_timestamp_postfabricdata; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_postfabricdata BEFORE UPDATE ON public."PostForgeData" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3751 (class 2620 OID 254338)
+-- Name: Role set_timestamp_role; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_role BEFORE UPDATE ON public."Role" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3731 (class 2620 OID 254339)
+-- Name: AgentData set_timestamp_sellerdata; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_sellerdata BEFORE UPDATE ON public."AgentData" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3742 (class 2620 OID 254341)
+-- Name: MachineTechnology set_timestamp_technology; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_technology BEFORE UPDATE ON public."MachineTechnology" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3752 (class 2620 OID 254342)
+-- Name: User set_timestamp_user; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_user BEFORE UPDATE ON public."User" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3753 (class 2620 OID 254343)
+-- Name: UserData set_timestamp_userdata; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER set_timestamp_userdata BEFORE UPDATE ON public."UserData" FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
+
+
+--
+-- TOC entry 3733 (class 2620 OID 581695)
+-- Name: Component trg_component_status_history; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER trg_component_status_history AFTER INSERT OR UPDATE OF status_id ON public."Component" FOR EACH ROW EXECUTE FUNCTION public.track_component_status_change();
+
+
+--
+-- TOC entry 3734 (class 2620 OID 581694)
+-- Name: ComponentBudget trg_componentbudget_status_history; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER trg_componentbudget_status_history AFTER INSERT OR UPDATE OF status_id ON public."ComponentBudget" FOR EACH ROW EXECUTE FUNCTION public.track_budget_status_change();
+
+
+--
+-- TOC entry 3748 (class 2620 OID 254344)
+-- Name: Order trg_order_status_update; Type: TRIGGER; Schema: public; Owner: neondb_owner
+--
+
+CREATE TRIGGER trg_order_status_update AFTER UPDATE ON public."Order" FOR EACH ROW WHEN ((old.status_id IS DISTINCT FROM new.status_id)) EXECUTE FUNCTION public.log_order_status_change();
+
+ALTER TABLE public."Order" DISABLE TRIGGER trg_order_status_update;
+
+
+--
+-- TOC entry 3716 (class 2606 OID 581641)
+-- Name: BudgetStatusHistory BudgetStatusHistory_component_budget_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."BudgetStatusHistory"
+    ADD CONSTRAINT "BudgetStatusHistory_component_budget_id_fkey" FOREIGN KEY (component_budget_id) REFERENCES public."ComponentBudget"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3717 (class 2606 OID 581646)
+-- Name: BudgetStatusHistory BudgetStatusHistory_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."BudgetStatusHistory"
+    ADD CONSTRAINT "BudgetStatusHistory_status_id_fkey" FOREIGN KEY (status_id) REFERENCES public."BudgetStatus"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3718 (class 2606 OID 581651)
+-- Name: BudgetStatusHistory BudgetStatusHistory_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."BudgetStatusHistory"
+    ADD CONSTRAINT "BudgetStatusHistory_user_id_fkey" FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3714 (class 2606 OID 573941)
+-- Name: BudgetStatus BudgetStatus_parent_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."BudgetStatus"
+    ADD CONSTRAINT "BudgetStatus_parent_status_id_fkey" FOREIGN KEY (parent_status_id) REFERENCES public."BudgetStatus"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3729 (class 2606 OID 770151)
+-- Name: ComponentBudgetFinishingMaterial ComponentBudgetFinishingMater_component_budget_finishing_i_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFinishingMaterial"
+    ADD CONSTRAINT "ComponentBudgetFinishingMater_component_budget_finishing_i_fkey" FOREIGN KEY (component_budget_finishing_id) REFERENCES public."ComponentBudgetFinishing"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3730 (class 2606 OID 770156)
+-- Name: ComponentBudgetFinishingMaterial ComponentBudgetFinishingMaterial_finishing_material_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFinishingMaterial"
+    ADD CONSTRAINT "ComponentBudgetFinishingMaterial_finishing_material_id_fkey" FOREIGN KEY (finishing_material_id) REFERENCES public."FinishingMaterial"(id);
+
+
+--
+-- TOC entry 3727 (class 2606 OID 770126)
+-- Name: ComponentBudgetFinishing ComponentBudgetFinishing_component_budget_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFinishing"
+    ADD CONSTRAINT "ComponentBudgetFinishing_component_budget_id_fkey" FOREIGN KEY (component_budget_id) REFERENCES public."ComponentBudget"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3728 (class 2606 OID 770131)
+-- Name: ComponentBudgetFinishing ComponentBudgetFinishing_finishing_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFinishing"
+    ADD CONSTRAINT "ComponentBudgetFinishing_finishing_id_fkey" FOREIGN KEY (finishing_id) REFERENCES public."Finishing"(id);
+
+
+--
+-- TOC entry 3675 (class 2606 OID 770072)
+-- Name: ComponentBudget ComponentBudget_curing_machine_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT "ComponentBudget_curing_machine_id_fkey" FOREIGN KEY (curing_machine_id) REFERENCES public."MachineCure"(id);
+
+
+--
+-- TOC entry 3676 (class 2606 OID 770062)
+-- Name: ComponentBudget ComponentBudget_submitted_by_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT "ComponentBudget_submitted_by_user_id_fkey" FOREIGN KEY (submitted_by_user_id) REFERENCES public."User"(id);
+
+
+--
+-- TOC entry 3677 (class 2606 OID 770067)
+-- Name: ComponentBudget ComponentBudget_support_material_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT "ComponentBudget_support_material_id_fkey" FOREIGN KEY (support_material_id) REFERENCES public."Material"(id);
+
+
+--
+-- TOC entry 3719 (class 2606 OID 581671)
+-- Name: ComponentStatusHistory ComponentStatusHistory_component_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentStatusHistory"
+    ADD CONSTRAINT "ComponentStatusHistory_component_id_fkey" FOREIGN KEY (component_id) REFERENCES public."Component"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3720 (class 2606 OID 581676)
+-- Name: ComponentStatusHistory ComponentStatusHistory_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentStatusHistory"
+    ADD CONSTRAINT "ComponentStatusHistory_status_id_fkey" FOREIGN KEY (status_id) REFERENCES public."ComponentStatus"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3721 (class 2606 OID 581681)
+-- Name: ComponentStatusHistory ComponentStatusHistory_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentStatusHistory"
+    ADD CONSTRAINT "ComponentStatusHistory_user_id_fkey" FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3715 (class 2606 OID 573962)
+-- Name: ComponentStatus ComponentStatus_parent_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentStatus"
+    ADD CONSTRAINT "ComponentStatus_parent_status_id_fkey" FOREIGN KEY (parent_status_id) REFERENCES public."ComponentStatus"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3667 (class 2606 OID 573998)
+-- Name: Component Component_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT "Component_status_id_fkey" FOREIGN KEY (status_id) REFERENCES public."ComponentStatus"(id);
+
+
+--
+-- TOC entry 3725 (class 2606 OID 770103)
+-- Name: Finishing_FinishingMaterial Finishing_FinishingMaterial_finishing_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Finishing_FinishingMaterial"
+    ADD CONSTRAINT "Finishing_FinishingMaterial_finishing_id_fkey" FOREIGN KEY (finishing_id) REFERENCES public."Finishing"(id);
+
+
+--
+-- TOC entry 3726 (class 2606 OID 770108)
+-- Name: Finishing_FinishingMaterial Finishing_FinishingMaterial_finishing_material_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Finishing_FinishingMaterial"
+    ADD CONSTRAINT "Finishing_FinishingMaterial_finishing_material_id_fkey" FOREIGN KEY (finishing_material_id) REFERENCES public."FinishingMaterial"(id);
+
+
+--
+-- TOC entry 3713 (class 2606 OID 573920)
+-- Name: OrderStatus OrderStatus_parent_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."OrderStatus"
+    ADD CONSTRAINT "OrderStatus_parent_status_id_fkey" FOREIGN KEY (parent_status_id) REFERENCES public."OrderStatus"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3659 (class 2606 OID 254345)
+-- Name: AdminData fk_admindata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AdminData"
+    ADD CONSTRAINT fk_admindata_role FOREIGN KEY (role_id) REFERENCES public."Role"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3660 (class 2606 OID 254350)
+-- Name: AdminData fk_admindata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AdminData"
+    ADD CONSTRAINT fk_admindata_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3663 (class 2606 OID 254355)
+-- Name: AnalystData fk_analystdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AnalystData"
+    ADD CONSTRAINT fk_analystdata_role FOREIGN KEY (role_id) REFERENCES public."Role"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3664 (class 2606 OID 254360)
+-- Name: AnalystData fk_analystdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AnalystData"
+    ADD CONSTRAINT fk_analystdata_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3685 (class 2606 OID 254390)
+-- Name: Component_Finishing fk_cf_component; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component_Finishing"
+    ADD CONSTRAINT fk_cf_component FOREIGN KEY (component_id) REFERENCES public."Component"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3686 (class 2606 OID 254395)
+-- Name: Component_Finishing fk_cf_finishing; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component_Finishing"
+    ADD CONSTRAINT fk_cf_finishing FOREIGN KEY (finishing_id) REFERENCES public."Finishing"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3665 (class 2606 OID 254400)
+-- Name: ClientData fk_clientdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ClientData"
+    ADD CONSTRAINT fk_clientdata_role FOREIGN KEY (role_id) REFERENCES public."Role"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3666 (class 2606 OID 254405)
+-- Name: ClientData fk_clientdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ClientData"
+    ADD CONSTRAINT fk_clientdata_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3668 (class 2606 OID 516096)
+-- Name: Component fk_component_base_id; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT fk_component_base_id FOREIGN KEY (component_base_id) REFERENCES public."Component"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3669 (class 2606 OID 254410)
+-- Name: Component fk_component_fabric; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT fk_component_fabric FOREIGN KEY (fabric_id) REFERENCES public."ForgeData"(user_id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3670 (class 2606 OID 254415)
+-- Name: Component fk_component_machine; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT fk_component_machine FOREIGN KEY (machine_id) REFERENCES public."Machine"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3671 (class 2606 OID 254420)
+-- Name: Component fk_component_material; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT fk_component_material FOREIGN KEY (material_id) REFERENCES public."Material"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3672 (class 2606 OID 254425)
+-- Name: Component fk_component_parent; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT fk_component_parent FOREIGN KEY (parent_component_id) REFERENCES public."Component"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3673 (class 2606 OID 254430)
+-- Name: Component fk_component_postfabric; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT fk_component_postfabric FOREIGN KEY (postfabric_id) REFERENCES public."PostForgeData"(user_id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3674 (class 2606 OID 770054)
+-- Name: Component fk_component_support_material; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Component"
+    ADD CONSTRAINT fk_component_support_material FOREIGN KEY (support_material_id) REFERENCES public."Material"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3678 (class 2606 OID 254435)
+-- Name: ComponentBudget fk_componentbudget_analyst; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT fk_componentbudget_analyst FOREIGN KEY (analyst_id) REFERENCES public."AdminData"(user_id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3679 (class 2606 OID 573988)
+-- Name: ComponentBudget fk_componentbudget_budgetstatus; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT fk_componentbudget_budgetstatus FOREIGN KEY (status_id) REFERENCES public."BudgetStatus"(id);
+
+
+--
+-- TOC entry 3680 (class 2606 OID 254440)
+-- Name: ComponentBudget fk_componentbudget_client; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT fk_componentbudget_client FOREIGN KEY (client_id) REFERENCES public."ClientData"(user_id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3681 (class 2606 OID 254445)
+-- Name: ComponentBudget fk_componentbudget_component; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT fk_componentbudget_component FOREIGN KEY (component_id) REFERENCES public."Component"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3682 (class 2606 OID 254450)
+-- Name: ComponentBudget fk_componentbudget_forge; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudget"
+    ADD CONSTRAINT fk_componentbudget_forge FOREIGN KEY (forge_id) REFERENCES public."UserData"(user_id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3683 (class 2606 OID 254460)
+-- Name: ComponentBudgetFiles fk_componentbudgetfiles_componentbudget; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentBudgetFiles"
+    ADD CONSTRAINT fk_componentbudgetfiles_componentbudget FOREIGN KEY (component_budget_id) REFERENCES public."ComponentBudget"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3684 (class 2606 OID 254465)
+-- Name: ComponentFile fk_componentfile_component; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ComponentFile"
+    ADD CONSTRAINT fk_componentfile_component FOREIGN KEY (component_id) REFERENCES public."Component"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3689 (class 2606 OID 254470)
+-- Name: ForgeData fk_fabricdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ForgeData"
+    ADD CONSTRAINT fk_fabricdata_role FOREIGN KEY (role_id) REFERENCES public."Role"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3690 (class 2606 OID 254475)
+-- Name: ForgeData fk_fabricdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."ForgeData"
+    ADD CONSTRAINT fk_fabricdata_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3687 (class 2606 OID 254480)
+-- Name: Finishing fk_finishing_parent; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Finishing"
+    ADD CONSTRAINT fk_finishing_parent FOREIGN KEY (parent_finishing_id) REFERENCES public."Finishing"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3688 (class 2606 OID 254485)
+-- Name: Finishing fk_finishing_type; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Finishing"
+    ADD CONSTRAINT fk_finishing_type FOREIGN KEY (finishingtype_id) REFERENCES public."FinishingType"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3691 (class 2606 OID 254490)
+-- Name: Machine fk_machine_manufacturer; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Machine"
+    ADD CONSTRAINT fk_machine_manufacturer FOREIGN KEY (machinemanufacturer_id) REFERENCES public."MachineManufacturer"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3692 (class 2606 OID 254495)
+-- Name: Machine fk_machine_technology; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Machine"
+    ADD CONSTRAINT fk_machine_technology FOREIGN KEY (technology_id) REFERENCES public."MachineTechnology"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3722 (class 2606 OID 729104)
+-- Name: MachineCure fk_machinecure_manufacturer; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."MachineCure"
+    ADD CONSTRAINT fk_machinecure_manufacturer FOREIGN KEY (machinemanufacturer_id) REFERENCES public."MachineManufacturer"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3693 (class 2606 OID 254500)
+-- Name: Material fk_material_manufacturer; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material"
+    ADD CONSTRAINT fk_material_manufacturer FOREIGN KEY (materialmanufacturer_id) REFERENCES public."MaterialManufacturer"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3694 (class 2606 OID 254505)
+-- Name: Material fk_material_type; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material"
+    ADD CONSTRAINT fk_material_type FOREIGN KEY (materialtype_id) REFERENCES public."MaterialType"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3695 (class 2606 OID 254510)
+-- Name: Material_Machine fk_mm_machine; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material_Machine"
+    ADD CONSTRAINT fk_mm_machine FOREIGN KEY (machine_id) REFERENCES public."Machine"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3723 (class 2606 OID 737291)
+-- Name: Material_MachineCure fk_mm_machinecure; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material_MachineCure"
+    ADD CONSTRAINT fk_mm_machinecure FOREIGN KEY (machinecure_id) REFERENCES public."MachineCure"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3696 (class 2606 OID 254515)
+-- Name: Material_Machine fk_mm_material; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material_Machine"
+    ADD CONSTRAINT fk_mm_material FOREIGN KEY (material_id) REFERENCES public."Material"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3724 (class 2606 OID 737296)
+-- Name: Material_MachineCure fk_mm_material; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Material_MachineCure"
+    ADD CONSTRAINT fk_mm_material FOREIGN KEY (material_id) REFERENCES public."Material"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3706 (class 2606 OID 254520)
+-- Name: Order_Component fk_oc_component; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order_Component"
+    ADD CONSTRAINT fk_oc_component FOREIGN KEY (component_id) REFERENCES public."Component"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3707 (class 2606 OID 254525)
+-- Name: Order_Component fk_oc_order; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order_Component"
+    ADD CONSTRAINT fk_oc_order FOREIGN KEY (order_id) REFERENCES public."Order"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3697 (class 2606 OID 254530)
+-- Name: Order fk_order_client; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order"
+    ADD CONSTRAINT fk_order_client FOREIGN KEY (client_id) REFERENCES public."ClientData"(user_id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3698 (class 2606 OID 573983)
+-- Name: Order fk_order_orderstatus; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order"
+    ADD CONSTRAINT fk_order_orderstatus FOREIGN KEY (status_id) REFERENCES public."OrderStatus"(id);
+
+
+--
+-- TOC entry 3699 (class 2606 OID 254535)
+-- Name: Order fk_order_payment_terms; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order"
+    ADD CONSTRAINT fk_order_payment_terms FOREIGN KEY (payment_terms_id) REFERENCES public."PaymentTerms"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3700 (class 2606 OID 254540)
+-- Name: Order fk_order_priority; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order"
+    ADD CONSTRAINT fk_order_priority FOREIGN KEY (priority_id) REFERENCES public."Priority"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3701 (class 2606 OID 254545)
+-- Name: Order fk_order_production_type; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order"
+    ADD CONSTRAINT fk_order_production_type FOREIGN KEY (production_type_id) REFERENCES public."ProductionType"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3702 (class 2606 OID 254550)
+-- Name: Order fk_order_seller; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."Order"
+    ADD CONSTRAINT fk_order_seller FOREIGN KEY (seller_id) REFERENCES public."UserData"(user_id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3703 (class 2606 OID 254560)
+-- Name: OrderStatusHistory fk_orderstatushistory_order; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."OrderStatusHistory"
+    ADD CONSTRAINT fk_orderstatushistory_order FOREIGN KEY (order_id) REFERENCES public."Order"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3704 (class 2606 OID 573993)
+-- Name: OrderStatusHistory fk_orderstatushistory_orderstatus; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."OrderStatusHistory"
+    ADD CONSTRAINT fk_orderstatushistory_orderstatus FOREIGN KEY (status_id) REFERENCES public."OrderStatus"(id);
+
+
+--
+-- TOC entry 3705 (class 2606 OID 254570)
+-- Name: OrderStatusHistory fk_orderstatushistory_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."OrderStatusHistory"
+    ADD CONSTRAINT fk_orderstatushistory_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3708 (class 2606 OID 254575)
+-- Name: PostForgeData fk_postfabricdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."PostForgeData"
+    ADD CONSTRAINT fk_postfabricdata_role FOREIGN KEY (role_id) REFERENCES public."Role"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3709 (class 2606 OID 254580)
+-- Name: PostForgeData fk_postfabricdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."PostForgeData"
+    ADD CONSTRAINT fk_postfabricdata_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3712 (class 2606 OID 294929)
+-- Name: RefreshTokens fk_refresh_tokens_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."RefreshTokens"
+    ADD CONSTRAINT fk_refresh_tokens_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3661 (class 2606 OID 254585)
+-- Name: AgentData fk_sellerdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AgentData"
+    ADD CONSTRAINT fk_sellerdata_role FOREIGN KEY (role_id) REFERENCES public."Role"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3662 (class 2606 OID 254590)
+-- Name: AgentData fk_sellerdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."AgentData"
+    ADD CONSTRAINT fk_sellerdata_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3710 (class 2606 OID 254600)
+-- Name: UserData fk_userdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."UserData"
+    ADD CONSTRAINT fk_userdata_role FOREIGN KEY (role_id) REFERENCES public."Role"(id) ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3711 (class 2606 OID 254605)
+-- Name: UserData fk_userdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
+--
+
+ALTER TABLE ONLY public."UserData"
+    ADD CONSTRAINT fk_userdata_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
+
+
+-- Completed on 2025-08-19 09:48:44 UTC
+
+--
+-- PostgreSQL database dump complete
+--
+

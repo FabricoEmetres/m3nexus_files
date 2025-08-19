@@ -204,3 +204,137 @@ Objetivo: Documentar arquitetura, decisões, trade-offs, segurança, testes e pr
 
 Thúlio Silva
 
+
+
+---
+
+## 13. Correção Importante – Seleção do Status Inicial (BudgetStatus)
+
+- O status inicial do orçamento NÃO deve ser resolvido por título.
+- Regra correta: selecionar o registo em "BudgetStatus" onde o campo "order" = 0 (primeiro da ordem de status)
+- Racional: torna o fluxo independente de traduções de título e alinhado à ordenação canónica do workflow.
+- Implementação sugerida:
+  - SQL: `SELECT id FROM "BudgetStatus" WHERE "order" = 0 LIMIT 1;`
+  - Falha controlada se não existir: retornar 500 com mensagem de configuração ausente.
+
+---
+
+## 14. Mapeamento de Dados para ComponentBudget (Detelhado)
+
+O objetivo é persistir apenas o que a BD aceita hoje, de forma minimalista, mapeando campos críticos e usando JSONB como fallback quando necessário.
+
+### 14.1 Campos principais
+- component_id ← context.componentId
+- submitted_by_user_id ← userId autenticado
+- submission_mode ← derivado de context.userRole ("forge" | "post-forge" | "admin")
+- status_id ← BudgetStatus."order" = 0
+- final_price_per_piece ← budgetCalculations.final_price_per_piece
+- internal_notes ← forgeData.comments.internal (opcional)
+- client_notes ← forgeData.comments.external (opcional)
+- description ← (opcional; pode receber concat de resumo do orçamento)
+
+### 14.2 Produção (Forge)
+- items_per_table ← forgeData.production.itemsPerTable
+- print_hours_per_table ← forgeData.production.printHoursPerTable
+- volume_per_table ← forgeData.production.volumePerTable
+- support_volume_per_table ← forgeData.production.supportVolumePerTable
+- modeling_hours ← forgeData.production.timeEstimates.modelingHours
+- slicing_hours ← forgeData.production.timeEstimates.slicingHours
+- maintenance_hours_per_table ← forgeData.production.timeEstimates.maintenanceHoursPerTable
+
+### 14.3 Cura (Forge)
+- curing_machine_id ← forgeData.curing.machine.id (quando isRequired)
+- curing_hours ← forgeData.curing.hours
+- curing_items_per_table ← forgeData.curing.itemsPerTable
+- curing_auto_filled ← forgeData.curing.autoFilledFromMachine? boolean (se existir no payload; caso contrário, false)
+
+### 14.4 Totais/valores
+- total_value ← (opcional) se existir cálculo consolidado visado pela BD
+- final_price_per_piece ← já mapeado (campo existente)
+- Se fizer sentido guardar custo final por peça (final_cost_per_piece), usar JSONB fallback enquanto não existir coluna
+
+### 14.5 Fallback JSONB
+- forge_data_json (se necessário):
+  - budgetCalculations.estimated_forge_days, estimated_prod_days, final_cost_per_piece
+  - quaisquer subcampos de produção/curing não suportados nativamente
+- postforge_data_json (se necessário):
+  - finishings[]/materials[] com dynamicFields e staticFields
+- Nota: o uso de JSONB mantém velocidade de entrega e não trava por dependência de migrações estruturais.
+
+---
+
+## 15. Validações por Papel – Matriz com Paths
+
+### 15.1 Gerais
+- context.componentId: uuid
+- context.version: number > 0
+- budgetCalculations.estimated_forge_days: number > 0
+- budgetCalculations.final_cost_per_piece: number > 0
+- budgetCalculations.final_price_per_piece: number > 0
+- budgetCalculations.estimated_prod_days: number > 0
+
+### 15.2 Forge
+- forgeData.production.itemsPerTable: number > 0
+- forgeData.production.printHoursPerTable: number > 0
+- forgeData.production.volumePerTable: number >= 0
+- forgeData.production.supportVolumePerTable: number >= 0
+- forgeData.production.timeEstimates.modelingHours: number >= 0
+- forgeData.production.timeEstimates.slicingHours: number >= 0
+- forgeData.production.timeEstimates.maintenanceHoursPerTable: number >= 0
+
+#### Cura (condicional)
+- forgeData.curing.isRequired === true ⇒
+  - forgeData.curing.machine.id: uuid
+  - forgeData.curing.hours: number > 0
+  - forgeData.curing.itemsPerTable: number > 0
+
+### 15.3 Post-Forge
+Para cada finishing.material:
+- dynamicFields.unitConsumption: number > 0
+- dynamicFields.applicationHours: number > 0
+- staticFields.name: string.trim().length > 0
+- staticFields.supplierName: string.trim().length > 0
+- staticFields.unitCost: number > 0
+- staticFields.purchaseLink: string | null (normalizado), opcional
+- staticFields.description: string | null (normalizado), opcional
+
+### 15.4 Normalização
+- Strings: trim
+- Nulls: undefined → null, strings vazias controladas para campos textuais opcionais
+- Números: validar parse e faixas; rejeitar NaN
+
+### 15.5 Autorização
+- userRole = Forge ⇒ pode enviar forgeData
+- userRole = Post-Forge ⇒ pode enviar postForgeData
+- userRole = Admin ⇒ pode enviar ambos
+- Nota: sempre podemos aceitar ambos e validar apenas a parte relevante ao papel, para reuso de UI multi-role
+
+---
+
+## 16. Fluxo de Transação – Passo a Passo Técnico
+
+1) Autenticar (getAuthenticatedUserId), derivar language (pt/en)
+2) Validar payload (geral + por role)
+3) BEGIN
+4) Query status inicial: `SELECT id FROM "BudgetStatus" WHERE "order" = 0 LIMIT 1` (erro 500 se não encontrado)
+5) INSERT em "ComponentBudget" com campos mapeados
+6) INSERT em "BudgetStatusHistory" (component_budget_id, status_id, user_id, notes=null)
+7) COMMIT
+8) Responder 200 { success: true, data: { budgetId, componentId, version, statusId }, message }
+
+— ROLLBACK em qualquer falha de validação lógica após BEGIN (se ocorrer), ou exceções DB.
+
+---
+
+## 17. Tratamento de Erros e Mensagens (PT/EN)
+
+- 405: Método não permitido / Method not allowed
+- 401: Autenticação obrigatória / Authentication required
+- 400: Erros de validação (lista de { path, message })
+- 500: Erro interno ao submeter orçamento / Internal server error while submitting budget
+
+Mensagens exemplificadas:
+- PT: "Campo obrigatório em falta: budgetCalculations.final_price_per_piece"
+- EN: "Missing required field: budgetCalculations.final_price_per_piece"
+
+---

@@ -5,7 +5,7 @@
 -- Dumped from database version 17.5
 -- Dumped by pg_dump version 17.5
 
--- Started on 2025-08-19 09:48:35 UTC
+-- Started on 2025-08-20 14:46:19 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -107,7 +107,7 @@ CREATE TABLE public."BudgetStatusHistory" (
 ALTER TABLE public."BudgetStatusHistory" OWNER TO neondb_owner;
 
 --
--- TOC entry 3949 (class 0 OID 0)
+-- TOC entry 3950 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: TABLE "BudgetStatusHistory"; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -116,7 +116,7 @@ COMMENT ON TABLE public."BudgetStatusHistory" IS 'Tracks status changes for Comp
 
 
 --
--- TOC entry 3950 (class 0 OID 0)
+-- TOC entry 3951 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: COLUMN "BudgetStatusHistory".component_budget_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -125,7 +125,7 @@ COMMENT ON COLUMN public."BudgetStatusHistory".component_budget_id IS 'Reference
 
 
 --
--- TOC entry 3951 (class 0 OID 0)
+-- TOC entry 3952 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: COLUMN "BudgetStatusHistory".status_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -134,7 +134,7 @@ COMMENT ON COLUMN public."BudgetStatusHistory".status_id IS 'Reference to the Bu
 
 
 --
--- TOC entry 3952 (class 0 OID 0)
+-- TOC entry 3953 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: COLUMN "BudgetStatusHistory".user_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -143,7 +143,7 @@ COMMENT ON COLUMN public."BudgetStatusHistory".user_id IS 'User who triggered th
 
 
 --
--- TOC entry 3953 (class 0 OID 0)
+-- TOC entry 3954 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: COLUMN "BudgetStatusHistory".notes; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -152,7 +152,7 @@ COMMENT ON COLUMN public."BudgetStatusHistory".notes IS 'Optional notes about th
 
 
 --
--- TOC entry 3954 (class 0 OID 0)
+-- TOC entry 3955 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: COLUMN "BudgetStatusHistory".change_timestamp; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -219,7 +219,7 @@ CREATE TABLE public."Component" (
 ALTER TABLE public."Component" OWNER TO neondb_owner;
 
 --
--- TOC entry 3955 (class 0 OID 0)
+-- TOC entry 3956 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: COLUMN "Component".component_base_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -239,25 +239,23 @@ CREATE TABLE public."ComponentBudget" (
     status_id uuid NOT NULL,
     client_id uuid,
     analyst_id uuid,
-    description text,
     internal_notes text,
     client_notes text,
     updated_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     created_at timestamp(6) with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     submission_mode character varying(20),
-    submitted_by_user_id uuid,
     support_material_id uuid,
-    support_volume_per_table numeric(10,3),
+    support_g_per_table numeric(10,3),
     items_per_table integer,
-    print_hours_per_table integer,
-    volume_per_table numeric(10,3),
-    modeling_hours integer,
-    slicing_hours integer,
-    maintenance_hours_per_table integer,
+    print_min_per_table integer,
+    g_per_table numeric(10,3),
+    modeling_min integer,
+    slicing_min integer,
+    maintenance_min_per_table integer,
     curing_machine_id uuid,
-    curing_hours integer,
+    curing_min integer,
     curing_items_per_table integer,
-    curing_auto_filled boolean DEFAULT false,
+    curing_min_edited boolean,
     is_active boolean,
     total_value numeric(12,2),
     final_price_per_piece numeric(12,2),
@@ -268,7 +266,7 @@ CREATE TABLE public."ComponentBudget" (
 ALTER TABLE public."ComponentBudget" OWNER TO neondb_owner;
 
 --
--- TOC entry 3956 (class 0 OID 0)
+-- TOC entry 3957 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: COLUMN "ComponentBudget".support_material_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -277,16 +275,16 @@ COMMENT ON COLUMN public."ComponentBudget".support_material_id IS 'Material de s
 
 
 --
--- TOC entry 3957 (class 0 OID 0)
--- Dependencies: 225
--- Name: COLUMN "ComponentBudget".support_volume_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
---
-
-COMMENT ON COLUMN public."ComponentBudget".support_volume_per_table IS 'Volume de suporte por mesa (g)';
-
-
---
 -- TOC entry 3958 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".support_g_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".support_g_per_table IS 'Volume de suporte por mesa (g)';
+
+
+--
+-- TOC entry 3959 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: COLUMN "ComponentBudget".items_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -295,52 +293,52 @@ COMMENT ON COLUMN public."ComponentBudget".items_per_table IS 'Itens por mesa (i
 
 
 --
--- TOC entry 3959 (class 0 OID 0)
--- Dependencies: 225
--- Name: COLUMN "ComponentBudget".print_hours_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
---
-
-COMMENT ON COLUMN public."ComponentBudget".print_hours_per_table IS 'Tempo de impressão por mesa (minutos)';
-
-
---
 -- TOC entry 3960 (class 0 OID 0)
 -- Dependencies: 225
--- Name: COLUMN "ComponentBudget".volume_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+-- Name: COLUMN "ComponentBudget".print_min_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
 
-COMMENT ON COLUMN public."ComponentBudget".volume_per_table IS 'Volume por mesa (g)';
+COMMENT ON COLUMN public."ComponentBudget".print_min_per_table IS 'Tempo de impressão por mesa (minutos)';
 
 
 --
 -- TOC entry 3961 (class 0 OID 0)
 -- Dependencies: 225
--- Name: COLUMN "ComponentBudget".modeling_hours; Type: COMMENT; Schema: public; Owner: neondb_owner
+-- Name: COLUMN "ComponentBudget".g_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
 
-COMMENT ON COLUMN public."ComponentBudget".modeling_hours IS 'Tempo de modelação (minutos)';
+COMMENT ON COLUMN public."ComponentBudget".g_per_table IS 'Volume por mesa (g)';
 
 
 --
 -- TOC entry 3962 (class 0 OID 0)
 -- Dependencies: 225
--- Name: COLUMN "ComponentBudget".slicing_hours; Type: COMMENT; Schema: public; Owner: neondb_owner
+-- Name: COLUMN "ComponentBudget".modeling_min; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
 
-COMMENT ON COLUMN public."ComponentBudget".slicing_hours IS 'Tempo de slicing (minutos)';
+COMMENT ON COLUMN public."ComponentBudget".modeling_min IS 'Tempo de modelação (minutos)';
 
 
 --
 -- TOC entry 3963 (class 0 OID 0)
 -- Dependencies: 225
--- Name: COLUMN "ComponentBudget".maintenance_hours_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+-- Name: COLUMN "ComponentBudget".slicing_min; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
 
-COMMENT ON COLUMN public."ComponentBudget".maintenance_hours_per_table IS 'Tempo de manutenção por mesa (minutos)';
+COMMENT ON COLUMN public."ComponentBudget".slicing_min IS 'Tempo de slicing (minutos)';
 
 
 --
 -- TOC entry 3964 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".maintenance_min_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".maintenance_min_per_table IS 'Tempo de manutenção por mesa (minutos)';
+
+
+--
+-- TOC entry 3965 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: COLUMN "ComponentBudget".curing_machine_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -349,16 +347,16 @@ COMMENT ON COLUMN public."ComponentBudget".curing_machine_id IS 'Máquina de cur
 
 
 --
--- TOC entry 3965 (class 0 OID 0)
--- Dependencies: 225
--- Name: COLUMN "ComponentBudget".curing_hours; Type: COMMENT; Schema: public; Owner: neondb_owner
---
-
-COMMENT ON COLUMN public."ComponentBudget".curing_hours IS 'Tempo de cura por mesa (minutos)';
-
-
---
 -- TOC entry 3966 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN "ComponentBudget".curing_min; Type: COMMENT; Schema: public; Owner: neondb_owner
+--
+
+COMMENT ON COLUMN public."ComponentBudget".curing_min IS 'Tempo de cura por mesa (minutos)';
+
+
+--
+-- TOC entry 3967 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: COLUMN "ComponentBudget".curing_items_per_table; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -389,7 +387,7 @@ CREATE TABLE public."ComponentBudgetFiles" (
 ALTER TABLE public."ComponentBudgetFiles" OWNER TO neondb_owner;
 
 --
--- TOC entry 3967 (class 0 OID 0)
+-- TOC entry 3968 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: COLUMN "ComponentBudgetFiles".budget_category; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -416,7 +414,7 @@ CREATE TABLE public."ComponentBudgetFinishing" (
 ALTER TABLE public."ComponentBudgetFinishing" OWNER TO neondb_owner;
 
 --
--- TOC entry 3968 (class 0 OID 0)
+-- TOC entry 3969 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: TABLE "ComponentBudgetFinishing"; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -450,7 +448,7 @@ CREATE TABLE public."ComponentBudgetFinishingMaterial" (
 ALTER TABLE public."ComponentBudgetFinishingMaterial" OWNER TO neondb_owner;
 
 --
--- TOC entry 3969 (class 0 OID 0)
+-- TOC entry 3970 (class 0 OID 0)
 -- Dependencies: 264
 -- Name: TABLE "ComponentBudgetFinishingMaterial"; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -513,7 +511,7 @@ CREATE TABLE public."ComponentStatusHistory" (
 ALTER TABLE public."ComponentStatusHistory" OWNER TO neondb_owner;
 
 --
--- TOC entry 3970 (class 0 OID 0)
+-- TOC entry 3971 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: TABLE "ComponentStatusHistory"; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -522,7 +520,7 @@ COMMENT ON TABLE public."ComponentStatusHistory" IS 'Tracks status changes for C
 
 
 --
--- TOC entry 3971 (class 0 OID 0)
+-- TOC entry 3972 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: COLUMN "ComponentStatusHistory".component_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -531,7 +529,7 @@ COMMENT ON COLUMN public."ComponentStatusHistory".component_id IS 'Reference to 
 
 
 --
--- TOC entry 3972 (class 0 OID 0)
+-- TOC entry 3973 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: COLUMN "ComponentStatusHistory".status_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -540,7 +538,7 @@ COMMENT ON COLUMN public."ComponentStatusHistory".status_id IS 'Reference to the
 
 
 --
--- TOC entry 3973 (class 0 OID 0)
+-- TOC entry 3974 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: COLUMN "ComponentStatusHistory".user_id; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -549,7 +547,7 @@ COMMENT ON COLUMN public."ComponentStatusHistory".user_id IS 'User who triggered
 
 
 --
--- TOC entry 3974 (class 0 OID 0)
+-- TOC entry 3975 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: COLUMN "ComponentStatusHistory".notes; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -558,7 +556,7 @@ COMMENT ON COLUMN public."ComponentStatusHistory".notes IS 'Optional notes about
 
 
 --
--- TOC entry 3975 (class 0 OID 0)
+-- TOC entry 3976 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: COLUMN "ComponentStatusHistory".change_timestamp; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -626,7 +624,7 @@ CREATE TABLE public."FinishingMaterial" (
 ALTER TABLE public."FinishingMaterial" OWNER TO neondb_owner;
 
 --
--- TOC entry 3976 (class 0 OID 0)
+-- TOC entry 3977 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: TABLE "FinishingMaterial"; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -667,7 +665,7 @@ CREATE TABLE public."Finishing_FinishingMaterial" (
 ALTER TABLE public."Finishing_FinishingMaterial" OWNER TO neondb_owner;
 
 --
--- TOC entry 3977 (class 0 OID 0)
+-- TOC entry 3978 (class 0 OID 0)
 -- Dependencies: 262
 -- Name: TABLE "Finishing_FinishingMaterial"; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -1074,7 +1072,7 @@ CREATE TABLE public."RefreshTokens" (
 ALTER TABLE public."RefreshTokens" OWNER TO neondb_owner;
 
 --
--- TOC entry 3978 (class 0 OID 0)
+-- TOC entry 3979 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: TABLE "RefreshTokens"; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -1083,7 +1081,7 @@ COMMENT ON TABLE public."RefreshTokens" IS 'Stores refresh tokens for JWT authen
 
 
 --
--- TOC entry 3979 (class 0 OID 0)
+-- TOC entry 3980 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: COLUMN "RefreshTokens".token_hash; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -1092,7 +1090,7 @@ COMMENT ON COLUMN public."RefreshTokens".token_hash IS 'SHA256 hash of the actua
 
 
 --
--- TOC entry 3980 (class 0 OID 0)
+-- TOC entry 3981 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: COLUMN "RefreshTokens".fingerprint_hash; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -1101,7 +1099,7 @@ COMMENT ON COLUMN public."RefreshTokens".fingerprint_hash IS 'SHA256 hash of use
 
 
 --
--- TOC entry 3981 (class 0 OID 0)
+-- TOC entry 3982 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: COLUMN "RefreshTokens".device_info; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -1110,7 +1108,7 @@ COMMENT ON COLUMN public."RefreshTokens".device_info IS 'Optional JSON object to
 
 
 --
--- TOC entry 3982 (class 0 OID 0)
+-- TOC entry 3983 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: COLUMN "RefreshTokens".ip_address; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -1151,7 +1149,7 @@ CREATE TABLE public."Translation" (
 ALTER TABLE public."Translation" OWNER TO neondb_owner;
 
 --
--- TOC entry 3983 (class 0 OID 0)
+-- TOC entry 3984 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: TABLE "Translation"; Type: COMMENT; Schema: public; Owner: neondb_owner
 --
@@ -1176,7 +1174,7 @@ CREATE TABLE public."UserData" (
 ALTER TABLE public."UserData" OWNER TO neondb_owner;
 
 --
--- TOC entry 3482 (class 2606 OID 254226)
+-- TOC entry 3484 (class 2606 OID 254226)
 -- Name: AdminData AdminData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1185,7 +1183,7 @@ ALTER TABLE ONLY public."AdminData"
 
 
 --
--- TOC entry 3486 (class 2606 OID 254228)
+-- TOC entry 3488 (class 2606 OID 254228)
 -- Name: AnalystData AnalystData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1194,7 +1192,7 @@ ALTER TABLE ONLY public."AnalystData"
 
 
 --
--- TOC entry 3616 (class 2606 OID 581640)
+-- TOC entry 3617 (class 2606 OID 581640)
 -- Name: BudgetStatusHistory BudgetStatusHistory_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1203,7 +1201,7 @@ ALTER TABLE ONLY public."BudgetStatusHistory"
 
 
 --
--- TOC entry 3602 (class 2606 OID 573940)
+-- TOC entry 3603 (class 2606 OID 573940)
 -- Name: BudgetStatus BudgetStatus_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1212,7 +1210,7 @@ ALTER TABLE ONLY public."BudgetStatus"
 
 
 --
--- TOC entry 3604 (class 2606 OID 573950)
+-- TOC entry 3605 (class 2606 OID 573950)
 -- Name: BudgetStatus BudgetStatus_title_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1221,7 +1219,7 @@ ALTER TABLE ONLY public."BudgetStatus"
 
 
 --
--- TOC entry 3488 (class 2606 OID 254232)
+-- TOC entry 3490 (class 2606 OID 254232)
 -- Name: ClientData ClientData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1230,7 +1228,7 @@ ALTER TABLE ONLY public."ClientData"
 
 
 --
--- TOC entry 3490 (class 2606 OID 254234)
+-- TOC entry 3492 (class 2606 OID 254234)
 -- Name: ClientData ClientData_vat_number_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1239,7 +1237,7 @@ ALTER TABLE ONLY public."ClientData"
 
 
 --
--- TOC entry 3500 (class 2606 OID 254236)
+-- TOC entry 3502 (class 2606 OID 254236)
 -- Name: ComponentBudget ComponentBudge_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1248,7 +1246,7 @@ ALTER TABLE ONLY public."ComponentBudget"
 
 
 --
--- TOC entry 3507 (class 2606 OID 254238)
+-- TOC entry 3508 (class 2606 OID 254238)
 -- Name: ComponentBudgetFiles ComponentBudgetFiles_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1257,7 +1255,7 @@ ALTER TABLE ONLY public."ComponentBudgetFiles"
 
 
 --
--- TOC entry 3654 (class 2606 OID 770150)
+-- TOC entry 3655 (class 2606 OID 770150)
 -- Name: ComponentBudgetFinishingMaterial ComponentBudgetFinishingMater_component_budget_finishing_id_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1266,7 +1264,7 @@ ALTER TABLE ONLY public."ComponentBudgetFinishingMaterial"
 
 
 --
--- TOC entry 3656 (class 2606 OID 770148)
+-- TOC entry 3657 (class 2606 OID 770148)
 -- Name: ComponentBudgetFinishingMaterial ComponentBudgetFinishingMaterial_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1275,7 +1273,7 @@ ALTER TABLE ONLY public."ComponentBudgetFinishingMaterial"
 
 
 --
--- TOC entry 3648 (class 2606 OID 770125)
+-- TOC entry 3649 (class 2606 OID 770125)
 -- Name: ComponentBudgetFinishing ComponentBudgetFinishing_component_budget_id_finishing_id_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1284,7 +1282,7 @@ ALTER TABLE ONLY public."ComponentBudgetFinishing"
 
 
 --
--- TOC entry 3650 (class 2606 OID 770123)
+-- TOC entry 3651 (class 2606 OID 770123)
 -- Name: ComponentBudgetFinishing ComponentBudgetFinishing_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1293,7 +1291,7 @@ ALTER TABLE ONLY public."ComponentBudgetFinishing"
 
 
 --
--- TOC entry 3512 (class 2606 OID 254240)
+-- TOC entry 3513 (class 2606 OID 254240)
 -- Name: ComponentFile ComponentFile_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1302,7 +1300,7 @@ ALTER TABLE ONLY public."ComponentFile"
 
 
 --
--- TOC entry 3624 (class 2606 OID 581670)
+-- TOC entry 3625 (class 2606 OID 581670)
 -- Name: ComponentStatusHistory ComponentStatusHistory_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1311,7 +1309,7 @@ ALTER TABLE ONLY public."ComponentStatusHistory"
 
 
 --
--- TOC entry 3609 (class 2606 OID 573961)
+-- TOC entry 3610 (class 2606 OID 573961)
 -- Name: ComponentStatus ComponentStatus_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1320,7 +1318,7 @@ ALTER TABLE ONLY public."ComponentStatus"
 
 
 --
--- TOC entry 3611 (class 2606 OID 573971)
+-- TOC entry 3612 (class 2606 OID 573971)
 -- Name: ComponentStatus ComponentStatus_title_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1329,7 +1327,7 @@ ALTER TABLE ONLY public."ComponentStatus"
 
 
 --
--- TOC entry 3515 (class 2606 OID 254242)
+-- TOC entry 3516 (class 2606 OID 254242)
 -- Name: Component_Finishing Component_Finishing_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1338,7 +1336,7 @@ ALTER TABLE ONLY public."Component_Finishing"
 
 
 --
--- TOC entry 3492 (class 2606 OID 254244)
+-- TOC entry 3494 (class 2606 OID 254244)
 -- Name: Component Component_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1347,7 +1345,7 @@ ALTER TABLE ONLY public."Component"
 
 
 --
--- TOC entry 3525 (class 2606 OID 254246)
+-- TOC entry 3526 (class 2606 OID 254246)
 -- Name: ForgeData FabricData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1356,7 +1354,7 @@ ALTER TABLE ONLY public."ForgeData"
 
 
 --
--- TOC entry 3642 (class 2606 OID 770093)
+-- TOC entry 3643 (class 2606 OID 770093)
 -- Name: FinishingMaterial FinishingMaterial_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1365,7 +1363,7 @@ ALTER TABLE ONLY public."FinishingMaterial"
 
 
 --
--- TOC entry 3521 (class 2606 OID 254248)
+-- TOC entry 3522 (class 2606 OID 254248)
 -- Name: FinishingType FinishingType_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1374,7 +1372,7 @@ ALTER TABLE ONLY public."FinishingType"
 
 
 --
--- TOC entry 3523 (class 2606 OID 254250)
+-- TOC entry 3524 (class 2606 OID 254250)
 -- Name: FinishingType FinishingType_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1383,7 +1381,7 @@ ALTER TABLE ONLY public."FinishingType"
 
 
 --
--- TOC entry 3644 (class 2606 OID 770102)
+-- TOC entry 3645 (class 2606 OID 770102)
 -- Name: Finishing_FinishingMaterial Finishing_FinishingMaterial_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1392,7 +1390,7 @@ ALTER TABLE ONLY public."Finishing_FinishingMaterial"
 
 
 --
--- TOC entry 3517 (class 2606 OID 254252)
+-- TOC entry 3518 (class 2606 OID 254252)
 -- Name: Finishing Finishing_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1401,7 +1399,7 @@ ALTER TABLE ONLY public."Finishing"
 
 
 --
--- TOC entry 3519 (class 2606 OID 254254)
+-- TOC entry 3520 (class 2606 OID 254254)
 -- Name: Finishing Finishing_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1410,7 +1408,7 @@ ALTER TABLE ONLY public."Finishing"
 
 
 --
--- TOC entry 3633 (class 2606 OID 745473)
+-- TOC entry 3634 (class 2606 OID 745473)
 -- Name: MachineCure MachineCure_model_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1419,7 +1417,7 @@ ALTER TABLE ONLY public."MachineCure"
 
 
 --
--- TOC entry 3635 (class 2606 OID 729100)
+-- TOC entry 3636 (class 2606 OID 729100)
 -- Name: MachineCure MachineCure_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1428,7 +1426,7 @@ ALTER TABLE ONLY public."MachineCure"
 
 
 --
--- TOC entry 3533 (class 2606 OID 254256)
+-- TOC entry 3534 (class 2606 OID 254256)
 -- Name: MachineManufacturer MachineManufacturer_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1437,7 +1435,7 @@ ALTER TABLE ONLY public."MachineManufacturer"
 
 
 --
--- TOC entry 3535 (class 2606 OID 254258)
+-- TOC entry 3536 (class 2606 OID 254258)
 -- Name: MachineManufacturer MachineManufacturer_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1446,7 +1444,7 @@ ALTER TABLE ONLY public."MachineManufacturer"
 
 
 --
--- TOC entry 3527 (class 2606 OID 254260)
+-- TOC entry 3528 (class 2606 OID 254260)
 -- Name: Machine Machine_ip_address_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1455,7 +1453,7 @@ ALTER TABLE ONLY public."Machine"
 
 
 --
--- TOC entry 3529 (class 2606 OID 254262)
+-- TOC entry 3530 (class 2606 OID 254262)
 -- Name: Machine Machine_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1464,7 +1462,7 @@ ALTER TABLE ONLY public."Machine"
 
 
 --
--- TOC entry 3531 (class 2606 OID 254264)
+-- TOC entry 3532 (class 2606 OID 254264)
 -- Name: Machine Machine_serial_number_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1473,7 +1471,7 @@ ALTER TABLE ONLY public."Machine"
 
 
 --
--- TOC entry 3545 (class 2606 OID 254266)
+-- TOC entry 3546 (class 2606 OID 254266)
 -- Name: MaterialManufacturer MaterialManufacturer_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1482,7 +1480,7 @@ ALTER TABLE ONLY public."MaterialManufacturer"
 
 
 --
--- TOC entry 3547 (class 2606 OID 254268)
+-- TOC entry 3548 (class 2606 OID 254268)
 -- Name: MaterialManufacturer MaterialManufacturer_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1491,7 +1489,7 @@ ALTER TABLE ONLY public."MaterialManufacturer"
 
 
 --
--- TOC entry 3549 (class 2606 OID 254270)
+-- TOC entry 3550 (class 2606 OID 254270)
 -- Name: MaterialType MaterialType_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1500,7 +1498,7 @@ ALTER TABLE ONLY public."MaterialType"
 
 
 --
--- TOC entry 3551 (class 2606 OID 254272)
+-- TOC entry 3552 (class 2606 OID 254272)
 -- Name: MaterialType MaterialType_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1509,7 +1507,7 @@ ALTER TABLE ONLY public."MaterialType"
 
 
 --
--- TOC entry 3638 (class 2606 OID 737290)
+-- TOC entry 3639 (class 2606 OID 737290)
 -- Name: Material_MachineCure Material_MachineCure_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1518,7 +1516,7 @@ ALTER TABLE ONLY public."Material_MachineCure"
 
 
 --
--- TOC entry 3553 (class 2606 OID 254274)
+-- TOC entry 3554 (class 2606 OID 254274)
 -- Name: Material_Machine Material_Machine_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1527,7 +1525,7 @@ ALTER TABLE ONLY public."Material_Machine"
 
 
 --
--- TOC entry 3541 (class 2606 OID 254276)
+-- TOC entry 3542 (class 2606 OID 254276)
 -- Name: Material Material_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1536,7 +1534,7 @@ ALTER TABLE ONLY public."Material"
 
 
 --
--- TOC entry 3543 (class 2606 OID 254278)
+-- TOC entry 3544 (class 2606 OID 254278)
 -- Name: Material Material_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1545,7 +1543,7 @@ ALTER TABLE ONLY public."Material"
 
 
 --
--- TOC entry 3557 (class 2606 OID 254280)
+-- TOC entry 3558 (class 2606 OID 254280)
 -- Name: OrderStatusHistory OrderStatusHistory_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1554,7 +1552,7 @@ ALTER TABLE ONLY public."OrderStatusHistory"
 
 
 --
--- TOC entry 3595 (class 2606 OID 573919)
+-- TOC entry 3596 (class 2606 OID 573919)
 -- Name: OrderStatus OrderStatus_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1563,7 +1561,7 @@ ALTER TABLE ONLY public."OrderStatus"
 
 
 --
--- TOC entry 3597 (class 2606 OID 573929)
+-- TOC entry 3598 (class 2606 OID 573929)
 -- Name: OrderStatus OrderStatus_title_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1572,7 +1570,7 @@ ALTER TABLE ONLY public."OrderStatus"
 
 
 --
--- TOC entry 3559 (class 2606 OID 254282)
+-- TOC entry 3560 (class 2606 OID 254282)
 -- Name: Order_Component Order_Component_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1581,7 +1579,7 @@ ALTER TABLE ONLY public."Order_Component"
 
 
 --
--- TOC entry 3555 (class 2606 OID 254284)
+-- TOC entry 3556 (class 2606 OID 254284)
 -- Name: Order Order_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1590,7 +1588,7 @@ ALTER TABLE ONLY public."Order"
 
 
 --
--- TOC entry 3561 (class 2606 OID 254286)
+-- TOC entry 3562 (class 2606 OID 254286)
 -- Name: PaymentTerms PaymentTerms_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1599,7 +1597,7 @@ ALTER TABLE ONLY public."PaymentTerms"
 
 
 --
--- TOC entry 3563 (class 2606 OID 254288)
+-- TOC entry 3564 (class 2606 OID 254288)
 -- Name: PostForgeData PostFabricData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1608,7 +1606,7 @@ ALTER TABLE ONLY public."PostForgeData"
 
 
 --
--- TOC entry 3565 (class 2606 OID 254290)
+-- TOC entry 3566 (class 2606 OID 254290)
 -- Name: Priority Priority_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1617,7 +1615,7 @@ ALTER TABLE ONLY public."Priority"
 
 
 --
--- TOC entry 3567 (class 2606 OID 254292)
+-- TOC entry 3568 (class 2606 OID 254292)
 -- Name: ProductionType ProductionType_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1626,7 +1624,7 @@ ALTER TABLE ONLY public."ProductionType"
 
 
 --
--- TOC entry 3586 (class 2606 OID 294923)
+-- TOC entry 3587 (class 2606 OID 294923)
 -- Name: RefreshTokens RefreshTokens_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1635,7 +1633,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3588 (class 2606 OID 294925)
+-- TOC entry 3589 (class 2606 OID 294925)
 -- Name: RefreshTokens RefreshTokens_token_hash_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1644,7 +1642,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3569 (class 2606 OID 254294)
+-- TOC entry 3570 (class 2606 OID 254294)
 -- Name: Role Role_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1653,7 +1651,7 @@ ALTER TABLE ONLY public."Role"
 
 
 --
--- TOC entry 3571 (class 2606 OID 254296)
+-- TOC entry 3572 (class 2606 OID 254296)
 -- Name: Role Role_title_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1662,7 +1660,7 @@ ALTER TABLE ONLY public."Role"
 
 
 --
--- TOC entry 3484 (class 2606 OID 254298)
+-- TOC entry 3486 (class 2606 OID 254298)
 -- Name: AgentData SellerData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1671,7 +1669,7 @@ ALTER TABLE ONLY public."AgentData"
 
 
 --
--- TOC entry 3537 (class 2606 OID 254304)
+-- TOC entry 3538 (class 2606 OID 254304)
 -- Name: MachineTechnology Technology_name_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1680,7 +1678,7 @@ ALTER TABLE ONLY public."MachineTechnology"
 
 
 --
--- TOC entry 3539 (class 2606 OID 254306)
+-- TOC entry 3540 (class 2606 OID 254306)
 -- Name: MachineTechnology Technology_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1689,7 +1687,7 @@ ALTER TABLE ONLY public."MachineTechnology"
 
 
 --
--- TOC entry 3573 (class 2606 OID 254308)
+-- TOC entry 3574 (class 2606 OID 254308)
 -- Name: Translation Translation_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1698,7 +1696,7 @@ ALTER TABLE ONLY public."Translation"
 
 
 --
--- TOC entry 3575 (class 2606 OID 254310)
+-- TOC entry 3576 (class 2606 OID 254310)
 -- Name: Translation Translation_source_text_target_language_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1707,7 +1705,7 @@ ALTER TABLE ONLY public."Translation"
 
 
 --
--- TOC entry 3582 (class 2606 OID 254312)
+-- TOC entry 3583 (class 2606 OID 254312)
 -- Name: UserData UserData_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1716,7 +1714,7 @@ ALTER TABLE ONLY public."UserData"
 
 
 --
--- TOC entry 3584 (class 2606 OID 254314)
+-- TOC entry 3585 (class 2606 OID 254314)
 -- Name: UserData UserData_user_id_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1725,7 +1723,7 @@ ALTER TABLE ONLY public."UserData"
 
 
 --
--- TOC entry 3578 (class 2606 OID 254316)
+-- TOC entry 3579 (class 2606 OID 254316)
 -- Name: User User_email_key; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1734,7 +1732,7 @@ ALTER TABLE ONLY public."User"
 
 
 --
--- TOC entry 3580 (class 2606 OID 254318)
+-- TOC entry 3581 (class 2606 OID 254318)
 -- Name: User User_pkey; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1743,7 +1741,7 @@ ALTER TABLE ONLY public."User"
 
 
 --
--- TOC entry 3640 (class 2606 OID 745475)
+-- TOC entry 3641 (class 2606 OID 745475)
 -- Name: Material_MachineCure material_machinecure_unique; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1752,7 +1750,7 @@ ALTER TABLE ONLY public."Material_MachineCure"
 
 
 --
--- TOC entry 3498 (class 2606 OID 507935)
+-- TOC entry 3500 (class 2606 OID 507935)
 -- Name: Component uk_component_base_version; Type: CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -1761,7 +1759,7 @@ ALTER TABLE ONLY public."Component"
 
 
 --
--- TOC entry 3631 (class 1259 OID 729102)
+-- TOC entry 3632 (class 1259 OID 729102)
 -- Name: MachineCure_ip_address_key; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1769,7 +1767,7 @@ CREATE UNIQUE INDEX "MachineCure_ip_address_key" ON public."MachineCure" USING b
 
 
 --
--- TOC entry 3636 (class 1259 OID 729103)
+-- TOC entry 3637 (class 1259 OID 729103)
 -- Name: MachineCure_serial_number_key; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1777,7 +1775,7 @@ CREATE UNIQUE INDEX "MachineCure_serial_number_key" ON public."MachineCure" USIN
 
 
 --
--- TOC entry 3493 (class 1259 OID 770053)
+-- TOC entry 3495 (class 1259 OID 770053)
 -- Name: fk_component_support_material; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1785,7 +1783,7 @@ CREATE INDEX fk_component_support_material ON public."Component" USING btree (su
 
 
 --
--- TOC entry 3494 (class 1259 OID 770059)
+-- TOC entry 3496 (class 1259 OID 770059)
 -- Name: fki_fk_component_support_material; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1793,7 +1791,7 @@ CREATE INDEX fki_fk_component_support_material ON public."Component" USING btree
 
 
 --
--- TOC entry 3605 (class 1259 OID 573946)
+-- TOC entry 3606 (class 1259 OID 573946)
 -- Name: idx_budgetstatus_order; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1801,7 +1799,7 @@ CREATE INDEX idx_budgetstatus_order ON public."BudgetStatus" USING btree ("order
 
 
 --
--- TOC entry 3606 (class 1259 OID 573948)
+-- TOC entry 3607 (class 1259 OID 573948)
 -- Name: idx_budgetstatus_parent; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1809,7 +1807,7 @@ CREATE INDEX idx_budgetstatus_parent ON public."BudgetStatus" USING btree (paren
 
 
 --
--- TOC entry 3607 (class 1259 OID 573947)
+-- TOC entry 3608 (class 1259 OID 573947)
 -- Name: idx_budgetstatus_title; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1817,7 +1815,7 @@ CREATE INDEX idx_budgetstatus_title ON public."BudgetStatus" USING btree (title)
 
 
 --
--- TOC entry 3617 (class 1259 OID 581661)
+-- TOC entry 3618 (class 1259 OID 581661)
 -- Name: idx_budgetstatushistory_budget_status_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1825,7 +1823,7 @@ CREATE INDEX idx_budgetstatushistory_budget_status_timestamp ON public."BudgetSt
 
 
 --
--- TOC entry 3618 (class 1259 OID 581660)
+-- TOC entry 3619 (class 1259 OID 581660)
 -- Name: idx_budgetstatushistory_budget_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1833,7 +1831,7 @@ CREATE INDEX idx_budgetstatushistory_budget_timestamp ON public."BudgetStatusHis
 
 
 --
--- TOC entry 3619 (class 1259 OID 581656)
+-- TOC entry 3620 (class 1259 OID 581656)
 -- Name: idx_budgetstatushistory_component_budget; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1841,7 +1839,7 @@ CREATE INDEX idx_budgetstatushistory_component_budget ON public."BudgetStatusHis
 
 
 --
--- TOC entry 3620 (class 1259 OID 581657)
+-- TOC entry 3621 (class 1259 OID 581657)
 -- Name: idx_budgetstatushistory_status; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1849,7 +1847,7 @@ CREATE INDEX idx_budgetstatushistory_status ON public."BudgetStatusHistory" USIN
 
 
 --
--- TOC entry 3621 (class 1259 OID 581659)
+-- TOC entry 3622 (class 1259 OID 581659)
 -- Name: idx_budgetstatushistory_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1857,7 +1855,7 @@ CREATE INDEX idx_budgetstatushistory_timestamp ON public."BudgetStatusHistory" U
 
 
 --
--- TOC entry 3622 (class 1259 OID 581658)
+-- TOC entry 3623 (class 1259 OID 581658)
 -- Name: idx_budgetstatushistory_user; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1865,7 +1863,7 @@ CREATE INDEX idx_budgetstatushistory_user ON public."BudgetStatusHistory" USING 
 
 
 --
--- TOC entry 3651 (class 1259 OID 770136)
+-- TOC entry 3652 (class 1259 OID 770136)
 -- Name: idx_cbf_budget; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1873,7 +1871,7 @@ CREATE INDEX idx_cbf_budget ON public."ComponentBudgetFinishing" USING btree (co
 
 
 --
--- TOC entry 3652 (class 1259 OID 770137)
+-- TOC entry 3653 (class 1259 OID 770137)
 -- Name: idx_cbf_finishing; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1881,7 +1879,7 @@ CREATE INDEX idx_cbf_finishing ON public."ComponentBudgetFinishing" USING btree 
 
 
 --
--- TOC entry 3657 (class 1259 OID 770161)
+-- TOC entry 3658 (class 1259 OID 770161)
 -- Name: idx_cbfm_budgetfin; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1889,7 +1887,7 @@ CREATE INDEX idx_cbfm_budgetfin ON public."ComponentBudgetFinishingMaterial" USI
 
 
 --
--- TOC entry 3658 (class 1259 OID 770162)
+-- TOC entry 3659 (class 1259 OID 770162)
 -- Name: idx_cbfm_finishing_material; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1897,7 +1895,7 @@ CREATE INDEX idx_cbfm_finishing_material ON public."ComponentBudgetFinishingMate
 
 
 --
--- TOC entry 3495 (class 1259 OID 507932)
+-- TOC entry 3497 (class 1259 OID 507932)
 -- Name: idx_component_base_id; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1905,7 +1903,7 @@ CREATE INDEX idx_component_base_id ON public."Component" USING btree (component_
 
 
 --
--- TOC entry 3496 (class 1259 OID 507933)
+-- TOC entry 3498 (class 1259 OID 507933)
 -- Name: idx_component_base_version; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1913,7 +1911,7 @@ CREATE INDEX idx_component_base_version ON public."Component" USING btree (compo
 
 
 --
--- TOC entry 3501 (class 1259 OID 770080)
+-- TOC entry 3503 (class 1259 OID 770080)
 -- Name: idx_componentbudget_component; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1921,7 +1919,7 @@ CREATE INDEX idx_componentbudget_component ON public."ComponentBudget" USING btr
 
 
 --
--- TOC entry 3502 (class 1259 OID 770078)
+-- TOC entry 3504 (class 1259 OID 770078)
 -- Name: idx_componentbudget_curing_machine; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1929,7 +1927,7 @@ CREATE INDEX idx_componentbudget_curing_machine ON public."ComponentBudget" USIN
 
 
 --
--- TOC entry 3503 (class 1259 OID 770081)
+-- TOC entry 3505 (class 1259 OID 770081)
 -- Name: idx_componentbudget_status; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1937,15 +1935,7 @@ CREATE INDEX idx_componentbudget_status ON public."ComponentBudget" USING btree 
 
 
 --
--- TOC entry 3504 (class 1259 OID 770079)
--- Name: idx_componentbudget_submitted_by; Type: INDEX; Schema: public; Owner: neondb_owner
---
-
-CREATE INDEX idx_componentbudget_submitted_by ON public."ComponentBudget" USING btree (submitted_by_user_id);
-
-
---
--- TOC entry 3505 (class 1259 OID 770077)
+-- TOC entry 3506 (class 1259 OID 770077)
 -- Name: idx_componentbudget_support_material; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1953,7 +1943,7 @@ CREATE INDEX idx_componentbudget_support_material ON public."ComponentBudget" US
 
 
 --
--- TOC entry 3508 (class 1259 OID 770165)
+-- TOC entry 3509 (class 1259 OID 770165)
 -- Name: idx_componentbudgetfiles_budget; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1961,7 +1951,7 @@ CREATE INDEX idx_componentbudgetfiles_budget ON public."ComponentBudgetFiles" US
 
 
 --
--- TOC entry 3509 (class 1259 OID 770166)
+-- TOC entry 3510 (class 1259 OID 770166)
 -- Name: idx_componentbudgetfiles_budget_category; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1969,7 +1959,7 @@ CREATE INDEX idx_componentbudgetfiles_budget_category ON public."ComponentBudget
 
 
 --
--- TOC entry 3510 (class 1259 OID 254319)
+-- TOC entry 3511 (class 1259 OID 254319)
 -- Name: idx_componentbudgetfiles_componentbudget_id; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1977,7 +1967,7 @@ CREATE INDEX idx_componentbudgetfiles_componentbudget_id ON public."ComponentBud
 
 
 --
--- TOC entry 3513 (class 1259 OID 254320)
+-- TOC entry 3514 (class 1259 OID 254320)
 -- Name: idx_componentfile_component_id; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1985,7 +1975,7 @@ CREATE INDEX idx_componentfile_component_id ON public."ComponentFile" USING btre
 
 
 --
--- TOC entry 3612 (class 1259 OID 573967)
+-- TOC entry 3613 (class 1259 OID 573967)
 -- Name: idx_componentstatus_order; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -1993,7 +1983,7 @@ CREATE INDEX idx_componentstatus_order ON public."ComponentStatus" USING btree (
 
 
 --
--- TOC entry 3613 (class 1259 OID 573969)
+-- TOC entry 3614 (class 1259 OID 573969)
 -- Name: idx_componentstatus_parent; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2001,7 +1991,7 @@ CREATE INDEX idx_componentstatus_parent ON public."ComponentStatus" USING btree 
 
 
 --
--- TOC entry 3614 (class 1259 OID 573968)
+-- TOC entry 3615 (class 1259 OID 573968)
 -- Name: idx_componentstatus_title; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2009,7 +1999,7 @@ CREATE INDEX idx_componentstatus_title ON public."ComponentStatus" USING btree (
 
 
 --
--- TOC entry 3625 (class 1259 OID 581686)
+-- TOC entry 3626 (class 1259 OID 581686)
 -- Name: idx_componentstatushistory_component; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2017,7 +2007,7 @@ CREATE INDEX idx_componentstatushistory_component ON public."ComponentStatusHist
 
 
 --
--- TOC entry 3626 (class 1259 OID 581691)
+-- TOC entry 3627 (class 1259 OID 581691)
 -- Name: idx_componentstatushistory_component_status_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2025,7 +2015,7 @@ CREATE INDEX idx_componentstatushistory_component_status_timestamp ON public."Co
 
 
 --
--- TOC entry 3627 (class 1259 OID 581690)
+-- TOC entry 3628 (class 1259 OID 581690)
 -- Name: idx_componentstatushistory_component_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2033,7 +2023,7 @@ CREATE INDEX idx_componentstatushistory_component_timestamp ON public."Component
 
 
 --
--- TOC entry 3628 (class 1259 OID 581687)
+-- TOC entry 3629 (class 1259 OID 581687)
 -- Name: idx_componentstatushistory_status; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2041,7 +2031,7 @@ CREATE INDEX idx_componentstatushistory_status ON public."ComponentStatusHistory
 
 
 --
--- TOC entry 3629 (class 1259 OID 581689)
+-- TOC entry 3630 (class 1259 OID 581689)
 -- Name: idx_componentstatushistory_timestamp; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2049,7 +2039,7 @@ CREATE INDEX idx_componentstatushistory_timestamp ON public."ComponentStatusHist
 
 
 --
--- TOC entry 3630 (class 1259 OID 581688)
+-- TOC entry 3631 (class 1259 OID 581688)
 -- Name: idx_componentstatushistory_user; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2057,7 +2047,7 @@ CREATE INDEX idx_componentstatushistory_user ON public."ComponentStatusHistory" 
 
 
 --
--- TOC entry 3645 (class 1259 OID 770113)
+-- TOC entry 3646 (class 1259 OID 770113)
 -- Name: idx_finishing_finmat_finishing; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2065,7 +2055,7 @@ CREATE INDEX idx_finishing_finmat_finishing ON public."Finishing_FinishingMateri
 
 
 --
--- TOC entry 3646 (class 1259 OID 770114)
+-- TOC entry 3647 (class 1259 OID 770114)
 -- Name: idx_finishing_finmat_material; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2073,7 +2063,7 @@ CREATE INDEX idx_finishing_finmat_material ON public."Finishing_FinishingMateria
 
 
 --
--- TOC entry 3598 (class 1259 OID 573925)
+-- TOC entry 3599 (class 1259 OID 573925)
 -- Name: idx_orderstatus_order; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2081,7 +2071,7 @@ CREATE INDEX idx_orderstatus_order ON public."OrderStatus" USING btree ("order")
 
 
 --
--- TOC entry 3599 (class 1259 OID 573927)
+-- TOC entry 3600 (class 1259 OID 573927)
 -- Name: idx_orderstatus_parent; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2089,7 +2079,7 @@ CREATE INDEX idx_orderstatus_parent ON public."OrderStatus" USING btree (parent_
 
 
 --
--- TOC entry 3600 (class 1259 OID 573926)
+-- TOC entry 3601 (class 1259 OID 573926)
 -- Name: idx_orderstatus_title; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2097,7 +2087,7 @@ CREATE INDEX idx_orderstatus_title ON public."OrderStatus" USING btree (title);
 
 
 --
--- TOC entry 3589 (class 1259 OID 294937)
+-- TOC entry 3590 (class 1259 OID 294937)
 -- Name: idx_refresh_tokens_active; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2105,7 +2095,7 @@ CREATE INDEX idx_refresh_tokens_active ON public."RefreshTokens" USING btree (is
 
 
 --
--- TOC entry 3590 (class 1259 OID 294936)
+-- TOC entry 3591 (class 1259 OID 294936)
 -- Name: idx_refresh_tokens_expires_at; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2113,7 +2103,7 @@ CREATE INDEX idx_refresh_tokens_expires_at ON public."RefreshTokens" USING btree
 
 
 --
--- TOC entry 3591 (class 1259 OID 294935)
+-- TOC entry 3592 (class 1259 OID 294935)
 -- Name: idx_refresh_tokens_token_hash; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2121,7 +2111,7 @@ CREATE INDEX idx_refresh_tokens_token_hash ON public."RefreshTokens" USING btree
 
 
 --
--- TOC entry 3592 (class 1259 OID 294934)
+-- TOC entry 3593 (class 1259 OID 294934)
 -- Name: idx_refresh_tokens_user_id; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2129,7 +2119,7 @@ CREATE INDEX idx_refresh_tokens_user_id ON public."RefreshTokens" USING btree (u
 
 
 --
--- TOC entry 3576 (class 1259 OID 254321)
+-- TOC entry 3577 (class 1259 OID 254321)
 -- Name: idx_translation_lookup; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2137,7 +2127,7 @@ CREATE INDEX idx_translation_lookup ON public."Translation" USING btree (source_
 
 
 --
--- TOC entry 3593 (class 1259 OID 303104)
+-- TOC entry 3594 (class 1259 OID 303104)
 -- Name: idx_unique_active_user_token; Type: INDEX; Schema: public; Owner: neondb_owner
 --
 
@@ -2403,21 +2393,12 @@ ALTER TABLE ONLY public."ComponentBudgetFinishing"
 
 
 --
--- TOC entry 3675 (class 2606 OID 770072)
+-- TOC entry 3676 (class 2606 OID 770072)
 -- Name: ComponentBudget ComponentBudget_curing_machine_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
 ALTER TABLE ONLY public."ComponentBudget"
     ADD CONSTRAINT "ComponentBudget_curing_machine_id_fkey" FOREIGN KEY (curing_machine_id) REFERENCES public."MachineCure"(id);
-
-
---
--- TOC entry 3676 (class 2606 OID 770062)
--- Name: ComponentBudget ComponentBudget_submitted_by_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
---
-
-ALTER TABLE ONLY public."ComponentBudget"
-    ADD CONSTRAINT "ComponentBudget_submitted_by_user_id_fkey" FOREIGN KEY (submitted_by_user_id) REFERENCES public."User"(id);
 
 
 --
@@ -2466,7 +2447,7 @@ ALTER TABLE ONLY public."ComponentStatus"
 
 
 --
--- TOC entry 3667 (class 2606 OID 573998)
+-- TOC entry 3668 (class 2606 OID 573998)
 -- Name: Component Component_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2502,7 +2483,7 @@ ALTER TABLE ONLY public."OrderStatus"
 
 
 --
--- TOC entry 3659 (class 2606 OID 254345)
+-- TOC entry 3660 (class 2606 OID 254345)
 -- Name: AdminData fk_admindata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2511,7 +2492,7 @@ ALTER TABLE ONLY public."AdminData"
 
 
 --
--- TOC entry 3660 (class 2606 OID 254350)
+-- TOC entry 3661 (class 2606 OID 254350)
 -- Name: AdminData fk_admindata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2520,7 +2501,7 @@ ALTER TABLE ONLY public."AdminData"
 
 
 --
--- TOC entry 3663 (class 2606 OID 254355)
+-- TOC entry 3664 (class 2606 OID 254355)
 -- Name: AnalystData fk_analystdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2529,7 +2510,7 @@ ALTER TABLE ONLY public."AnalystData"
 
 
 --
--- TOC entry 3664 (class 2606 OID 254360)
+-- TOC entry 3665 (class 2606 OID 254360)
 -- Name: AnalystData fk_analystdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2556,7 +2537,7 @@ ALTER TABLE ONLY public."Component_Finishing"
 
 
 --
--- TOC entry 3665 (class 2606 OID 254400)
+-- TOC entry 3666 (class 2606 OID 254400)
 -- Name: ClientData fk_clientdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2565,7 +2546,7 @@ ALTER TABLE ONLY public."ClientData"
 
 
 --
--- TOC entry 3666 (class 2606 OID 254405)
+-- TOC entry 3667 (class 2606 OID 254405)
 -- Name: ClientData fk_clientdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2574,7 +2555,7 @@ ALTER TABLE ONLY public."ClientData"
 
 
 --
--- TOC entry 3668 (class 2606 OID 516096)
+-- TOC entry 3669 (class 2606 OID 516096)
 -- Name: Component fk_component_base_id; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2583,7 +2564,7 @@ ALTER TABLE ONLY public."Component"
 
 
 --
--- TOC entry 3669 (class 2606 OID 254410)
+-- TOC entry 3670 (class 2606 OID 254410)
 -- Name: Component fk_component_fabric; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2592,7 +2573,7 @@ ALTER TABLE ONLY public."Component"
 
 
 --
--- TOC entry 3670 (class 2606 OID 254415)
+-- TOC entry 3671 (class 2606 OID 254415)
 -- Name: Component fk_component_machine; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2601,7 +2582,7 @@ ALTER TABLE ONLY public."Component"
 
 
 --
--- TOC entry 3671 (class 2606 OID 254420)
+-- TOC entry 3672 (class 2606 OID 254420)
 -- Name: Component fk_component_material; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2610,7 +2591,7 @@ ALTER TABLE ONLY public."Component"
 
 
 --
--- TOC entry 3672 (class 2606 OID 254425)
+-- TOC entry 3673 (class 2606 OID 254425)
 -- Name: Component fk_component_parent; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2619,7 +2600,7 @@ ALTER TABLE ONLY public."Component"
 
 
 --
--- TOC entry 3673 (class 2606 OID 254430)
+-- TOC entry 3674 (class 2606 OID 254430)
 -- Name: Component fk_component_postfabric; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2628,7 +2609,7 @@ ALTER TABLE ONLY public."Component"
 
 
 --
--- TOC entry 3674 (class 2606 OID 770054)
+-- TOC entry 3675 (class 2606 OID 770054)
 -- Name: Component fk_component_support_material; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2943,7 +2924,7 @@ ALTER TABLE ONLY public."RefreshTokens"
 
 
 --
--- TOC entry 3661 (class 2606 OID 254585)
+-- TOC entry 3662 (class 2606 OID 254585)
 -- Name: AgentData fk_sellerdata_role; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2952,7 +2933,7 @@ ALTER TABLE ONLY public."AgentData"
 
 
 --
--- TOC entry 3662 (class 2606 OID 254590)
+-- TOC entry 3663 (class 2606 OID 254590)
 -- Name: AgentData fk_sellerdata_user; Type: FK CONSTRAINT; Schema: public; Owner: neondb_owner
 --
 
@@ -2978,7 +2959,7 @@ ALTER TABLE ONLY public."UserData"
     ADD CONSTRAINT fk_userdata_user FOREIGN KEY (user_id) REFERENCES public."User"(id) ON DELETE CASCADE;
 
 
--- Completed on 2025-08-19 09:48:44 UTC
+-- Completed on 2025-08-20 14:46:29 UTC
 
 --
 -- PostgreSQL database dump complete

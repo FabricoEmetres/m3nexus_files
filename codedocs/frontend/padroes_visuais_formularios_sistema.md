@@ -53,7 +53,7 @@
 
 /* Acabamentos */
 --finishing-bg: #fee2e2;     /* bg-red-100 */
---finishing-text: #991b1b;   /* text-red-800 */
+--finishing-text: #991b1b;   /* text-red-500 */
 ```
 
 ### **Estados de Feedback**
@@ -67,7 +67,7 @@
 /* Erro */
 --error-bg: #fef2f2;         /* Fundo de mensagens de erro */
 --error-border: #fecaca;     /* Borda de erro */
---error-text: #dc2626;       /* Texto de erro (text-red-600) */
+--error-text: #dc2626;       /* Texto de erro (text-red-500) */
 --error-field: #ef4444;      /* Texto de erro em campos (text-red-500) */
 
 /* Aviso */
@@ -382,7 +382,7 @@ font-family: 'Orbitron', monospace;
 
 /* Focus Transitions */
 .focus-transition {
-  @apply transition-all duration-200 ease-in-out;
+  @apply transition-all duration-300 ease-in-out;
 }
 ```
 
@@ -459,10 +459,10 @@ font-family: 'Orbitron', monospace;
 <!-- Erro Geral do Formulário -->
 <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
   <div className="flex">
-    <FontAwesomeIcon icon={faExclamationTriangle} className="text-red-400 mr-3 mt-0.5" />
+    <FontAwesomeIcon icon={faExclamationTriangle} className="text-red-500 mr-3 mt-0.5" />
     <div>
-      <h3 className="text-sm font-medium text-red-800">Erros encontrados</h3>
-      <ul className="text-sm text-red-700 mt-1 list-disc list-inside">
+      <h3 className="text-sm font-medium text-red-500">Erros encontrados</h3>
+      <ul className="text-sm text-red-500 mt-1 list-disc list-inside">
         <li>Campo nome é obrigatório</li>
         <li>Email deve ter formato válido</li>
       </ul>
@@ -624,7 +624,7 @@ font-family: 'Orbitron', monospace;
 <!-- Accordion Container -->
 <div className="border border-gray-200 rounded-lg overflow-hidden">
   <!-- Accordion Header -->
-  <button className="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-[#004587] focus:ring-inset transition-colors duration-200">
+  <button className="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-[#004587] focus:ring-inset transition-all duration-300">
     <div className="flex items-center justify-between">
       <div className="flex items-center">
         <FontAwesomeIcon icon={faRectangleList} className="text-[#004587] mr-3" />
@@ -632,13 +632,13 @@ font-family: 'Orbitron', monospace;
       </div>
       <FontAwesomeIcon
         icon={isOpen ? faChevronUp : faChevronDown}
-        className="text-gray-400 transition-transform duration-200"
+        className="text-gray-400 transition-all duration-300"
       />
     </div>
   </button>
 
   <!-- Accordion Content -->
-  <div className={`overflow-hidden transition-all duration-400 ease-in-out ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
+  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
     <div className="p-6 bg-white border-t border-gray-200">
       <!-- Conteúdo do accordion -->
     </div>
@@ -669,7 +669,7 @@ font-family: 'Orbitron', monospace;
         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         accept=".pdf,.jpg,.jpeg,.png,.dwg,.step,.stl"
       />
-      <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center hover:border-[#004587] hover:bg-blue-50 transition-colors duration-200 min-h-[120px] flex flex-col items-center justify-center">
+      <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center hover:border-[#004587] hover:bg-blue-50 transition-all duration-300 min-h-[120px] flex flex-col items-center justify-center">
         <FontAwesomeIcon icon={faPlus} className="text-gray-400 text-2xl mb-2" />
         <span className="text-sm text-gray-500">Adicionar</span>
       </div>
@@ -691,7 +691,7 @@ font-family: 'Orbitron', monospace;
       </div>
 
       <!-- Remove Button -->
-      <button className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+      <button className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <FontAwesomeIcon icon={faTimes} className="text-xs" />
       </button>
     </div>

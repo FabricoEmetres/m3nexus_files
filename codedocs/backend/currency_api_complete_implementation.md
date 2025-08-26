@@ -182,7 +182,7 @@ const eurToGBP = gbpToUsdRate / eurToUsdRate; // = 0.8645 GBP
 ### **✅ Validação Matemática:**
 ```javascript
 // Teste: 22 EUR para USD
-22 * 1.1597 = 25.51 USD ✅ (idêntico ao Google)
+22 * 1.1597 = 25.51 USD ✅ (idêntico ao Google) pFi
 ```
 
 ---

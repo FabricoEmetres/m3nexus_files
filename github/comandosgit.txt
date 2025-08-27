@@ -35,3 +35,23 @@ git branch -M main
 
 # 8. Envie para o remoto
 git push -u origin main
+
+
+------------------------
+PUXAR MUDANÇAS DO COLEGA
+------------------------
+# 1. Verificar status atual
+git status
+git branch
+
+# 2. Mudar para branch dev (se necessário)
+git switch dev
+
+# 3. Salvar suas mudanças locais
+git stash push -m "Minhas mudanças antes do merge com colega"
+
+# 4. Puxar atualizações do colega
+git pull origin dev
+
+# 5. Aplicar suas mudanças em cima
+git stash pop

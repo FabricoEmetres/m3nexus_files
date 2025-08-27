@@ -1,114 +1,148 @@
-OPTIONS /api/session 204 in 148ms
-API handler should not return a value, received object.
- OPTIONS /api/session 204 in 160ms
-API handler should not return a value, received object.
- OPTIONS /api/session 204 in 71ms
-API handler should not return a value, received object.
- OPTIONS /api/session 204 in 80ms
-✅ Sessão válida para: admin2@mail.com
- GET /api/session 200 in 94ms
-✅ Sessão válida para: admin2@mail.com
- GET /api/session 200 in 108ms
-✅ Sessão válida para: admin2@mail.com
- GET /api/session 200 in 216ms
-✅ Sessão válida para: admin2@mail.com
- GET /api/session 200 in 218ms
-API handler should not return a value, received object.
- OPTIONS /api/db-status 204 in 120ms
-API handler should not return a value, received object.
- OPTIONS /api/db-status 204 in 129ms
-API handler should not return a value, received object.
- OPTIONS /api/get-component-versions?baseComponentId=6d41d420-8562-4186-a49a-43c3fd8020ba 204 in 107ms
-API handler should not return a value, received object.
- OPTIONS /api/db-status 204 in 53ms
-✅ Sessão válida para: admin2@mail.com
- GET /api/session 200 in 63ms
-API handler should not return a value, received object.
- OPTIONS /api/db-status 204 in 59ms
-🚀 Starting component-versions API request
-🔌 Database connection established
-🔐 Starting authentication
+OPTIONS /api/submit-component-budget-v2 204 in 44ms
+📨 [V2] Incoming budget submit request { method: 'POST', ts: '2025-08-27T11:17:57.981Z' }
 ✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
-✅ Authentication successful for user: f8465b52-d8ca-4f66-91a8-428b3f065df6
-🔍 Fetching versions for component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
-🔍 Executing versions query...
-✅ Sessão válida para: admin2@mail.com
- GET /api/session 200 in 19ms
-📊 Found 2 versions for component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
-🔄 Processing version data...
-✅ Successfully fetched 2 versions
-📊 Response summary: 2 versions for component base 6d41d420-8562-4186-a49a-43c3fd8020ba
-🔌 Releasing database connection
-🏁 component-versions API request completed
- GET /api/get-component-versions?baseComponentId=6d41d420-8562-4186-a49a-43c3fd8020ba 304 in 122ms
- GET /api/db-status 200 in 140ms
-API handler should not return a value, received object.
- OPTIONS /api/get-component-budget-data?componentId=cc8b240d-f251-49f0-9ad4-ee94becb0fc4&orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde 204 in 42ms
-API handler should not return a value, received object.
- OPTIONS /api/get-username 204 in 24ms
- GET /api/db-status 200 in 101ms
-🌐 Detected language: pt from header: pt
-🚀 Starting component-budget-data API request
-✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
-✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
-🔌 Database connection established
-📋 Processing request for componentId: cc8b240d-f251-49f0-9ad4-ee94becb0fc4, orderId: 32eaa430-6e70-46b4-a3bb-18b05e84efde
-🔍 Fetching budget data for component: cc8b240d-f251-49f0-9ad4-ee94becb0fc4 with order context: 32eaa430-6e70-46b4-a3bb-18b05e84efde
-🔍 Fetching component details for: cc8b240d-f251-49f0-9ad4-ee94becb0fc4
-✅ Component found: Componente 1 (Cópia 2) (v2)
-🔍 Finishings count: 3
-🔍 Fetching available versions for component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
-✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
-🔍 Searching for user with ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
-🔍 User ID type: string
-🔍 User ID length: 36
-🔍 Executing query: SELECT id, name, surname FROM "User" WHERE id = $1 with parameter: f8465b52-d8ca-4f66-91a8-428b3f065df6
-📊 Found 2 available versions
-🔍 Fetching support materials for machine: f1b2d59d-c02c-4fe3-b5ee-047f4bf7c822
-🔍 Query result rows count: 1
-🔍 Found user data: {
-  id: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
-  name: 'admin2',
-  surname: 'admin2'
+🧩 [V2] Parsed payload overview {
+  userId: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
+  context: {
+    componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
+    userRole: 'Admin',
+    language: 'pt'
+  },
+  hasForgeData: true,
+  hasPostForgeData: true,
+  hasBudgetCalcs: false
 }
- GET /api/get-username 304 in 64ms
- GET /api/db-status 200 in 63ms
-📋 Support Material Type ID: 9313c048-5957-4416-aa4e-9e4a7e9f4089
-📊 Found 2 support materials for machine: f1b2d59d-c02c-4fe3-b5ee-047f4bf7c822
- GET /api/db-status 200 in 53ms
- GET /api/db-status 200 in 65ms
- GET /api/db-status 200 in 64ms
+🧪 [V2] Derived fields {
+  submission_mode: 'admin',
+  componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
+  final_price_per_piece: null,
+  selectedMachine: null,
+  selectedMaterial: null,
+  production: {
+    items_per_table: 123,
+    print_min_per_table: 83,
+    g_per_table: 123,
+    support_g_per_table: 123,
+    modeling_min: 83,
+    slicing_min: 83,
+    maintenance_min_per_table: 83
+  },
+  curing: {
+    curing_required: false,
+    curing_machine_id: null,
+    curing_min: null,
+    curing_items_per_table: null
+  },
+  comments: { internal: true, external: true }
+}
 ✅ New database connection established
-🔍 Fetching curing machines for material: 8be739d4-15ad-429e-baf2-2fa158429eac
-📊 Found 0 curing machines for material: 8be739d4-15ad-429e-baf2-2fa158429eac
-🔍 Fetching order context for: 32eaa430-6e70-46b4-a3bb-18b05e84efde with component base: 6d41d420-8562-4186-a49a-43c3fd8020ba
-✅ Order context found: nova orçamentação
-🔄 Processing response data...
-🔄 Machine status: "Available" -> "Disponível"
-🔄 Technology name: "Filament" -> "Filamento"
-🔄 Material color: "Several colours" -> "Várias cores"
-🔄 Material type: "Polyethylene Terephthalate Glycol" -> "Polietileno Tereftalato Glicol"
-🔎 [GET] Component finishings for eligible lookup: [
-  '09aedc80-dc61-4491-b14d-d5c7b9fbafa2',
-  '1f2323ac-266e-40b7-ba65-8e14f395d3dc',
-  '0a21c3d4-6569-4ad7-bdb7-484cd2fda3bf'
-]
-🗂 Loaded saved finishings/materials from budget: 66efbd61-506d-43c4-b369-a868085ccbe6 (keys=3)
-🔎 [GET] Eligible materials SQL (by finishingIds) {
-  finishingIds: [
-    '09aedc80-dc61-4491-b14d-d5c7b9fbafa2',
-    '1f2323ac-266e-40b7-ba65-8e14f395d3dc',
-    '0a21c3d4-6569-4ad7-bdb7-484cd2fda3bf'
-  ]
+🔧 [V2] Checking component machine/material updates {
+  componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
+  selectedMachine: null,
+  selectedMaterial: null,
+  currentMachineId: 'f1b2d59d-c02c-4fe3-b5ee-047f4bf7c822',
+  currentMaterialId: '8be739d4-15ad-429e-baf2-2fa158429eac'
 }
-📋 [GET] Eligible materials result count: 0
-📋 [GET] Eligible materials per finishing: {}
-✅ Successfully fetched budget data
-📊 Response summary: 2 versions, 2 support materials, 0 curing machines, 5 finishing types, 3 component finishings
- GET /api/get-component-budget-data?componentId=cc8b240d-f251-49f0-9ad4-ee94becb0fc4&orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde 304 in 3072ms
-API handler should not return a value, received object.
- OPTIONS /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 204 in 18ms
-✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
- GET /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 304 in 1501ms
-✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
- GET /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 304 in 1474ms
+🔄 [V2] Machine will be updated: { from: 'f1b2d59d-c02c-4fe3-b5ee-047f4bf7c822', to: null }
+🔄 [V2] Material will be updated: { from: '8be739d4-15ad-429e-baf2-2fa158429eac', to: null }
+✅ [V2] Component updated successfully {
+  componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
+  updatedFields: [ 'machine_id = $1', 'material_id = $2' ],
+  newMachineId: null,
+  newMaterialId: null
+}
+🔧 [V2] Building INSERT {
+  statusId: 'd0ae4003-61e4-43d1-af19-744929a13652',
+  client_id: null,
+  curing_min_edited: null
+}
+📝 [V2] INSERT preview {
+  forge_id: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
+  component_id: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
+  status_id: 'd0ae4003-61e4-43d1-af19-744929a13652',
+  client_id: null,
+  submission_mode: 'admin',
+  is_active: false,
+  final_price_per_piece: null,
+  support_material_id: '7f0fc98e-70af-4a83-bfa1-b19296b84a1a',
+  support_g_per_table: 123,
+  items_per_table: 123,
+  print_min_per_table: 83,
+  g_per_table: 123,
+  modeling_min: 83,
+  slicing_min: 83,
+  maintenance_min_per_table: 83,
+  curing_machine_id: null,
+  curing_min: null,
+  curing_items_per_table: null,
+  internal_notes: '123',
+  client_notes: '123'
+}
+✅ [V2] Budget inserted (pre-finishings) {
+  budgetId: '351c7348-cbd1-430a-b6b9-a51da6cf47c4',
+  componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
+  userId: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
+  ts: '2025-08-27T11:17:58.649Z'
+}
+🧱 [V2] Processing Post‑Forge finishings { count: 3 }
+✏️ [V2] Updated FinishingMaterial {
+  finishing_material_id: '4c7429c6-1c35-49aa-98a3-801935a2925a',
+  updated_fields: [ 'default_unit_cost = $1' ]
+}
+✏️ [V2] Updated FinishingMaterial {
+  finishing_material_id: '6b1f7d0e-9a8d-4060-a40c-ffbbdbbba91d',
+  updated_fields: [ 'default_unit_cost = $1' ]
+}
+🧹 [V2] Removed FFM associations not present in submission {
+  finishing_id: '09aedc80-dc61-4491-b14d-d5c7b9fbafa2',
+  removed_count: 1
+}
+🔗 [V2] Inserted finishing with materials {
+  component_budget_finishing_id: '7438c1a3-e76d-42be-bf8d-f5af792b1bc0',
+  materials_count: 2
+}
+✏️ [V2] Updated FinishingMaterial {
+  finishing_material_id: '08f30fc5-2c82-4a9b-903d-b6b5e4bf8a67',
+  updated_fields: [ 'default_unit_cost = $1' ]
+}
+🧹 [V2] Removed FFM associations not present in submission {
+  finishing_id: '1f2323ac-266e-40b7-ba65-8e14f395d3dc',
+  removed_count: 1
+}
+🔗 [V2] Inserted finishing with materials {
+  component_budget_finishing_id: '0b697a00-d470-425f-9e7f-52fefd458d7b',
+  materials_count: 1
+}
+✏️ [V2] Updated FinishingMaterial {
+  finishing_material_id: '6b1f7d0e-9a8d-4060-a40c-ffbbdbbba91d',
+  updated_fields: [ 'default_unit_cost = $1' ]
+}
+🧹 [V2] Removed FFM associations not present in submission {
+  finishing_id: '0a21c3d4-6569-4ad7-bdb7-484cd2fda3bf',
+  removed_count: 1
+}
+🔗 [V2] Inserted finishing with materials {
+  component_budget_finishing_id: 'e6babe78-3f5b-420a-a43b-d052bd7eb142',
+  materials_count: 1
+}
+📦 [V2] Post‑Forge persisted {
+  budgetId: '351c7348-cbd1-430a-b6b9-a51da6cf47c4',
+  finishingsInserted: 3,
+  materialsInserted: 4
+}
+❌ Exception during moveOneDriveItem for item 01IK7GO4VCGFJSU6DXXRB336435L36RPMP to new parent: {"id":"01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ"}. Error: Graph API error (409): Name already exists {
+  code: 'nameAlreadyExists',
+  message: 'Name already exists',
+  innerError: {
+    date: '2025-08-27T11:18:02',
+    'request-id': 'd7a325a4-7260-4e43-8689-423b0c879c83',
+    'client-request-id': 'd7a325a4-7260-4e43-8689-423b0c879c83'
+  }
+}
+🔥 [V2] Insert failed {
+  code: undefined,
+  detail: undefined,
+  message: 'Graph API error (409): Name already exists'
+}
+🏁 [V2] Request finished { ts: '2025-08-27T11:18:02.357Z', took_ms: 4376 }
+ POST /api/submit-component-budget-v2 500 in 4390ms

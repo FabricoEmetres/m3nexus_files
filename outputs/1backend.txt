@@ -1,5 +1,8 @@
-OPTIONS /api/submit-component-budget-v2 204 in 44ms
-📨 [V2] Incoming budget submit request { method: 'POST', ts: '2025-08-27T11:17:57.981Z' }
+ No JWT token found in cookies
+ POST /api/image-token 200 in 17ms
+API handler should not return a value, received object.
+ OPTIONS /api/submit-component-budget-v2 204 in 16ms
+📨 [V2] Incoming budget submit request { method: 'POST', ts: '2025-08-28T07:49:02.336Z' }
 ✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
 🧩 [V2] Parsed payload overview {
   userId: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
@@ -16,13 +19,13 @@ OPTIONS /api/submit-component-budget-v2 204 in 44ms
   submission_mode: 'admin',
   componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
   final_price_per_piece: null,
-  selectedMachine: null,
-  selectedMaterial: null,
+  selectedMachine: '|c2ed89cd-eb2b-4c40-a68f-4d69593e72ef',
+  selectedMaterial: '|b8a38cd5-e998-414f-835c-be5f6363f11f',
   production: {
     items_per_table: 123,
     print_min_per_table: 83,
     g_per_table: 123,
-    support_g_per_table: 123,
+    support_g_per_table: null,
     modeling_min: 83,
     slicing_min: 83,
     maintenance_min_per_table: 83
@@ -35,21 +38,26 @@ OPTIONS /api/submit-component-budget-v2 204 in 44ms
   },
   comments: { internal: true, external: true }
 }
-✅ New database connection established
-🔧 [V2] Checking component machine/material updates {
+API handler should not return a value, received object.
+ OPTIONS /api/image-token 204 in 20ms
+⚠ No JWT token found in cookies
+ POST /api/image-token 200 in 15ms
+🔧 [V2] Extracting budget-specific machine/material IDs {
   componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
-  selectedMachine: null,
-  selectedMaterial: null,
-  currentMachineId: 'f1b2d59d-c02c-4fe3-b5ee-047f4bf7c822',
-  currentMaterialId: '8be739d4-15ad-429e-baf2-2fa158429eac'
+  selectedMachine: '|c2ed89cd-eb2b-4c40-a68f-4d69593e72ef',
+  selectedMaterial: '|b8a38cd5-e998-414f-835c-be5f6363f11f'
 }
-🔄 [V2] Machine will be updated: { from: 'f1b2d59d-c02c-4fe3-b5ee-047f4bf7c822', to: null }
-🔄 [V2] Material will be updated: { from: '8be739d4-15ad-429e-baf2-2fa158429eac', to: null }
-✅ [V2] Component updated successfully {
+✅ [V2] Valid budget machine ID extracted from selection: c2ed89cd-eb2b-4c40-a68f-4d69593e72ef
+✅ [V2] Valid budget material ID extracted from selection: b8a38cd5-e998-414f-835c-be5f6363f11f
+🏁 [V2] Final budget machine/material IDs {
+  budgetMachineId: 'c2ed89cd-eb2b-4c40-a68f-4d69593e72ef',
+  budgetMaterialId: 'b8a38cd5-e998-414f-835c-be5f6363f11f'
+}
+📊 [V2] Updating component status { componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4', statusOrder: 2 }
+ℹ️ [V2] Component status already correct, no update needed {
   componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
-  updatedFields: [ 'machine_id = $1', 'material_id = $2' ],
-  newMachineId: null,
-  newMaterialId: null
+  currentStatusId: '986df83e-0fe9-4ba4-9876-f694bad6b801',
+  targetStatusId: '986df83e-0fe9-4ba4-9876-f694bad6b801'
 }
 🔧 [V2] Building INSERT {
   statusId: 'd0ae4003-61e4-43d1-af19-744929a13652',
@@ -64,8 +72,10 @@ OPTIONS /api/submit-component-budget-v2 204 in 44ms
   submission_mode: 'admin',
   is_active: false,
   final_price_per_piece: null,
-  support_material_id: '7f0fc98e-70af-4a83-bfa1-b19296b84a1a',
-  support_g_per_table: 123,
+  budget_machine_id: 'c2ed89cd-eb2b-4c40-a68f-4d69593e72ef',
+  budget_material_id: 'b8a38cd5-e998-414f-835c-be5f6363f11f',
+  support_material_id: null,
+  support_g_per_table: null,
   items_per_table: 123,
   print_min_per_table: 83,
   g_per_table: 123,
@@ -79,12 +89,19 @@ OPTIONS /api/submit-component-budget-v2 204 in 44ms
   client_notes: '123'
 }
 ✅ [V2] Budget inserted (pre-finishings) {
-  budgetId: '351c7348-cbd1-430a-b6b9-a51da6cf47c4',
+  budgetId: 'd5a2b908-7cb2-4100-af38-093d1f640f6e',
   componentId: 'cc8b240d-f251-49f0-9ad4-ee94becb0fc4',
   userId: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
-  ts: '2025-08-27T11:17:58.649Z'
+  ts: '2025-08-28T07:49:02.876Z'
 }
 🧱 [V2] Processing Post‑Forge finishings { count: 3 }
+🧪 [V2] Finishing drying validation {
+  finishing_id: '09aedc80-dc61-4491-b14d-d5c7b9fbafa2',
+  finishingIndex: 0,
+  need_drying: false,
+  requiresDrying: false,
+  provided_drying_hours: 0
+}
 ✏️ [V2] Updated FinishingMaterial {
   finishing_material_id: '4c7429c6-1c35-49aa-98a3-801935a2925a',
   updated_fields: [ 'default_unit_cost = $1' ]
@@ -98,8 +115,15 @@ OPTIONS /api/submit-component-budget-v2 204 in 44ms
   removed_count: 1
 }
 🔗 [V2] Inserted finishing with materials {
-  component_budget_finishing_id: '7438c1a3-e76d-42be-bf8d-f5af792b1bc0',
+  component_budget_finishing_id: 'f28a247e-2285-4a86-8118-a951ea2cb1af',
   materials_count: 2
+}
+🧪 [V2] Finishing drying validation {
+  finishing_id: '1f2323ac-266e-40b7-ba65-8e14f395d3dc',
+  finishingIndex: 1,
+  need_drying: true,
+  requiresDrying: true,
+  provided_drying_hours: 1.3833333333333333
 }
 ✏️ [V2] Updated FinishingMaterial {
   finishing_material_id: '08f30fc5-2c82-4a9b-903d-b6b5e4bf8a67',
@@ -110,8 +134,15 @@ OPTIONS /api/submit-component-budget-v2 204 in 44ms
   removed_count: 1
 }
 🔗 [V2] Inserted finishing with materials {
-  component_budget_finishing_id: '0b697a00-d470-425f-9e7f-52fefd458d7b',
+  component_budget_finishing_id: 'c89bc52b-5e10-4654-8044-a0bd6e8d5ff0',
   materials_count: 1
+}
+🧪 [V2] Finishing drying validation {
+  finishing_id: '0a21c3d4-6569-4ad7-bdb7-484cd2fda3bf',
+  finishingIndex: 2,
+  need_drying: true,
+  requiresDrying: true,
+  provided_drying_hours: 1.3833333333333333
 }
 ✏️ [V2] Updated FinishingMaterial {
   finishing_material_id: '6b1f7d0e-9a8d-4060-a40c-ffbbdbbba91d',
@@ -122,27 +153,226 @@ OPTIONS /api/submit-component-budget-v2 204 in 44ms
   removed_count: 1
 }
 🔗 [V2] Inserted finishing with materials {
-  component_budget_finishing_id: 'e6babe78-3f5b-420a-a43b-d052bd7eb142',
+  component_budget_finishing_id: '946c61f2-386b-4616-a250-2dd407719e98',
   materials_count: 1
 }
 📦 [V2] Post‑Forge persisted {
-  budgetId: '351c7348-cbd1-430a-b6b9-a51da6cf47c4',
+  budgetId: 'd5a2b908-7cb2-4100-af38-093d1f640f6e',
   finishingsInserted: 3,
   materialsInserted: 4
 }
-❌ Exception during moveOneDriveItem for item 01IK7GO4VCGFJSU6DXXRB336435L36RPMP to new parent: {"id":"01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ"}. Error: Graph API error (409): Name already exists {
+🔄 [OneDrive] Attempting to move item with auto-rename {
+  itemId: '01IK7GO4RRMPXM7LUAFRG3GITWTJEPYP6R',
+  targetParentId: '01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ',
+  desiredName: 'IMG_20250813_012520HAHAHAHA.JPG',
+  maxAttempts: 10
+}
+🔄 [OneDrive] Attempt 1/10: Moving with name "IMG_20250813_012520HAHAHAHA.JPG"
+✅ [OneDrive] File moved successfully {
+  originalName: 'IMG_20250813_012520HAHAHAHA.JPG',
+  finalName: 'IMG_20250813_012520HAHAHAHA.JPG',
+  attempt: 1,
+  itemId: '01IK7GO4RRMPXM7LUAFRG3GITWTJEPYP6R'
+}
+🔄 [OneDrive] Attempting to move item with auto-rename {
+  itemId: '01IK7GO4VIWNSFP75RR5GI6KUF4QXW2HKC',
+  targetParentId: '01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ',
+  desiredName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI.STL',
+  maxAttempts: 10
+}
+🔄 [OneDrive] Attempt 1/10: Moving with name "PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI.STL"
+❌ Exception during moveOneDriveItem for item 01IK7GO4VIWNSFP75RR5GI6KUF4QXW2HKC to new parent: {"id":"01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ"}. Error: Graph API error (409): Name already exists {
   code: 'nameAlreadyExists',
   message: 'Name already exists',
   innerError: {
-    date: '2025-08-27T11:18:02',
-    'request-id': 'd7a325a4-7260-4e43-8689-423b0c879c83',
-    'client-request-id': 'd7a325a4-7260-4e43-8689-423b0c879c83'
+    date: '2025-08-28T07:49:07',
+    'request-id': 'd417b8a0-9a13-405e-9727-ba6c5431bd2c',
+    'client-request-id': 'd417b8a0-9a13-405e-9727-ba6c5431bd2c'
   }
 }
-🔥 [V2] Insert failed {
-  code: undefined,
-  detail: undefined,
-  message: 'Graph API error (409): Name already exists'
+⚠️ [OneDrive] Move attempt failed {
+  attemptName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI.STL',
+  attempt: 1,
+  errorCode: 'unknown',
+  errorMessage: 'Graph API error (409): Name already exists'
 }
-🏁 [V2] Request finished { ts: '2025-08-27T11:18:02.357Z', took_ms: 4376 }
- POST /api/submit-component-budget-v2 500 in 4390ms
+🔄 [OneDrive] Name conflict detected, trying alternative name...
+🔄 [OneDrive] Attempt 2/10: Moving with name "PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (1).STL"
+❌ Exception during moveOneDriveItem for item 01IK7GO4VIWNSFP75RR5GI6KUF4QXW2HKC to new parent: {"id":"01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ"}. Error: Graph API error (409): Name already exists {
+  code: 'nameAlreadyExists',
+  message: 'Name already exists',
+  innerError: {
+    date: '2025-08-28T07:49:07',
+    'request-id': '1bac3aff-2e22-4c17-bd1a-9f3509383737',
+    'client-request-id': '1bac3aff-2e22-4c17-bd1a-9f3509383737'
+  }
+}
+⚠️ [OneDrive] Move attempt failed {
+  attemptName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (1).STL',
+  attempt: 2,
+  errorCode: 'unknown',
+  errorMessage: 'Graph API error (409): Name already exists'
+}
+🔄 [OneDrive] Name conflict detected, trying alternative name...
+🔄 [OneDrive] Attempt 3/10: Moving with name "PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (2).STL"
+❌ Exception during moveOneDriveItem for item 01IK7GO4VIWNSFP75RR5GI6KUF4QXW2HKC to new parent: {"id":"01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ"}. Error: Graph API error (409): Name already exists {
+  code: 'nameAlreadyExists',
+  message: 'Name already exists',
+  innerError: {
+    date: '2025-08-28T07:49:07',
+    'request-id': 'e0a7eafc-8cd9-45f7-8f53-5f4351dca07c',
+    'client-request-id': 'e0a7eafc-8cd9-45f7-8f53-5f4351dca07c'
+  }
+}
+⚠️ [OneDrive] Move attempt failed {
+  attemptName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (2).STL',
+  attempt: 3,
+  errorCode: 'unknown',
+  errorMessage: 'Graph API error (409): Name already exists'
+}
+🔄 [OneDrive] Name conflict detected, trying alternative name...
+🔄 [OneDrive] Attempt 4/10: Moving with name "PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (3).STL"
+❌ Exception during moveOneDriveItem for item 01IK7GO4VIWNSFP75RR5GI6KUF4QXW2HKC to new parent: {"id":"01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ"}. Error: Graph API error (409): Name already exists {
+  code: 'nameAlreadyExists',
+  message: 'Name already exists',
+  innerError: {
+    date: '2025-08-28T07:49:08',
+    'request-id': 'ff6b93a4-da37-45a4-bbb2-e476b11ec356',
+    'client-request-id': 'ff6b93a4-da37-45a4-bbb2-e476b11ec356'
+  }
+}
+⚠️ [OneDrive] Move attempt failed {
+  attemptName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (3).STL',
+  attempt: 4,
+  errorCode: 'unknown',
+  errorMessage: 'Graph API error (409): Name already exists'
+}
+🔄 [OneDrive] Name conflict detected, trying alternative name...
+🔄 [OneDrive] Attempt 5/10: Moving with name "PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (4).STL"
+❌ Exception during moveOneDriveItem for item 01IK7GO4VIWNSFP75RR5GI6KUF4QXW2HKC to new parent: {"id":"01IK7GO4X5DOODWEVNVRE3VU5YJAP2WZXJ"}. Error: Graph API error (409): Name already exists {
+  code: 'nameAlreadyExists',
+  message: 'Name already exists',
+  innerError: {
+    date: '2025-08-28T07:49:08',
+    'request-id': '5ce833b0-74de-4ba8-8d54-742fdd9da946',
+    'client-request-id': '5ce833b0-74de-4ba8-8d54-742fdd9da946'
+  }
+}
+⚠️ [OneDrive] Move attempt failed {
+  attemptName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (4).STL',
+  attempt: 5,
+  errorCode: 'unknown',
+  errorMessage: 'Graph API error (409): Name already exists'
+}
+🔄 [OneDrive] Name conflict detected, trying alternative name...
+🔄 [OneDrive] Attempt 6/10: Moving with name "PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (5).STL"
+✅ [OneDrive] File moved successfully {
+  originalName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI.STL',
+  finalName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (5).STL',
+  attempt: 6,
+  itemId: '01IK7GO4VIWNSFP75RR5GI6KUF4QXW2HKC'
+}
+📝 [V2] File was automatically renamed to avoid conflict {
+  originalName: 'Paralelipipedo 100 50mm (hollowed).stl_ori.stl',
+  sanitizedName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI.STL',
+  finalName: 'PARALELIPIPEDO 100 50MM (HOLLOWED).STL_ORI (5).STL',
+  budgetId: 'd5a2b908-7cb2-4100-af38-093d1f640f6e',
+  totalRenamed: 1
+}
+📁 [V2] File upload summary {
+  budgetId: 'd5a2b908-7cb2-4100-af38-093d1f640f6e',
+  totalFiles: 2,
+  filesRenamed: 1,
+  filesWithOriginalName: 1
+}
+🏁 [V2] Request finished { ts: '2025-08-28T07:49:08.806Z', took_ms: 6470 }
+ POST /api/submit-component-budget-v2 201 in 6492ms
+API handler should not return a value, received object.
+ OPTIONS /api/session 204 in 45ms
+API handler should not return a value, received object.
+ OPTIONS /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 204 in 75ms
+API handler should not return a value, received object.
+ OPTIONS /api/session 204 in 31ms
+API handler should not return a value, received object.
+ OPTIONS /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 204 in 31ms
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 43ms
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 79ms
+API handler should not return a value, received object.
+ OPTIONS /api/refresh-token 204 in 76ms
+API handler should not return a value, received object.
+ OPTIONS /api/db-status 204 in 82ms
+✅ Sessão válida para: admin2@mail.com
+ GET /api/session 200 in 38ms
+❌ Error refreshing token: Error: getaddrinfo EAI_AGAIN ep-bitter-heart-abjw1xvb-pooler.eu-west-2.aws.neon.tech
+    at async handler (src/pages/api/refresh-token.js:71:16)
+  69 |     }
+  70 |
+> 71 |     client_pg = await pool.connect();
+     |                ^
+  72 |
+  73 |     // Verify fingerprint matches
+  74 |     const fingerprintHash = hashValue(fingerprint); {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'ep-bitter-heart-abjw1xvb-pooler.eu-west-2.aws.neon.tech'
+}
+ POST /api/refresh-token 500 in 214ms
+❌ Error translating text "Support Removal" to lang "pt": getaddrinfo EAI_AGAIN ep-bitter-heart-abjw1xvb-pooler.eu-west-2.aws.neon.tech
+✅ New database connection established
+ GET /api/db-status 200 in 825ms
+API handler should not return a value, received object.
+ OPTIONS /api/get-username 204 in 14ms
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🔍 Searching for user with ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🔍 User ID type: string
+🔍 User ID length: 36
+🔍 Executing query: SELECT id, name, surname FROM "User" WHERE id = $1 with parameter: f8465b52-d8ca-4f66-91a8-428b3f065df6
+ GET /api/db-status 200 in 113ms
+✅ New database connection established
+ GET /api/db-status 200 in 69ms
+✅ New database connection established
+🔍 Query result rows count: 1
+🔍 Found user data: {
+  id: 'f8465b52-d8ca-4f66-91a8-428b3f065df6',
+  name: 'admin2',
+  surname: 'admin2'
+}
+ GET /api/get-username 304 in 657ms
+ GET /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 200 in 3244ms
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+ ✓ Compiled /api/get-edit-orderdetail in 220ms
+API handler should not return a value, received object.
+ OPTIONS /api/get-budgets-by-component?orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde 204 in 68ms
+API handler should not return a value, received object.
+ OPTIONS /api/get-edit-orderdetail?resource=status 204 in 257ms
+🚀 Starting get-budgets-by-component API request at 2025-08-28T07:49:13.596Z
+✅ Order ID validation passed: 32eaa430-6e70-46b4-a3bb-18b05e84efde
+🔌 Database connection established
+🔐 Starting authentication for orderId: 32eaa430-6e70-46b4-a3bb-18b05e84efde
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+✅ Authentication successful for user: f8465b52-d8ca-4f66-91a8-428b3f065df6
+🔍 Verifying if order exists: 32eaa430-6e70-46b4-a3bb-18b05e84efde
+✅ Order found: nova orçamentação (Client: eu thulio)
+📊 Fetching ALL versions of components associated with order: 32eaa430-6e70-46b4-a3bb-18b05e84efde
+🔍 Executing main query to fetch components and all budgets...
+✅ Authentication successful for user ID: f8465b52-d8ca-4f66-91a8-428b3f065df6
+📊 Found 31 component-budget combinations for order: 32eaa430-6e70-46b4-a3bb-18b05e84efde
+🔄 Grouping budgets by component base, versions, and budgets...
+✅ Grouped into 2 component bases with ALL their versions
+✅ get-budgets-by-component API completed successfully in 359ms
+📊 Response summary: 2 component bases, 4 total versions (2 selected in order), 30 total budgets
+🔌 Database connection released
+ GET /api/get-budgets-by-component?orderId=32eaa430-6e70-46b4-a3bb-18b05e84efde 200 in 462ms
+✅ New database connection established
+✅ New database connection established
+✅ New database connection established
+ GET /api/get-edit-orderdetail?resource=status 304 in 1129ms
+ GET /api/getorderdetails/32eaa430-6e70-46b4-a3bb-18b05e84efde 200 in 2422ms
+API handler should not return a value, received object.
+ OPTIONS /api/refresh-token 204 in 9ms
+✅ Tokens refreshed successfully for user: admin2@mail.com
+ POST /api/refresh-token 200 in 426ms

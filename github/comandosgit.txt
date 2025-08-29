@@ -55,3 +55,13 @@ git pull origin dev
 
 # 5. Aplicar suas mudanças em cima
 git stash pop
+
+-----------------
+CRIAR NOVO BRANCH
+-----------------
+
+git branch nome_novo_do_branch
+
+git switch nome_novo_do_branch
+
+git push origin nome_novo_do_branch 
